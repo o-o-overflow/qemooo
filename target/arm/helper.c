@@ -3475,7 +3475,7 @@ static uint64_t do_ats_write(CPUARMState *env, uint64_t value,
                                         fi.ea, 1, fi.s1ptw, 1, fsc);
             env->exception.vaddress = value;
             env->exception.fsr = fsr;
-            raise_exception(env, EXCP_DATA_ABORT, syn, target_el);
+            raise_exception_arm(env, EXCP_DATA_ABORT, syn, target_el);
         }
     }
 
@@ -8299,7 +8299,7 @@ static void arm_cpu_add_definition(gpointer data, gpointer user_data)
     *cpu_list = entry;
 }
 
-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+CpuDefinitionInfoList *qmp_query_cpu_definitions_arm(Error **errp)
 {
     CpuDefinitionInfoList *cpu_list = NULL;
     GSList *list;
@@ -9390,6 +9390,7 @@ static void take_aarch32_exception(CPUARMState *env, int new_mode,
         env->regs[14] = env->regs[15] + offset;
     }
     env->regs[15] = newpc;
+    env->pc = newpc;
     arm_rebuild_hflags(env);
 }
 
@@ -12534,7 +12535,7 @@ uint32_t HELPER(sel_flags)(uint32_t flags, uint32_t a, uint32_t b)
  * The upper bytes of val (above the number specified by 'bytes') must have
  * been zeroed out by the caller.
  */
-uint32_t HELPER(crc32)(uint32_t acc, uint32_t val, uint32_t bytes)
+uint32_t HELPER(crc32_arm)(uint32_t acc, uint32_t val, uint32_t bytes)
 {
     uint8_t buf[4];
 

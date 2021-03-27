@@ -44,9 +44,11 @@ typedef ram_addr_t tb_page_addr_t;
 #include "qemu/log.h"
 
 void gen_intermediate_code(CPUState *cpu, TranslationBlock *tb, int max_insns);
+void gen_intermediate_code_arm(CPUState *cpu, TranslationBlock *tb, int max_insns);
 void restore_state_to_opc(CPUArchState *env, TranslationBlock *tb,
                           target_ulong *data);
-
+void restore_state_to_opc_arm(CPUArchState *env, TranslationBlock *tb,
+                          target_ulong *data);
 void cpu_gen_init(void);
 
 /**

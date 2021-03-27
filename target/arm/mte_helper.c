@@ -546,7 +546,7 @@ static void mte_check_fail(CPUARMState *env, uint32_t desc,
 
         is_write = FIELD_EX32(desc, MTEDESC, WRITE);
         syn = syn_data_abort_no_iss(el != 0, 0, 0, 0, 0, is_write, 0x11);
-        raise_exception(env, EXCP_DATA_ABORT, syn, exception_target_el(env));
+        raise_exception_arm(env, EXCP_DATA_ABORT, syn, exception_target_el(env));
         /* noreturn, but fall through to the assert anyway */
 
     case 0:

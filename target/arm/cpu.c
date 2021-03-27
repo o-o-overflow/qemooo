@@ -716,9 +716,21 @@ static bool arm_cpu_virtio_is_big_endian(CPUState *cs)
 static int
 print_insn_thumb1(bfd_vma pc, disassemble_info *info)
 {
-  return print_insn_arm(pc | 1, info);
+    return 0xdeadbeef;
+    //return print_insn_arm(pc | 1, info);
 }
 
+static int
+print_insn_arm_a64_nop(bfd_vma pc, disassemble_info *info)
+{
+    return 0xdeadbeef;
+    //return print_insn_arm(pc | 1, info);
+}
+print_insn_arm_nop(bfd_vma pc, disassemble_info *info)
+{
+return 0xdeadbeef;
+//return print_insn_arm(pc | 1, info);
+}
 static void arm_disas_set_info(CPUState *cpu, disassemble_info *info)
 {
     ARMCPU *ac = ARM_CPU(cpu);
@@ -731,7 +743,7 @@ static void arm_disas_set_info(CPUState *cpu, disassemble_info *info)
          * unset in this case to use the caller default behaviour.
          */
 #if defined(CONFIG_ARM_A64_DIS)
-        info->print_insn = print_insn_arm_a64;
+        info->print_insn = print_insn_arm_a64_nop;
 #endif
         info->cap_arch = CS_ARCH_ARM64;
         info->cap_insn_unit = 4;
@@ -744,7 +756,7 @@ static void arm_disas_set_info(CPUState *cpu, disassemble_info *info)
             info->cap_insn_split = 4;
             cap_mode = CS_MODE_THUMB;
         } else {
-            info->print_insn = print_insn_arm;
+            info->print_insn = print_insn_arm_nop;
             info->cap_insn_unit = 4;
             info->cap_insn_split = 4;
             cap_mode = CS_MODE_ARM;

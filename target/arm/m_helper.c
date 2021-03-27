@@ -592,7 +592,7 @@ void HELPER(v7m_blxns)(CPUARMState *env, uint32_t dest)
     }
 
     if (sp < v7m_sp_limit(env)) {
-        raise_exception(env, EXCP_STKOF, 0, 1);
+        raise_exception_arm(env, EXCP_STKOF, 0, 1);
     }
 
     saved_psr = env->v7m.exception;
@@ -2480,7 +2480,7 @@ void HELPER(v7m_msr)(CPUARMState *env, uint32_t maskreg, uint32_t val)
                 CPUState *cs = env_cpu(env);
 
                 cpu_restore_state(cs, GETPC(), true);
-                raise_exception(env, EXCP_STKOF, 0, 1);
+                raise_exception_arm(env, EXCP_STKOF, 0, 1);
             }
 
             if (is_psp) {

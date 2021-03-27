@@ -768,6 +768,7 @@ int cpu_exec(CPUState *cpu)
             }
 
             tb = tb_find(cpu, last_tb, tb_exit, cflags);
+
             cpu_loop_exec_tb(cpu, tb, &last_tb, &tb_exit);
             /* Try to align the host and virtual clocks
                if the guest is in advance */

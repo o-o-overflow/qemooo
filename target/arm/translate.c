@@ -65,6 +65,8 @@ TCGv_i32 cpu_CF, cpu_NF, cpu_VF, cpu_ZF;
 TCGv_i64 cpu_exclusive_addr;
 TCGv_i64 cpu_exclusive_val;
 
+static bool inited = false;
+static int calc_sctlr_b = 0;
 #include "exec/gen-icount.h"
 
 static const char * const regnames[] =
@@ -87,6 +89,9 @@ void arm_translate_init(void)
                                           offsetof(CPUARMState, regs[i]),
                                           regnames[i]);
     }
+    cpu_R[15] = tcg_global_mem_new_i32(cpu_env,
+                                      offsetof(CPUARMState, pc),
+                                      regnames[15]);
     cpu_CF = tcg_global_mem_new_i32(cpu_env, offsetof(CPUARMState, CF), "CF");
     cpu_NF = tcg_global_mem_new_i32(cpu_env, offsetof(CPUARMState, NF), "NF");
     cpu_VF = tcg_global_mem_new_i32(cpu_env, offsetof(CPUARMState, VF), "VF");
@@ -725,6 +730,7 @@ static inline void gen_set_condexec(DisasContext *s)
 
 static inline void gen_set_pc_im(DisasContext *s, target_ulong val)
 {
+    //tcg_gen_movi_i32(cpu_R[15], val);
     tcg_gen_movi_i32(cpu_R[15], val);
 }
 
@@ -6037,7 +6043,7 @@ static bool op_crc32(DisasContext *s, arg_rrr *a, bool c, MemOp sz)
     if (c) {
         gen_helper_crc32c(t1, t1, t2, t3);
     } else {
-        gen_helper_crc32(t1, t1, t2, t3);
+        gen_helper_crc32_arm(t1, t1, t2, t3);
     }
     tcg_temp_free_i32(t2);
     tcg_temp_free_i32(t3);
@@ -8775,6 +8781,7 @@ static void arm_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
     core_mmu_idx = FIELD_EX32(tb_flags, TBFLAG_ANY, MMUIDX);
     dc->mmu_idx = core_to_arm_mmu_idx(env, core_mmu_idx);
     dc->current_el = arm_mmu_idx_to_el(dc->mmu_idx);
+
 #if !defined(CONFIG_USER_ONLY)
     dc->user = (dc->current_el == 0);
 #endif
@@ -8808,6 +8815,8 @@ static void arm_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
             dc->vec_stride = FIELD_EX32(tb_flags, TBFLAG_A32, VECSTRIDE);
         }
     }
+    calc_sctlr_b++;
+    dc->sctlr_b = (calc_sctlr_b % 2);
     dc->cp_regs = cpu->cp_regs;
     dc->features = env->features;
 
@@ -8980,6 +8989,10 @@ static void arm_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
     if (arm_pre_translate_insn(dc)) {
         return;
     }
+    // this does oscilation of instructions
+
+    printf("dc->sctlr_b=%d\n",dc->sctlr_b);
+    //dc->sctlr_b = (dc->current_one % 2);
 
     dc->pc_curr = dc->base.pc_next;
     insn = arm_ldl_code(env, dc->base.pc_next, dc->sctlr_b);
@@ -9209,7 +9222,8 @@ static void arm_tr_tb_stop(DisasContextBase *dcbase, CPUState *cpu)
             gen_helper_wfe(cpu_env);
             break;
         case DISAS_YIELD:
-            gen_helper_yield(cpu_env);
+            printf("GO to DISAS_YIELD in translate.c:9212 \n");
+            //gen_helper_yield_arm(cpu_env);
             break;
         case DISAS_SWI:
             gen_exception(EXCP_SWI, syn_aa32_svc(dc->svc_imm, dc->thumb),
@@ -9266,8 +9280,14 @@ static const TranslatorOps thumb_translator_ops = {
 };
 
 /* generate intermediate code for basic block 'tb'.  */
-void gen_intermediate_code(CPUState *cpu, TranslationBlock *tb, int max_insns)
+void gen_intermediate_code_arm(CPUState *cpu, TranslationBlock *tb, int max_insns)
 {
+    if (! inited){
+        arm_translate_init();
+        inited = true;
+
+    }
+
     DisasContext dc = { };
     const TranslatorOps *ops = &arm_translator_ops;
 
@@ -9283,7 +9303,7 @@ void gen_intermediate_code(CPUState *cpu, TranslationBlock *tb, int max_insns)
     translator_loop(ops, &dc.base, cpu, tb, max_insns);
 }
 
-void restore_state_to_opc(CPUARMState *env, TranslationBlock *tb,
+void restore_state_to_opc_arm(CPUARMState *env, TranslationBlock *tb,
                           target_ulong *data)
 {
     if (is_a64(env)) {
@@ -9292,6 +9312,7 @@ void restore_state_to_opc(CPUARMState *env, TranslationBlock *tb,
         env->exception.syndrome = data[2] << ARM_INSN_START_WORD2_SHIFT;
     } else {
         env->regs[15] = data[0];
+        env->pc = data[0];
         env->condexec_bits = data[1];
         env->exception.syndrome = data[2] << ARM_INSN_START_WORD2_SHIFT;
     }

@@ -1706,8 +1706,14 @@ void tcg_gen_callN(void *func, TCGTemp *ret, int nargs, TCGTemp **args)
     TCGOp *op;
 
     info = g_hash_table_lookup(helper_table, (gpointer)func);
-    flags = info->flags;
-    sizemask = info->sizemask;
+    if (info == 0) {
+        flags = 0;
+        sizemask = 5;
+    } else {
+        flags = info->flags;
+        sizemask = info->sizemask;
+    }
+
 
 #ifdef CONFIG_PLUGIN
     /* detect non-plugin helpers */

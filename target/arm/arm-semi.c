@@ -782,10 +782,15 @@ target_ulong do_arm_semihosting(CPUARMState *env)
         dealloc_guestfd(arg0);
         return ret;
     case TARGET_SYS_WRITEC:
-        qemu_semihosting_console_outc(env, args);
+        // might be able to use if put later in build statement.
+        printf("\n\033[31mIN TARGET_SYS WRITEC target/arm/arm-semi.c: 785\033[0m\n");
+        //qemu_semihosting_console_outc(env, args);
         return 0xdeadbeef;
     case TARGET_SYS_WRITE0:
-        return qemu_semihosting_console_outs(env, args);
+        // might be able to use if put later in build statement.
+        printf("\n\033[31mIN TARGET_SYS WRITEC target/arm/arm-semi.c: 791\033[0m\n");
+        return 0xdeadbeef;
+        //return qemu_semihosting_console_outs(env, args);
     case TARGET_SYS_WRITE:
         GET_ARG(0);
         GET_ARG(1);
@@ -813,7 +818,10 @@ target_ulong do_arm_semihosting(CPUARMState *env)
 
         return guestfd_fns[gf->type].readfn(cpu, gf, arg1, len);
     case TARGET_SYS_READC:
-        return qemu_semihosting_console_inc(env);
+        // might be able to use if put later in build statement.
+        printf("\n\033[31mIN TARGET_SYS_READC target/arm/arm-semi.c: 822\033[0m\n");
+        return 0xdeadbeef;
+        //return qemu_semihosting_console_inc(env);
     case TARGET_SYS_ISTTY:
         GET_ARG(0);
 

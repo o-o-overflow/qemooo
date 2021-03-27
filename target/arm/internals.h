@@ -100,7 +100,7 @@ FIELD(V7M_EXCRET, RES1, 7, 25) /* including the must-be-1 prefix */
  * and target exception level. This should be called from helper functions,
  * and never returns because we will longjump back up to the CPU main loop.
  */
-void QEMU_NORETURN raise_exception(CPUARMState *env, uint32_t excp,
+void QEMU_NORETURN raise_exception_arm(CPUARMState *env, uint32_t excp,
                                    uint32_t syndrome, uint32_t target_el);
 
 /*

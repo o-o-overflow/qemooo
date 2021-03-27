@@ -102,6 +102,8 @@
 
 #define SMC_BITMAP_USE_THRESHOLD 10
 
+unsigned long inscnt = 0;
+
 typedef struct PageDesc {
     /* list of TBs intersecting this ram page */
     uintptr_t first_tb;
@@ -1741,7 +1743,18 @@ TranslationBlock *tb_gen_code(CPUState *cpu,
     tcg_func_start(tcg_ctx);
 
     tcg_ctx->cpu = env_cpu(env);
-    gen_intermediate_code(cpu, tb, max_insns);
+    if (cpu->kvm_fd == 1) {
+        gen_intermediate_code_arm(cpu, tb, max_insns);
+    } else if (cpu->kvm_fd == 2) {
+        gen_intermediate_code(cpu, tb, max_insns);
+    }
+//    if (inscnt % 2 == 0) {
+//        gen_intermediate_code_arm(cpu, tb, max_insns);
+//    } else {
+//        gen_intermediate_code(cpu, tb, max_insns);
+//    }
+    inscnt += 1;
+
     tcg_ctx->cpu = NULL;
 
     trace_translate_block(tb, tb->pc, tb->tc.ptr);

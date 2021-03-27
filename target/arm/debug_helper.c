@@ -277,7 +277,7 @@ void arm_debug_excp_handler(CPUState *cs)
 
             env->exception.fsr = arm_debug_exception_fsr(env);
             env->exception.vaddress = wp_hit->hitaddr;
-            raise_exception(env, EXCP_DATA_ABORT,
+            raise_exception_arm(env, EXCP_DATA_ABORT,
                     syn_watchpoint(same_el, 0, wnr),
                     arm_debug_target_el(env));
         }
@@ -303,7 +303,7 @@ void arm_debug_excp_handler(CPUState *cs)
          * exception/security level.
          */
         env->exception.vaddress = 0;
-        raise_exception(env, EXCP_PREFETCH_ABORT,
+        raise_exception_arm(env, EXCP_PREFETCH_ABORT,
                         syn_breakpoint(same_el),
                         arm_debug_target_el(env));
     }

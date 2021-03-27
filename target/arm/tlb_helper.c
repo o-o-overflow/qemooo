@@ -102,7 +102,7 @@ static void QEMU_NORETURN arm_deliver_fault(ARMCPU *cpu, vaddr addr,
 
     env->exception.vaddress = addr;
     env->exception.fsr = fsr;
-    raise_exception(env, exc, syn, target_el);
+    raise_exception_arm(env, exc, syn, target_el);
 }
 
 /* Raise a data fault alignment exception for the specified virtual address */

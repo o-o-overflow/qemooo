@@ -31478,7 +31478,7 @@ static bool mips_tr_breakpoint_check(DisasContextBase *dcbase, CPUState *cs,
     ctx->base.pc_next += 4;
     return true;
 }
-
+//#include<bswap.h>
 static void mips_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
 {
     CPUMIPSState *env = cs->env_ptr;
@@ -31492,6 +31492,9 @@ static void mips_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
         insn_bytes = decode_nanomips_opc(env, ctx);
     } else if (!(ctx->hflags & MIPS_HFLAG_M16)) {
         ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
+
+        //ctx->opcode = le_bswap(tempinsn, 32);
+
         insn_bytes = 4;
         decode_opc(env, ctx);
     } else if (ctx->insn_flags & ASE_MICROMIPS) {

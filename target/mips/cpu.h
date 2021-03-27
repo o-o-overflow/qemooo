@@ -1271,7 +1271,27 @@ enum {
 
     EXCP_LAST = EXCP_TLBRI,
 };
-
+#define EXCP_UDEF            1   /* undefined instruction */
+#define EXCP_SWI             2   /* software interrupt */
+#define EXCP_PREFETCH_ABORT  3
+#define EXCP_DATA_ABORT      4
+#define EXCP_IRQ             5
+#define EXCP_FIQ             6
+#define EXCP_BKPT            7
+#define EXCP_EXCEPTION_EXIT  8   /* Return from v7M exception.  */
+#define EXCP_KERNEL_TRAP     9   /* Jumped to kernel code page.  */
+#define EXCP_HVC            11   /* HyperVisor Call */
+#define EXCP_HYP_TRAP       12
+#define EXCP_SMC            13   /* Secure Monitor Call */
+#define EXCP_VIRQ           14
+#define EXCP_VFIQ           15
+#define EXCP_SEMIHOST       16   /* semihosting call */
+#define EXCP_NOCP           17   /* v7M NOCP UsageFault */
+#define EXCP_INVSTATE       18   /* v7M INVSTATE UsageFault */
+#define EXCP_STKOF          19   /* v8M STKOF UsageFault */
+#define EXCP_LAZYFP         20   /* v7M fault during lazy FP stacking */
+#define EXCP_LSERR          21   /* v8M LSERR SecureFault */
+#define EXCP_UNALIGNED      22   /* v7M UNALIGNED UsageFault */
 /*
  * This is an internally generated WAKE request line.
  * It is driven by the CPU itself. Raised when the MT

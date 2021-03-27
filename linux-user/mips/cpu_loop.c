@@ -67,7 +67,9 @@ void cpu_loop(CPUMIPSState *env)
     CPUState *cs = env_cpu(env);
     target_siginfo_t info;
     int trapnr;
+    unsigned int n, insn;
     abi_long ret;
+    cs->kvm_fd = 1;
 # ifdef TARGET_ABI_MIPSO32
     unsigned int syscall_num;
 # endif
@@ -82,6 +84,7 @@ void cpu_loop(CPUMIPSState *env)
         case EXCP_SYSCALL:
             env->active_tc.PC += 4;
 # ifdef TARGET_ABI_MIPSO32
+            cs->kvm_fd = 1;  // next time we are doing a different ARCH
             syscall_num = env->active_tc.gpr[2] - 4000;
             if (syscall_num >= sizeof(mips_syscall_args)) {
                 /* syscall_num is larger that any defined for MIPS O32 */
@@ -130,6 +133,7 @@ void cpu_loop(CPUMIPSState *env)
                                  env->active_tc.gpr[7],
                                  arg5, arg6, arg7, arg8);
             }
+
 done_syscall:
 # else
             ret = do_syscall(env, env->active_tc.gpr[2],
@@ -309,6 +313,221 @@ done_syscall:
         case EXCP_ATOMIC:
             cpu_exec_step_atomic(cs);
             break;
+
+/* ***************** ARMS ************************/
+//            case EXCP_UDEF:
+//            case EXCP_NOCP:
+//            case EXCP_INVSTATE:
+//            {
+//                TaskState *ts = cs->opaque;
+//                uint32_t opcode;
+//                int rc;
+//
+//                /* we handle the FPU emulation here, as Linux */
+//                /* we get the opcode */
+//                /* FIXME - what to do if get_user() fails? */
+//                get_user_code_u32(opcode, env->active_tc.PC, env);
+//
+//                rc = EmulateAll(opcode, &ts->fpa, env);
+//                if (rc == 0) { /* illegal instruction */
+//                    info.si_signo = TARGET_SIGILL;
+//                    info.si_errno = 0;
+//                    info.si_code = TARGET_ILL_ILLOPN;
+//                    info._sifields._sigfault._addr = env->active_tc.PC;
+//                    queue_signal(env, info.si_signo, QEMU_SI_FAULT, &info);
+//                } else if (rc < 0) { /* FP exception */
+//                    int arm_fpe=0;
+//
+//                    /* translate softfloat flags to FPSR flags */
+//                    if (-rc & float_flag_invalid)
+//                        arm_fpe |= BIT_IOC;
+//                    if (-rc & float_flag_divbyzero)
+//                        arm_fpe |= BIT_DZC;
+//                    if (-rc & float_flag_overflow)
+//                        arm_fpe |= BIT_OFC;
+//                    if (-rc & float_flag_underflow)
+//                        arm_fpe |= BIT_UFC;
+//                    if (-rc & float_flag_inexact)
+//                        arm_fpe |= BIT_IXC;
+//
+//                    FPSR fpsr = ts->fpa.fpsr;
+//                    //printf("fpsr 0x%x, arm_fpe 0x%x\n",fpsr,arm_fpe);
+//
+//                    if (fpsr & (arm_fpe << 16)) { /* exception enabled? */
+//                        info.si_signo = TARGET_SIGFPE;
+//                        info.si_errno = 0;
+//
+//                        /* ordered by priority, least first */
+//                        if (arm_fpe & BIT_IXC) info.si_code = TARGET_FPE_FLTRES;
+//                        if (arm_fpe & BIT_UFC) info.si_code = TARGET_FPE_FLTUND;
+//                        if (arm_fpe & BIT_OFC) info.si_code = TARGET_FPE_FLTOVF;
+//                        if (arm_fpe & BIT_DZC) info.si_code = TARGET_FPE_FLTDIV;
+//                        if (arm_fpe & BIT_IOC) info.si_code = TARGET_FPE_FLTINV;
+//
+//                        info._sifields._sigfault._addr = env->regs[15];
+//                        queue_signal(env, info.si_signo, QEMU_SI_FAULT, &info);
+//                    } else {
+//                        env->regs[15] += 4;
+//                    }
+//
+//                    /* accumulate unenabled exceptions */
+//                    if ((!(fpsr & BIT_IXE)) && (arm_fpe & BIT_IXC))
+//                        fpsr |= BIT_IXC;
+//                    if ((!(fpsr & BIT_UFE)) && (arm_fpe & BIT_UFC))
+//                        fpsr |= BIT_UFC;
+//                    if ((!(fpsr & BIT_OFE)) && (arm_fpe & BIT_OFC))
+//                        fpsr |= BIT_OFC;
+//                    if ((!(fpsr & BIT_DZE)) && (arm_fpe & BIT_DZC))
+//                        fpsr |= BIT_DZC;
+//                    if ((!(fpsr & BIT_IOE)) && (arm_fpe & BIT_IOC))
+//                        fpsr |= BIT_IOC;
+//                    ts->fpa.fpsr=fpsr;
+//                } else { /* everything OK */
+//                    /* increment PC */
+//                    env->regs[15] += 4;
+//                }
+//            }
+//                break;
+            case EXCP_SWI:
+            {
+                cs->kvm_fd = 2; // next time we do a different arch
+                //env->eabi = 1;
+                /* system call */
+
+                /*
+                 * Equivalent of kernel CONFIG_OABI_COMPAT: read the
+                 * Arm SVC insn to extract the immediate, which is the
+                 * syscall number in OABI.
+                 */
+                /* FIXME - what to do if get_user() fails? */
+                //get_user_code_u32(insn, env->active_tc.PC - 4, env);
+                //n = insn & 0xffffff;
+                n = env->active_tc.gpr[7];
+//                if (n == 0) {
+//                    /* zero immediate: EABI, syscall number in r7 */
+//                    n = env->active_tc.gpr[7];
+//                } else {
+//                    /*
+//                     * This XOR matches the kernel code: an immediate
+//                     * in the valid range (0x900000 .. 0x9fffff) is
+//                     * converted into the correct EABI-style syscall
+//                     * number; invalid immediates end up as values
+//                     * > 0xfffff and are handled below as out-of-range.
+//                     */
+//                    n ^= ARM_SYSCALL_BASE;
+//                    env->eabi = 0;
+//                }
+//                if (n > ARM_NR_BASE) {
+//                    switch (n) {
+//                        case ARM_NR_cacheflush:
+//                            /* nop */
+//                            break;
+//                        case ARM_NR_set_tls:
+//                            cpu_set_tls(env, env->active_tc.gpr[0]);
+//                            env->active_tc.gpr[0] = 0;
+//                            break;
+//                        case ARM_NR_breakpoint:
+//                            env->active_tc.PC -= 4;
+//                            //goto excp_debug;
+//                        case ARM_NR_get_tls:
+//                            //
+//                            //
+//                            //
+//                            //
+//                            //
+//                            // env->active_tc.gpr[0] = cpu_get_tls(env);
+//                            break;
+//                        default:
+//                            if (n < 0xf0800) {
+//                                /*
+//                                 * Syscalls 0xf0000..0xf07ff (or 0x9f0000..
+//                                 * 0x9f07ff in OABI numbering) are defined
+//                                 * to return -ENOSYS rather than raising
+//                                 * SIGILL. Note that we have already
+//                                 * removed the 0x900000 prefix.
+//                                 */
+//                                qemu_log_mask(LOG_UNIMP,
+//                                              "qemu: Unsupported ARM syscall: 0x%x\n",
+//                                              n);
+//                                env->active_tc.gpr[0] = -TARGET_ENOSYS;
+//                            } else {
+//                                /*
+//                                 * Otherwise SIGILL. This includes any SWI with
+//                                 * immediate not originally 0x9fxxxx, because
+//                                 * of the earlier XOR.
+//                                 */
+//                                info.si_signo = TARGET_SIGILL;
+//                                info.si_errno = 0;
+//                                info.si_code = TARGET_ILL_ILLTRP;
+//                                info._sifields._sigfault._addr = env->active_tc.gpr[15];
+//
+//                                info._sifields._sigfault._addr -= 4;
+//
+//                                queue_signal(env, info.si_signo,
+//                                             QEMU_SI_FAULT, &info);
+//                            }
+//                            break;
+//                    }
+//                } else {
+                    ret = do_syscall(env,
+                                     n,
+                                     env->active_tc.gpr[0],
+                                     env->active_tc.gpr[1],
+                                     env->active_tc.gpr[2],
+                                     env->active_tc.gpr[3],
+                                     env->active_tc.gpr[4],
+                                     env->active_tc.gpr[5],
+                                     0, 0);
+                    if (ret == -TARGET_ERESTARTSYS) {
+                        env->active_tc.PC -= 4;
+                    } else if (ret != -TARGET_QEMU_ESIGRETURN) {
+                        env->active_tc.gpr[0] = ret;
+                    }
+//                }
+
+            }
+                break;
+//            case EXCP_SEMIHOST:
+//                env->regs[0] = do_arm_semihosting(env);
+//                env->regs[15] += env->thumb ? 2 : 4;
+//                break;
+//            case EXCP_INTERRUPT:
+//                /* just indicate that signals should be handled asap */
+//                break;
+//            case EXCP_PREFETCH_ABORT:
+//            case EXCP_DATA_ABORT:
+//                addr = env->exception.vaddress;
+//                {
+//                    info.si_signo = TARGET_SIGSEGV;
+//                    info.si_errno = 0;
+//                    /* XXX: check env->error_code */
+//                    info.si_code = TARGET_SEGV_MAPERR;
+//                    info._sifields._sigfault._addr = addr;
+//                    queue_signal(env, info.si_signo, QEMU_SI_FAULT, &info);
+//                }
+//                break;
+//            case EXCP_DEBUG:
+//            case EXCP_BKPT:
+//            excp_debug:
+//                info.si_signo = TARGET_SIGTRAP;
+//                info.si_errno = 0;
+//                info.si_code = TARGET_TRAP_BRKPT;
+//                queue_signal(env, info.si_signo, QEMU_SI_FAULT, &info);
+//                break;
+//            case EXCP_KERNEL_TRAP:
+//                if (do_kernel_trap(env))
+//                    goto error;
+//                break;
+//            case EXCP_YIELD:
+//                /* nothing to do here for user-mode, just resume guest code */
+//                break;
+//            case EXCP_ATOMIC:
+//                cpu_exec_step_atomic(cs);
+//                break;
+
+
+/****************************************/
+
         default:
 error:
             EXCP_DUMP(env, "qemu: unhandled CPU exception 0x%x - aborting\n", trapnr);

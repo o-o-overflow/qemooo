@@ -2575,7 +2575,7 @@ static void load_elf_image(const char *image_name, int image_fd,
 
     /* First of all, some simple consistency checks */
     if (!elf_check_ident(ehdr)) {
-        error_setg(&err, "Invalid ELF image for this architecture");
+        error_setg(&err, "Invalid ELF image for this architecture ");
         goto exit_errmsg;
     }
     bswap_ehdr(ehdr);

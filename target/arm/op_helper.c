@@ -54,14 +54,14 @@ static CPUState *do_raise_exception(CPUARMState *env, uint32_t excp,
     return cs;
 }
 
-void raise_exception(CPUARMState *env, uint32_t excp,
+void raise_exception_arm(CPUARMState *env, uint32_t excp,
                      uint32_t syndrome, uint32_t target_el)
 {
     CPUState *cs = do_raise_exception(env, excp, syndrome, target_el);
     cpu_loop_exit(cs);
 }
 
-void raise_exception_ra(CPUARMState *env, uint32_t excp, uint32_t syndrome,
+void raise_exception_ra_arm(CPUARMState *env, uint32_t excp, uint32_t syndrome,
                         uint32_t target_el, uintptr_t ra)
 {
     CPUState *cs = do_raise_exception(env, excp, syndrome, target_el);
@@ -105,7 +105,7 @@ void HELPER(v8m_stackcheck)(CPUARMState *env, uint32_t newvalue)
          * get them right before raising the exception.
          */
         cpu_restore_state(cs, GETPC(), true);
-        raise_exception(env, EXCP_STKOF, 0, 1);
+        raise_exception_arm(env, EXCP_STKOF, 0, 1);
     }
 }
 
@@ -303,7 +303,7 @@ void HELPER(wfi)(CPUARMState *env, uint32_t insn_len)
             env->regs[15] -= insn_len;
         }
 
-        raise_exception(env, EXCP_UDEF, syn_wfx(1, 0xe, 0, insn_len == 2),
+        raise_exception_arm(env, EXCP_UDEF, syn_wfx(1, 0xe, 0, insn_len == 2),
                         target_el);
     }
 
@@ -321,10 +321,10 @@ void HELPER(wfe)(CPUARMState *env)
      * (ie halting until some event occurs), so we never take
      * a configurable trap to a different exception level.
      */
-    HELPER(yield)(env);
+    HELPER(yield_arm)(env);
 }
 
-void HELPER(yield)(CPUARMState *env)
+void HELPER(yield_arm)(CPUARMState *env)
 {
     CPUState *cs = env_cpu(env);
 
@@ -355,7 +355,7 @@ void HELPER(exception_internal)(CPUARMState *env, uint32_t excp)
 void HELPER(exception_with_syndrome)(CPUARMState *env, uint32_t excp,
                                      uint32_t syndrome, uint32_t target_el)
 {
-    raise_exception(env, excp, syndrome, target_el);
+    raise_exception_arm(env, excp, syndrome, target_el);
 }
 
 /* Raise an EXCP_BKPT with the specified syndrome register value,
@@ -384,7 +384,7 @@ void HELPER(exception_bkpt_insn)(CPUARMState *env, uint32_t syndrome)
     if (debug_el < cur_el) {
         debug_el = cur_el;
     }
-    raise_exception(env, EXCP_BKPT, syndrome, debug_el);
+    raise_exception_arm(env, EXCP_BKPT, syndrome, debug_el);
 }
 
 uint32_t HELPER(cpsr_read)(CPUARMState *env)
@@ -478,7 +478,7 @@ uint32_t HELPER(get_r13_banked)(CPUARMState *env, uint32_t mode)
         /* SRS instruction is UNPREDICTABLE from System mode; we UNDEF.
          * Other UNPREDICTABLE and UNDEF cases were caught at translate time.
          */
-        raise_exception(env, EXCP_UDEF, syn_uncategorized(),
+        raise_exception_arm(env, EXCP_UDEF, syn_uncategorized(),
                         exception_target_el(env));
     }
 
@@ -543,7 +543,7 @@ static void msr_mrs_banked_exc_checks(CPUARMState *env, uint32_t tgtmode,
     return;
 
 undef:
-    raise_exception(env, EXCP_UDEF, syn_uncategorized(),
+    raise_exception_arm(env, EXCP_UDEF, syn_uncategorized(),
                     exception_target_el(env));
 }
 
@@ -617,7 +617,7 @@ void HELPER(access_check_cp_reg)(CPUARMState *env, void *rip, uint32_t syndrome,
 
     if (arm_feature(env, ARM_FEATURE_XSCALE) && ri->cp < 14
         && extract32(env->cp15.c15_cpar, ri->cp, 1) == 0) {
-        raise_exception(env, EXCP_UDEF, syndrome, exception_target_el(env));
+        raise_exception_arm(env, EXCP_UDEF, syndrome, exception_target_el(env));
     }
 
     /*
@@ -691,7 +691,7 @@ void HELPER(access_check_cp_reg)(CPUARMState *env, void *rip, uint32_t syndrome,
     }
 
 exept:
-    raise_exception(env, EXCP_UDEF, syndrome, target_el);
+    raise_exception_arm(env, EXCP_UDEF, syndrome, target_el);
 }
 
 void HELPER(set_cp_reg)(CPUARMState *env, void *rip, uint32_t value)
@@ -787,7 +787,7 @@ void HELPER(pre_hvc)(CPUARMState *env)
     }
 
     if (undef) {
-        raise_exception(env, EXCP_UDEF, syn_uncategorized(),
+        raise_exception_arm(env, EXCP_UDEF, syn_uncategorized(),
                         exception_target_el(env));
     }
 }
@@ -849,7 +849,7 @@ void HELPER(pre_smc)(CPUARMState *env, uint32_t syndrome)
          * PSCI-via-SMC as implying an EL3.
          * This handles the very last line of the previous table.
          */
-        raise_exception(env, EXCP_UDEF, syn_uncategorized(),
+        raise_exception_arm(env, EXCP_UDEF, syn_uncategorized(),
                         exception_target_el(env));
     }
 
@@ -859,7 +859,7 @@ void HELPER(pre_smc)(CPUARMState *env, uint32_t syndrome)
          * making PSCI calls into QEMU's "firmware" via HCR.TSC.
          * This handles all the "Trap to EL2" cases of the previous table.
          */
-        raise_exception(env, EXCP_HYP_TRAP, syndrome, 2);
+        raise_exception_arm(env, EXCP_HYP_TRAP, syndrome, 2);
     }
 
     /* Catch the two remaining "Undef insn" cases of the previous table:
@@ -868,7 +868,7 @@ void HELPER(pre_smc)(CPUARMState *env, uint32_t syndrome)
      */
     if (!arm_is_psci_call(cpu, EXCP_SMC) &&
         (smd || !arm_feature(env, ARM_FEATURE_EL3))) {
-        raise_exception(env, EXCP_UDEF, syn_uncategorized(),
+        raise_exception_arm(env, EXCP_UDEF, syn_uncategorized(),
                         exception_target_el(env));
     }
 }

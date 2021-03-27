@@ -218,18 +218,49 @@ typedef struct ARMPACKey {
 } ARMPACKey;
 #endif
 
+typedef struct MIPS_TCState MIPS_TCState;
+struct MIPS_TCState {
+    //target_ulong gpr[16];
+    //target_ulong PC;
+    target_ulong HI[4];
+    target_ulong LO[4];
+    target_ulong ACX[4];
+    target_ulong DSPControl;
+    int32_t CP0_TCStatus;
+
+    int32_t CP0_TCBind;
+
+    target_ulong CP0_TCHalt;
+    target_ulong CP0_TCContext;
+    target_ulong CP0_TCSchedule;
+    target_ulong CP0_TCScheFBack;
+    int32_t CP0_Debug_tcstatus;
+    target_ulong CP0_UserLocal;
+
+    int32_t msacsr;
+
+
+    float_status msa_fp_status;
+
+    /* Upper 64-bit MMRs (multimedia registers); the lower 64-bit are GPRs */
+    uint64_t mmr[32];
+
+    target_ulong mxu_gpr[16 - 1];
+    target_ulong mxu_cr;
+};
 
 typedef struct CPUARMState {
     /* Regs for current mode.  */
     uint32_t regs[16];
-
+    uint32_t mips_regs[16];
+    uint64_t pc;
+    MIPS_TCState mips_tc_state;
     /* 32/64 switch only happens when taking and returning from
      * exceptions so the overlap semantics are taken care of then
      * instead of having a complicated union.
      */
     /* Regs for A64 mode.  */
     uint64_t xregs[32];
-    uint64_t pc;
     /* PSTATE isn't an architectural register for ARMv8. However, it is
      * convenient for us to assemble the underlying state into a 32 bit format
      * identical to the architectural format used for the SPSR. (This is also

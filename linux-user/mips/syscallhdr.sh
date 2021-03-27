@@ -1,5 +1,6 @@
 #!/bin/sh
 # SPDX-License-Identifier: GPL-2.0
+set -x
 
 in="$1"
 out="$2"
@@ -30,7 +31,22 @@ grep -E "^[0-9A-Fa-fXx]+[[:space:]]+${my_abis}" "$in" | sort -n | (
         nxt=$((nr+1))
     done
 
+
+) > "$out"
+
+
+offset=""
+my_abis="(common)"
+grep -E "^[0-9A-Fa-fXx]+[[:space:]]+${my_abis}" "$(dirname "$in")/arm_$(basename "$in")" | sort -n | (
+    while read nr abi name entry ; do
+    if [ -z "$offset" ]; then
+        echo "#define ARM_TARGET_NR_${prefix}${name} $nr"
+    else
+        echo "#define ARM_TARGET_NR_${prefix}${name} ($offset + $nr)"
+        fi
+    done
+
     printf "\n"
     printf "#endif /* %s */" "${fileguard}"
     printf "\n"
-) > "$out"
+) >> "$out"
