@@ -33,7 +33,7 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVState *env,
     cpu_loop_exit_restore(cs, pc);
 }
 
-void helper_raise_exception(CPURISCVState *env, uint32_t exception)
+void helper_raise_exception_riscv(CPURISCVState *env, uint32_t exception) // cooonjoooined changed to riscv
 {
     riscv_raise_exception(env, exception, 0);
 }

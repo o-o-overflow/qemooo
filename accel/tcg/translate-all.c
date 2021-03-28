@@ -1744,8 +1744,11 @@ TranslationBlock *tb_gen_code(CPUState *cpu,
 
     tcg_ctx->cpu = env_cpu(env);
     if (cpu->kvm_fd == 1) {
-        gen_intermediate_code_arm(cpu, tb, max_insns);
+        gen_intermediate_code_riscv(cpu, tb,max_insns); // cooonjoooined added
     } else if (cpu->kvm_fd == 2) {
+        gen_intermediate_code_arm(cpu, tb, max_insns);
+
+    } else if (cpu->kvm_fd == 3) {
         gen_intermediate_code(cpu, tb, max_insns);
     }
 //    if (inscnt % 2 == 0) {

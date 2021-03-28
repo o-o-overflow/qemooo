@@ -124,7 +124,7 @@ static void generate_exception(DisasContext *ctx, int excp)
 {
     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
     TCGv_i32 helper_tmp = tcg_const_i32(excp);
-    gen_helper_raise_exception(cpu_env, helper_tmp);
+    gen_helper_raise_exception_riscv(cpu_env, helper_tmp); // cooonjoooined changed to riscv
     tcg_temp_free_i32(helper_tmp);
     ctx->base.is_jmp = DISAS_NORETURN;
 }
@@ -134,7 +134,7 @@ static void generate_exception_mbadaddr(DisasContext *ctx, int excp)
     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
     tcg_gen_st_tl(cpu_pc, cpu_env, offsetof(CPURISCVState, badaddr));
     TCGv_i32 helper_tmp = tcg_const_i32(excp);
-    gen_helper_raise_exception(cpu_env, helper_tmp);
+    gen_helper_raise_exception_riscv(cpu_env, helper_tmp); // cooonjoooined changed to riscv
     tcg_temp_free_i32(helper_tmp);
     ctx->base.is_jmp = DISAS_NORETURN;
 }
@@ -142,7 +142,7 @@ static void generate_exception_mbadaddr(DisasContext *ctx, int excp)
 static void gen_exception_debug(void)
 {
     TCGv_i32 helper_tmp = tcg_const_i32(EXCP_DEBUG);
-    gen_helper_raise_exception(cpu_env, helper_tmp);
+    gen_helper_raise_exception_riscv(cpu_env, helper_tmp); // cooonjoooined changed to riscv
     tcg_temp_free_i32(helper_tmp);
 }
 
@@ -901,7 +901,7 @@ static const TranslatorOps riscv_tr_ops = {
     .disas_log          = riscv_tr_disas_log,
 };
 
-void gen_intermediate_code(CPUState *cs, TranslationBlock *tb, int max_insns)
+void gen_intermediate_code_riscv(CPUState *cs, TranslationBlock *tb, int max_insns)  // cooonjoooined changed to riscv
 {
     DisasContext ctx;
 

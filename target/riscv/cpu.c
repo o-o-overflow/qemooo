@@ -307,8 +307,8 @@ static bool riscv_cpu_has_work(CPUState *cs)
 #endif
 }
 
-void restore_state_to_opc(CPURISCVState *env, TranslationBlock *tb,
-                          target_ulong *data)
+void restore_state_to_opc_riscv(CPURISCVState *env, TranslationBlock *tb,
+                          target_ulong *data)  // cooonjoooined changed to riscv
 {
     env->pc = data[0];
 }
@@ -331,11 +331,16 @@ static void riscv_cpu_reset(DeviceState *dev)
     env->load_res = -1;
     set_default_nan_mode(1, &env->fp_status);
 }
-
+static int
+print_insn_riscv32_nop(bfd_vma pc, disassemble_info *info)  // cooonjoooined added
+{
+    return 0x0000c001;
+    //return print_insn_arm(pc | 1, info);
+}
 static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
 {
 #if defined(TARGET_RISCV32)
-    info->print_insn = print_insn_riscv32;
+    info->print_insn = print_insn_riscv32_nop;
 #elif defined(TARGET_RISCV64)
     info->print_insn = print_insn_riscv64;
 #endif
