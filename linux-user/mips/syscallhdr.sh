@@ -45,8 +45,10 @@ grep -E "^[0-9A-Fa-fXx]+[[:space:]]+${my_abis}" "$(dirname "$in")/arm_$(basename
         echo "#define ARM_TARGET_NR_${prefix}${name} ($offset + $nr)"
         fi
     done
-
-    printf "\n"
-    printf "#endif /* %s */" "${fileguard}"
-    printf "\n"
 ) >> "$out"
+
+cat "$(dirname "$in")/riscv32_syscall32_nr.header">> "$out"
+
+(printf "\n"
+    printf "#endif /* %s */" "${fileguard}"
+    printf "\n") >> "$out"

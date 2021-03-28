@@ -37,6 +37,9 @@ static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
 static TCGv load_res;
 static TCGv load_val;
 
+static bool inited = false; // cooonjoooined
+static int which_endian = 0;
+
 #include "exec/gen-icount.h"
 
 typedef struct DisasContext {
@@ -764,19 +767,23 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
 {
     /* check for compressed insn */
     if (extract16(opcode, 0, 2) != 3) {
-        if (!has_ext(ctx, RVC)) {
-            gen_exception_illegal(ctx);
-        } else {
+//        if (!has_ext(ctx, RVC)) {
+//            gen_exception_illegal(ctx);
+//        } else {
             ctx->pc_succ_insn = ctx->base.pc_next + 2;
             if (!decode_insn16(ctx, opcode)) {
                 /* fall back to old decoder */
                 decode_RV32_64C(ctx, opcode);
             }
-        }
+//        }
     } else {
+
         uint32_t opcode32 = opcode;
-        opcode32 = deposit32(opcode32, 16, 16,
-                             translator_lduw(env, ctx->base.pc_next + 2));
+        uint16_t temp = translator_lduw(env, ctx->base.pc_next + 2);
+        if ((which_endian % 2) == 0) {
+            temp = bswap16(temp);
+        }
+        opcode32 = deposit32(opcode32, 16, 16, temp);
         ctx->pc_succ_insn = ctx->base.pc_next + 4;
         if (!decode_insn32(ctx, opcode32)) {
             gen_exception_illegal(ctx);
@@ -848,8 +855,11 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
     DisasContext *ctx = container_of(dcbase, DisasContext, base);
     CPURISCVState *env = cpu->env_ptr;
     uint16_t opcode16 = translator_lduw(env, ctx->base.pc_next);
-
+    if ((which_endian % 2) == 0) {
+        opcode16 = bswap16(opcode16);
+    }
     decode_opc(env, ctx, opcode16);
+    //which_endian++;
     ctx->base.pc_next = ctx->pc_succ_insn;
 
     if (ctx->base.is_jmp == DISAS_NEXT) {
@@ -904,7 +914,11 @@ static const TranslatorOps riscv_tr_ops = {
 void gen_intermediate_code_riscv(CPUState *cs, TranslationBlock *tb, int max_insns)  // cooonjoooined changed to riscv
 {
     DisasContext ctx;
+    if (! inited){
+        riscv_translate_init();
+        inited = true;
 
+    }
     translator_loop(&riscv_tr_ops, &ctx.base, cs, tb, max_insns);
 }
 

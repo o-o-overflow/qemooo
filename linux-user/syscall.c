@@ -8181,6 +8181,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
     switch(num) {
     case TARGET_NR_exit:
+#ifdef RISCV32_TARGET_NR_exit
+    case RISCV32_TARGET_NR_exit:
+#endif
 #ifdef ARM_TARGET_NR_exit
 	case ARM_TARGET_NR_exit:
 #endif 
@@ -8225,6 +8228,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         _exit(arg1);
         return 0; /* avoid warning */
     case TARGET_NR_read:
+#ifdef RISCV32_TARGET_NR_read
+    case RISCV32_TARGET_NR_read:
+#endif
 #ifdef ARM_TARGET_NR_read
 	case ARM_TARGET_NR_read:
 #endif 
@@ -8243,6 +8249,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_write:
+#ifdef RISCV32_TARGET_NR_write
+    case RISCV32_TARGET_NR_write:
+#endif
 #ifdef ARM_TARGET_NR_write
 	case ARM_TARGET_NR_write:
 #endif 
@@ -8268,6 +8277,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_open
     case TARGET_NR_open:
+#ifdef RISCV32_TARGET_NR_open
+    case RISCV32_TARGET_NR_open:
+#endif
 #ifdef ARM_TARGET_NR_open
 	case ARM_TARGET_NR_open:
 #endif 
@@ -8282,6 +8294,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_openat:
+#ifdef RISCV32_TARGET_NR_openat
+    case RISCV32_TARGET_NR_openat:
+#endif
 #ifdef ARM_TARGET_NR_openat
 	case ARM_TARGET_NR_openat:
 #endif 
@@ -8296,6 +8311,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #if defined(TARGET_NR_name_to_handle_at) && defined(CONFIG_OPEN_BY_HANDLE)
     case TARGET_NR_name_to_handle_at:
+#ifdef RISCV32_TARGET_NR_name_to_handle_at
+    case RISCV32_TARGET_NR_name_to_handle_at:
+#endif
 #ifdef ARM_TARGET_NR_name_to_handle_at
 	case ARM_TARGET_NR_name_to_handle_at:
 #endif 
@@ -8305,6 +8323,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_open_by_handle_at) && defined(CONFIG_OPEN_BY_HANDLE)
     case TARGET_NR_open_by_handle_at:
+#ifdef RISCV32_TARGET_NR_open_by_handle_at
+    case RISCV32_TARGET_NR_open_by_handle_at:
+#endif
 #ifdef ARM_TARGET_NR_open_by_handle_at
 	case ARM_TARGET_NR_open_by_handle_at:
 #endif 
@@ -8314,6 +8335,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_close:
+#ifdef RISCV32_TARGET_NR_close
+    case RISCV32_TARGET_NR_close:
+#endif
 #ifdef ARM_TARGET_NR_close
 	case ARM_TARGET_NR_close:
 #endif 
@@ -8322,6 +8346,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(close(arg1));
 
     case TARGET_NR_brk:
+#ifdef RISCV32_TARGET_NR_brk
+    case RISCV32_TARGET_NR_brk:
+#endif
 #ifdef ARM_TARGET_NR_brk
 	case ARM_TARGET_NR_brk:
 #endif 
@@ -8329,6 +8356,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_brk(arg1);
 #ifdef TARGET_NR_fork
     case TARGET_NR_fork:
+#ifdef RISCV32_TARGET_NR_fork
+    case RISCV32_TARGET_NR_fork:
+#endif
 #ifdef ARM_TARGET_NR_fork
 	case ARM_TARGET_NR_fork:
 #endif 
@@ -8337,6 +8367,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_waitpid
     case TARGET_NR_waitpid:
+#ifdef RISCV32_TARGET_NR_waitpid
+    case RISCV32_TARGET_NR_waitpid:
+#endif
 
         {
             int status;
@@ -8349,6 +8382,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_waitid
     case TARGET_NR_waitid:
+#ifdef RISCV32_TARGET_NR_waitid
+    case RISCV32_TARGET_NR_waitid:
+#endif
 #ifdef ARM_TARGET_NR_waitid
 	case ARM_TARGET_NR_waitid:
 #endif 
@@ -8368,6 +8404,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_creat /* not on alpha */
     case TARGET_NR_creat:
+#ifdef RISCV32_TARGET_NR_creat
+    case RISCV32_TARGET_NR_creat:
+#endif
 #ifdef ARM_TARGET_NR_creat
 	case ARM_TARGET_NR_creat:
 #endif 
@@ -8381,6 +8420,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_link
     case TARGET_NR_link:
+#ifdef RISCV32_TARGET_NR_link
+    case RISCV32_TARGET_NR_link:
+#endif
 #ifdef ARM_TARGET_NR_link
 	case ARM_TARGET_NR_link:
 #endif 
@@ -8400,6 +8442,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_linkat)
     case TARGET_NR_linkat:
+#ifdef RISCV32_TARGET_NR_linkat
+    case RISCV32_TARGET_NR_linkat:
+#endif
 #ifdef ARM_TARGET_NR_linkat
 	case ARM_TARGET_NR_linkat:
 #endif 
@@ -8421,6 +8466,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_unlink
     case TARGET_NR_unlink:
+#ifdef RISCV32_TARGET_NR_unlink
+    case RISCV32_TARGET_NR_unlink:
+#endif
 #ifdef ARM_TARGET_NR_unlink
 	case ARM_TARGET_NR_unlink:
 #endif 
@@ -8433,6 +8481,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_unlinkat)
     case TARGET_NR_unlinkat:
+#ifdef RISCV32_TARGET_NR_unlinkat
+    case RISCV32_TARGET_NR_unlinkat:
+#endif
 #ifdef ARM_TARGET_NR_unlinkat
 	case ARM_TARGET_NR_unlinkat:
 #endif 
@@ -8444,6 +8495,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_execve:
+#ifdef RISCV32_TARGET_NR_execve
+    case RISCV32_TARGET_NR_execve:
+#endif
 #ifdef ARM_TARGET_NR_execve
 	case ARM_TARGET_NR_execve:
 #endif 
@@ -8545,6 +8599,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_chdir:
+#ifdef RISCV32_TARGET_NR_chdir
+    case RISCV32_TARGET_NR_chdir:
+#endif
 #ifdef ARM_TARGET_NR_chdir
 	case ARM_TARGET_NR_chdir:
 #endif 
@@ -8556,6 +8613,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_time
     case TARGET_NR_time:
+#ifdef RISCV32_TARGET_NR_time
+    case RISCV32_TARGET_NR_time:
+#endif
 
         {
             time_t host_time;
@@ -8569,6 +8629,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mknod
     case TARGET_NR_mknod:
+#ifdef RISCV32_TARGET_NR_mknod
+    case RISCV32_TARGET_NR_mknod:
+#endif
 #ifdef ARM_TARGET_NR_mknod
 	case ARM_TARGET_NR_mknod:
 #endif 
@@ -8581,6 +8644,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_mknodat)
     case TARGET_NR_mknodat:
+#ifdef RISCV32_TARGET_NR_mknodat
+    case RISCV32_TARGET_NR_mknodat:
+#endif
 #ifdef ARM_TARGET_NR_mknodat
 	case ARM_TARGET_NR_mknodat:
 #endif 
@@ -8593,6 +8659,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_chmod
     case TARGET_NR_chmod:
+#ifdef RISCV32_TARGET_NR_chmod
+    case RISCV32_TARGET_NR_chmod:
+#endif
 #ifdef ARM_TARGET_NR_chmod
 	case ARM_TARGET_NR_chmod:
 #endif 
@@ -8605,6 +8674,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_lseek
     case TARGET_NR_lseek:
+#ifdef RISCV32_TARGET_NR_lseek
+    case RISCV32_TARGET_NR_lseek:
+#endif
 #ifdef ARM_TARGET_NR_lseek
 	case ARM_TARGET_NR_lseek:
 #endif 
@@ -8614,6 +8686,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_getxpid) && defined(TARGET_ALPHA)
     /* Alpha specific */
     case TARGET_NR_getxpid:
+#ifdef RISCV32_TARGET_NR_getxpid
+    case RISCV32_TARGET_NR_getxpid:
+#endif
 #ifdef ARM_TARGET_NR_getxpid
 	case ARM_TARGET_NR_getxpid:
 #endif 
@@ -8623,6 +8698,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getpid
     case TARGET_NR_getpid:
+#ifdef RISCV32_TARGET_NR_getpid
+    case RISCV32_TARGET_NR_getpid:
+#endif
 #ifdef ARM_TARGET_NR_getpid
 	case ARM_TARGET_NR_getpid:
 #endif 
@@ -8630,6 +8708,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(getpid());
 #endif
     case TARGET_NR_mount:
+#ifdef RISCV32_TARGET_NR_mount
+    case RISCV32_TARGET_NR_mount:
+#endif
 #ifdef ARM_TARGET_NR_mount
 	case ARM_TARGET_NR_mount:
 #endif 
@@ -8691,6 +8772,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_umount) || defined(TARGET_NR_oldumount)
 #if defined(TARGET_NR_umount)
     case TARGET_NR_umount:
+#ifdef RISCV32_TARGET_NR_umount
+    case RISCV32_TARGET_NR_umount:
+#endif
 #ifdef ARM_TARGET_NR_umount
 	case ARM_TARGET_NR_umount:
 #endif 
@@ -8698,6 +8782,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_oldumount)
     case TARGET_NR_oldumount:
+#ifdef RISCV32_TARGET_NR_oldumount
+    case RISCV32_TARGET_NR_oldumount:
+#endif
 #ifdef ARM_TARGET_NR_oldumount
 	case ARM_TARGET_NR_oldumount:
 #endif 
@@ -8711,6 +8798,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_stime /* not on alpha */
     case TARGET_NR_stime:
+#ifdef RISCV32_TARGET_NR_stime
+    case RISCV32_TARGET_NR_stime:
+#endif
 #ifdef ARM_TARGET_NR_stime
 	case ARM_TARGET_NR_stime:
 #endif 
@@ -8726,11 +8816,17 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_alarm /* not on alpha */
     case TARGET_NR_alarm:
+#ifdef RISCV32_TARGET_NR_alarm
+    case RISCV32_TARGET_NR_alarm:
+#endif
 
         return alarm(arg1);
 #endif
 #ifdef TARGET_NR_pause /* not on alpha */
     case TARGET_NR_pause:
+#ifdef RISCV32_TARGET_NR_pause
+    case RISCV32_TARGET_NR_pause:
+#endif
 #ifdef ARM_TARGET_NR_pause
 	case ARM_TARGET_NR_pause:
 #endif 
@@ -8742,6 +8838,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_utime
     case TARGET_NR_utime:
+#ifdef RISCV32_TARGET_NR_utime
+    case RISCV32_TARGET_NR_utime:
+#endif
         {
             struct utimbuf tbuf, *host_tbuf;
             struct target_utimbuf *target_tbuf;
@@ -8764,6 +8863,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_utimes
     case TARGET_NR_utimes:
+#ifdef RISCV32_TARGET_NR_utimes
+    case RISCV32_TARGET_NR_utimes:
+#endif
 #ifdef ARM_TARGET_NR_utimes
 	case ARM_TARGET_NR_utimes:
 #endif 
@@ -8788,6 +8890,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_futimesat)
     case TARGET_NR_futimesat:
+#ifdef RISCV32_TARGET_NR_futimesat
+    case RISCV32_TARGET_NR_futimesat:
+#endif
 #ifdef ARM_TARGET_NR_futimesat
 	case ARM_TARGET_NR_futimesat:
 #endif 
@@ -8813,6 +8918,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_access
     case TARGET_NR_access:
+#ifdef RISCV32_TARGET_NR_access
+    case RISCV32_TARGET_NR_access:
+#endif
 #ifdef ARM_TARGET_NR_access
 	case ARM_TARGET_NR_access:
 #endif 
@@ -8826,6 +8934,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_faccessat) && defined(__NR_faccessat)
     case TARGET_NR_faccessat:
+#ifdef RISCV32_TARGET_NR_faccessat
+    case RISCV32_TARGET_NR_faccessat:
+#endif
 #ifdef ARM_TARGET_NR_faccessat
 	case ARM_TARGET_NR_faccessat:
 #endif 
@@ -8839,6 +8950,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_nice /* not on alpha */
     case TARGET_NR_nice:
+#ifdef RISCV32_TARGET_NR_nice
+    case RISCV32_TARGET_NR_nice:
+#endif
 #ifdef ARM_TARGET_NR_nice
 	case ARM_TARGET_NR_nice:
 #endif 
@@ -8846,6 +8960,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(nice(arg1));
 #endif
     case TARGET_NR_sync:
+#ifdef RISCV32_TARGET_NR_sync
+    case RISCV32_TARGET_NR_sync:
+#endif
 #ifdef ARM_TARGET_NR_sync
 	case ARM_TARGET_NR_sync:
 #endif 
@@ -8854,6 +8971,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return 0;
 #if defined(TARGET_NR_syncfs) && defined(CONFIG_SYNCFS)
     case TARGET_NR_syncfs:
+#ifdef RISCV32_TARGET_NR_syncfs
+    case RISCV32_TARGET_NR_syncfs:
+#endif
 #ifdef ARM_TARGET_NR_syncfs
 	case ARM_TARGET_NR_syncfs:
 #endif 
@@ -8861,6 +8981,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(syncfs(arg1));
 #endif
     case TARGET_NR_kill:
+#ifdef RISCV32_TARGET_NR_kill
+    case RISCV32_TARGET_NR_kill:
+#endif
 #ifdef ARM_TARGET_NR_kill
 	case ARM_TARGET_NR_kill:
 #endif 
@@ -8868,6 +8991,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(safe_kill(arg1, target_to_host_signal(arg2)));
 #ifdef TARGET_NR_rename
     case TARGET_NR_rename:
+#ifdef RISCV32_TARGET_NR_rename
+    case RISCV32_TARGET_NR_rename:
+#endif
 #ifdef ARM_TARGET_NR_rename
 	case ARM_TARGET_NR_rename:
 #endif 
@@ -8887,6 +9013,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_renameat)
     case TARGET_NR_renameat:
+#ifdef RISCV32_TARGET_NR_renameat
+    case RISCV32_TARGET_NR_renameat:
+#endif
 #ifdef ARM_TARGET_NR_renameat
 	case ARM_TARGET_NR_renameat:
 #endif 
@@ -8906,6 +9035,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_renameat2)
     case TARGET_NR_renameat2:
+#ifdef RISCV32_TARGET_NR_renameat2
+    case RISCV32_TARGET_NR_renameat2:
+#endif
 #ifdef ARM_TARGET_NR_renameat2
 	case ARM_TARGET_NR_renameat2:
 #endif 
@@ -8926,6 +9058,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mkdir
     case TARGET_NR_mkdir:
+#ifdef RISCV32_TARGET_NR_mkdir
+    case RISCV32_TARGET_NR_mkdir:
+#endif
 #ifdef ARM_TARGET_NR_mkdir
 	case ARM_TARGET_NR_mkdir:
 #endif 
@@ -8938,6 +9073,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_mkdirat)
     case TARGET_NR_mkdirat:
+#ifdef RISCV32_TARGET_NR_mkdirat
+    case RISCV32_TARGET_NR_mkdirat:
+#endif
 #ifdef ARM_TARGET_NR_mkdirat
 	case ARM_TARGET_NR_mkdirat:
 #endif 
@@ -8950,6 +9088,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_rmdir
     case TARGET_NR_rmdir:
+#ifdef RISCV32_TARGET_NR_rmdir
+    case RISCV32_TARGET_NR_rmdir:
+#endif
 #ifdef ARM_TARGET_NR_rmdir
 	case ARM_TARGET_NR_rmdir:
 #endif 
@@ -8961,6 +9102,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_dup:
+#ifdef RISCV32_TARGET_NR_dup
+    case RISCV32_TARGET_NR_dup:
+#endif
 #ifdef ARM_TARGET_NR_dup
 	case ARM_TARGET_NR_dup:
 #endif 
@@ -8972,6 +9116,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_pipe
     case TARGET_NR_pipe:
+#ifdef RISCV32_TARGET_NR_pipe
+    case RISCV32_TARGET_NR_pipe:
+#endif
 #ifdef ARM_TARGET_NR_pipe
 	case ARM_TARGET_NR_pipe:
 #endif 
@@ -8980,6 +9127,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_pipe2
     case TARGET_NR_pipe2:
+#ifdef RISCV32_TARGET_NR_pipe2
+    case RISCV32_TARGET_NR_pipe2:
+#endif
 #ifdef ARM_TARGET_NR_pipe2
 	case ARM_TARGET_NR_pipe2:
 #endif 
@@ -8988,6 +9138,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
                        target_to_host_bitmask(arg2, fcntl_flags_tbl), 1);
 #endif
     case TARGET_NR_times:
+#ifdef RISCV32_TARGET_NR_times
+    case RISCV32_TARGET_NR_times:
+#endif
 #ifdef ARM_TARGET_NR_times
 	case ARM_TARGET_NR_times:
 #endif 
@@ -9010,6 +9163,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_acct:
+#ifdef RISCV32_TARGET_NR_acct
+    case RISCV32_TARGET_NR_acct:
+#endif
 #ifdef ARM_TARGET_NR_acct
 	case ARM_TARGET_NR_acct:
 #endif 
@@ -9026,6 +9182,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_umount2
     case TARGET_NR_umount2:
+#ifdef RISCV32_TARGET_NR_umount2
+    case RISCV32_TARGET_NR_umount2:
+#endif
 
         if (!(p = lock_user_string(arg1)))
             return -TARGET_EFAULT;
@@ -9034,6 +9193,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_ioctl:
+#ifdef RISCV32_TARGET_NR_ioctl
+    case RISCV32_TARGET_NR_ioctl:
+#endif
 #ifdef ARM_TARGET_NR_ioctl
 	case ARM_TARGET_NR_ioctl:
 #endif 
@@ -9041,6 +9203,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_ioctl(arg1, arg2, arg3);
 #ifdef TARGET_NR_fcntl
     case TARGET_NR_fcntl:
+#ifdef RISCV32_TARGET_NR_fcntl
+    case RISCV32_TARGET_NR_fcntl:
+#endif
 #ifdef ARM_TARGET_NR_fcntl
 	case ARM_TARGET_NR_fcntl:
 #endif 
@@ -9048,18 +9213,27 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_fcntl(arg1, arg2, arg3);
 #endif
     case TARGET_NR_setpgid:
+#ifdef RISCV32_TARGET_NR_setpgid
+    case RISCV32_TARGET_NR_setpgid:
+#endif
 #ifdef ARM_TARGET_NR_setpgid
 	case ARM_TARGET_NR_setpgid:
 #endif 
 
         return get_errno(setpgid(arg1, arg2));
     case TARGET_NR_umask:
+#ifdef RISCV32_TARGET_NR_umask
+    case RISCV32_TARGET_NR_umask:
+#endif
 #ifdef ARM_TARGET_NR_umask
 	case ARM_TARGET_NR_umask:
 #endif 
 
         return get_errno(umask(arg1));
     case TARGET_NR_chroot:
+#ifdef RISCV32_TARGET_NR_chroot
+    case RISCV32_TARGET_NR_chroot:
+#endif
 #ifdef ARM_TARGET_NR_chroot
 	case ARM_TARGET_NR_chroot:
 #endif 
@@ -9071,6 +9245,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_dup2
     case TARGET_NR_dup2:
+#ifdef RISCV32_TARGET_NR_dup2
+    case RISCV32_TARGET_NR_dup2:
+#endif
 #ifdef ARM_TARGET_NR_dup2
 	case ARM_TARGET_NR_dup2:
 #endif 
@@ -9083,6 +9260,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(CONFIG_DUP3) && defined(TARGET_NR_dup3)
     case TARGET_NR_dup3:
+#ifdef RISCV32_TARGET_NR_dup3
+    case RISCV32_TARGET_NR_dup3:
+#endif
 #ifdef ARM_TARGET_NR_dup3
 	case ARM_TARGET_NR_dup3:
 #endif 
@@ -9103,6 +9283,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getppid /* not on alpha */
     case TARGET_NR_getppid:
+#ifdef RISCV32_TARGET_NR_getppid
+    case RISCV32_TARGET_NR_getppid:
+#endif
 #ifdef ARM_TARGET_NR_getppid
 	case ARM_TARGET_NR_getppid:
 #endif 
@@ -9111,6 +9294,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getpgrp
     case TARGET_NR_getpgrp:
+#ifdef RISCV32_TARGET_NR_getpgrp
+    case RISCV32_TARGET_NR_getpgrp:
+#endif
 #ifdef ARM_TARGET_NR_getpgrp
 	case ARM_TARGET_NR_getpgrp:
 #endif 
@@ -9118,6 +9304,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(getpgrp());
 #endif
     case TARGET_NR_setsid:
+#ifdef RISCV32_TARGET_NR_setsid
+    case RISCV32_TARGET_NR_setsid:
+#endif
 #ifdef ARM_TARGET_NR_setsid
 	case ARM_TARGET_NR_setsid:
 #endif 
@@ -9125,6 +9314,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(setsid());
 #ifdef TARGET_NR_sigaction
     case TARGET_NR_sigaction:
+#ifdef RISCV32_TARGET_NR_sigaction
+    case RISCV32_TARGET_NR_sigaction:
+#endif
 #ifdef ARM_TARGET_NR_sigaction
 	case ARM_TARGET_NR_sigaction:
 #endif 
@@ -9213,6 +9405,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_rt_sigaction:
+#ifdef RISCV32_TARGET_NR_rt_sigaction
+    case RISCV32_TARGET_NR_rt_sigaction:
+#endif
 #ifdef ARM_TARGET_NR_rt_sigaction
 	case ARM_TARGET_NR_rt_sigaction:
 #endif 
@@ -9293,6 +9488,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_sgetmask /* not on alpha */
     case TARGET_NR_sgetmask:
+#ifdef RISCV32_TARGET_NR_sgetmask
+    case RISCV32_TARGET_NR_sgetmask:
+#endif
 
         {
             sigset_t cur_set;
@@ -9307,6 +9505,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_ssetmask /* not on alpha */
     case TARGET_NR_ssetmask:
+#ifdef RISCV32_TARGET_NR_ssetmask
+    case RISCV32_TARGET_NR_ssetmask:
+#endif
 
         {
             sigset_t set, oset;
@@ -9322,6 +9523,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_sigprocmask
     case TARGET_NR_sigprocmask:
+#ifdef RISCV32_TARGET_NR_sigprocmask
+    case RISCV32_TARGET_NR_sigprocmask:
+#endif
 #ifdef ARM_TARGET_NR_sigprocmask
 	case ARM_TARGET_NR_sigprocmask:
 #endif 
@@ -9393,6 +9597,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_rt_sigprocmask:
+#ifdef RISCV32_TARGET_NR_rt_sigprocmask
+    case RISCV32_TARGET_NR_rt_sigprocmask:
+#endif
 #ifdef ARM_TARGET_NR_rt_sigprocmask
 	case ARM_TARGET_NR_rt_sigprocmask:
 #endif 
@@ -9439,6 +9646,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_sigpending
     case TARGET_NR_sigpending:
+#ifdef RISCV32_TARGET_NR_sigpending
+    case RISCV32_TARGET_NR_sigpending:
+#endif
 #ifdef ARM_TARGET_NR_sigpending
 	case ARM_TARGET_NR_sigpending:
 #endif 
@@ -9456,6 +9666,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_rt_sigpending:
+#ifdef RISCV32_TARGET_NR_rt_sigpending
+    case RISCV32_TARGET_NR_rt_sigpending:
+#endif
 #ifdef ARM_TARGET_NR_rt_sigpending
 	case ARM_TARGET_NR_rt_sigpending:
 #endif 
@@ -9483,6 +9696,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_sigsuspend
     case TARGET_NR_sigsuspend:
+#ifdef RISCV32_TARGET_NR_sigsuspend
+    case RISCV32_TARGET_NR_sigsuspend:
+#endif
 #ifdef ARM_TARGET_NR_sigsuspend
 	case ARM_TARGET_NR_sigsuspend:
 #endif 
@@ -9507,6 +9723,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_rt_sigsuspend:
+#ifdef RISCV32_TARGET_NR_rt_sigsuspend
+    case RISCV32_TARGET_NR_rt_sigsuspend:
+#endif
 #ifdef ARM_TARGET_NR_rt_sigsuspend
 	case ARM_TARGET_NR_rt_sigsuspend:
 #endif 
@@ -9530,6 +9749,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_rt_sigtimedwait
     case TARGET_NR_rt_sigtimedwait:
+#ifdef RISCV32_TARGET_NR_rt_sigtimedwait
+    case RISCV32_TARGET_NR_rt_sigtimedwait:
+#endif
 #ifdef ARM_TARGET_NR_rt_sigtimedwait
 	case ARM_TARGET_NR_rt_sigtimedwait:
 #endif 
@@ -9574,6 +9796,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_rt_sigtimedwait_time64
     case TARGET_NR_rt_sigtimedwait_time64:
+#ifdef RISCV32_TARGET_NR_rt_sigtimedwait_time64
+    case RISCV32_TARGET_NR_rt_sigtimedwait_time64:
+#endif
 #ifdef ARM_TARGET_NR_rt_sigtimedwait_time64
 	case ARM_TARGET_NR_rt_sigtimedwait_time64:
 #endif 
@@ -9619,6 +9844,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_rt_sigqueueinfo:
+#ifdef RISCV32_TARGET_NR_rt_sigqueueinfo
+    case RISCV32_TARGET_NR_rt_sigqueueinfo:
+#endif
 #ifdef ARM_TARGET_NR_rt_sigqueueinfo
 	case ARM_TARGET_NR_rt_sigqueueinfo:
 #endif 
@@ -9636,6 +9864,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_rt_tgsigqueueinfo:
+#ifdef RISCV32_TARGET_NR_rt_tgsigqueueinfo
+    case RISCV32_TARGET_NR_rt_tgsigqueueinfo:
+#endif
 #ifdef ARM_TARGET_NR_rt_tgsigqueueinfo
 	case ARM_TARGET_NR_rt_tgsigqueueinfo:
 #endif 
@@ -9654,6 +9885,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_sigreturn
     case TARGET_NR_sigreturn:
+#ifdef RISCV32_TARGET_NR_sigreturn
+    case RISCV32_TARGET_NR_sigreturn:
+#endif
 #ifdef ARM_TARGET_NR_sigreturn
 	case ARM_TARGET_NR_sigreturn:
 #endif 
@@ -9664,6 +9898,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_sigreturn(cpu_env);
 #endif
     case TARGET_NR_rt_sigreturn:
+#ifdef RISCV32_TARGET_NR_rt_sigreturn
+    case RISCV32_TARGET_NR_rt_sigreturn:
+#endif
 #ifdef ARM_TARGET_NR_rt_sigreturn
 	case ARM_TARGET_NR_rt_sigreturn:
 #endif 
@@ -9673,6 +9910,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return do_rt_sigreturn(cpu_env);
     case TARGET_NR_sethostname:
+#ifdef RISCV32_TARGET_NR_sethostname
+    case RISCV32_TARGET_NR_sethostname:
+#endif
 #ifdef ARM_TARGET_NR_sethostname
 	case ARM_TARGET_NR_sethostname:
 #endif 
@@ -9684,6 +9924,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_setrlimit
     case TARGET_NR_setrlimit:
+#ifdef RISCV32_TARGET_NR_setrlimit
+    case RISCV32_TARGET_NR_setrlimit:
+#endif
 #ifdef ARM_TARGET_NR_setrlimit
 	case ARM_TARGET_NR_setrlimit:
 #endif 
@@ -9716,6 +9959,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getrlimit
     case TARGET_NR_getrlimit:
+#ifdef RISCV32_TARGET_NR_getrlimit
+    case RISCV32_TARGET_NR_getrlimit:
+#endif
 
         {
             int resource = target_to_host_resource(arg1);
@@ -9734,6 +9980,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_getrusage:
+#ifdef RISCV32_TARGET_NR_getrusage
+    case RISCV32_TARGET_NR_getrusage:
+#endif
 #ifdef ARM_TARGET_NR_getrusage
 	case ARM_TARGET_NR_getrusage:
 #endif 
@@ -9748,6 +9997,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #if defined(TARGET_NR_gettimeofday)
     case TARGET_NR_gettimeofday:
+#ifdef RISCV32_TARGET_NR_gettimeofday
+    case RISCV32_TARGET_NR_gettimeofday:
+#endif
 #ifdef ARM_TARGET_NR_gettimeofday
 	case ARM_TARGET_NR_gettimeofday:
 #endif 
@@ -9770,6 +10022,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_settimeofday)
     case TARGET_NR_settimeofday:
+#ifdef RISCV32_TARGET_NR_settimeofday
+    case RISCV32_TARGET_NR_settimeofday:
+#endif
 #ifdef ARM_TARGET_NR_settimeofday
 	case ARM_TARGET_NR_settimeofday:
 #endif 
@@ -9797,6 +10052,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_select)
     case TARGET_NR_select:
+#ifdef RISCV32_TARGET_NR_select
+    case RISCV32_TARGET_NR_select:
+#endif
 #ifdef ARM_TARGET_NR_select
 	case ARM_TARGET_NR_select:
 #endif 
@@ -9815,6 +10073,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_pselect6
     case TARGET_NR_pselect6:
+#ifdef RISCV32_TARGET_NR_pselect6
+    case RISCV32_TARGET_NR_pselect6:
+#endif
 #ifdef ARM_TARGET_NR_pselect6
 	case ARM_TARGET_NR_pselect6:
 #endif 
@@ -9823,6 +10084,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_pselect6_time64
     case TARGET_NR_pselect6_time64:
+#ifdef RISCV32_TARGET_NR_pselect6_time64
+    case RISCV32_TARGET_NR_pselect6_time64:
+#endif
 #ifdef ARM_TARGET_NR_pselect6_time64
 	case ARM_TARGET_NR_pselect6_time64:
 #endif 
@@ -9831,6 +10095,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_symlink
     case TARGET_NR_symlink:
+#ifdef RISCV32_TARGET_NR_symlink
+    case RISCV32_TARGET_NR_symlink:
+#endif
 #ifdef ARM_TARGET_NR_symlink
 	case ARM_TARGET_NR_symlink:
 #endif 
@@ -9850,6 +10117,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_symlinkat)
     case TARGET_NR_symlinkat:
+#ifdef RISCV32_TARGET_NR_symlinkat
+    case RISCV32_TARGET_NR_symlinkat:
+#endif
 #ifdef ARM_TARGET_NR_symlinkat
 	case ARM_TARGET_NR_symlinkat:
 #endif 
@@ -9869,6 +10139,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_readlink
     case TARGET_NR_readlink:
+#ifdef RISCV32_TARGET_NR_readlink
+    case RISCV32_TARGET_NR_readlink:
+#endif
 #ifdef ARM_TARGET_NR_readlink
 	case ARM_TARGET_NR_readlink:
 #endif 
@@ -9905,6 +10178,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_readlinkat)
     case TARGET_NR_readlinkat:
+#ifdef RISCV32_TARGET_NR_readlinkat
+    case RISCV32_TARGET_NR_readlinkat:
+#endif
 #ifdef ARM_TARGET_NR_readlinkat
 	case ARM_TARGET_NR_readlinkat:
 #endif 
@@ -9930,6 +10206,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_swapon
     case TARGET_NR_swapon:
+#ifdef RISCV32_TARGET_NR_swapon
+    case RISCV32_TARGET_NR_swapon:
+#endif
 #ifdef ARM_TARGET_NR_swapon
 	case ARM_TARGET_NR_swapon:
 #endif 
@@ -9941,6 +10220,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_reboot:
+#ifdef RISCV32_TARGET_NR_reboot
+    case RISCV32_TARGET_NR_reboot:
+#endif
 #ifdef ARM_TARGET_NR_reboot
 	case ARM_TARGET_NR_reboot:
 #endif 
@@ -9959,6 +10241,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_mmap
     case TARGET_NR_mmap:
+#ifdef RISCV32_TARGET_NR_mmap
+    case RISCV32_TARGET_NR_mmap:
+#endif
 	
 #if (defined(TARGET_I386) && defined(TARGET_ABI32)) || \
     (defined(TARGET_ARM) && defined(TARGET_ABI32)) || \
@@ -9990,6 +10275,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mmap2
     case TARGET_NR_mmap2:
+#ifdef RISCV32_TARGET_NR_mmap2
+    case RISCV32_TARGET_NR_mmap2:
+#endif
 #ifdef ARM_TARGET_NR_mmap2
 	case ARM_TARGET_NR_mmap2:
 #endif 
@@ -10003,6 +10291,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(ret);
 #endif
     case TARGET_NR_munmap:
+#ifdef RISCV32_TARGET_NR_munmap
+    case RISCV32_TARGET_NR_munmap:
+#endif
 
 #ifdef ARM_TARGET_NR_munmap
 	case ARM_TARGET_NR_munmap:
@@ -10010,6 +10301,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(target_munmap(arg1, arg2));
     case TARGET_NR_mprotect:
+#ifdef RISCV32_TARGET_NR_mprotect
+    case RISCV32_TARGET_NR_mprotect:
+#endif
 #ifdef ARM_TARGET_NR_mprotect
 	case ARM_TARGET_NR_mprotect:
 #endif 
@@ -10028,6 +10322,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(target_mprotect(arg1, arg2, arg3));
 #ifdef TARGET_NR_mremap
     case TARGET_NR_mremap:
+#ifdef RISCV32_TARGET_NR_mremap
+    case RISCV32_TARGET_NR_mremap:
+#endif
 #ifdef ARM_TARGET_NR_mremap
 	case ARM_TARGET_NR_mremap:
 #endif 
@@ -10037,6 +10334,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         /* ??? msync/mlock/munlock are broken for softmmu.  */
 #ifdef TARGET_NR_msync
     case TARGET_NR_msync:
+#ifdef RISCV32_TARGET_NR_msync
+    case RISCV32_TARGET_NR_msync:
+#endif
 #ifdef ARM_TARGET_NR_msync
 	case ARM_TARGET_NR_msync:
 #endif 
@@ -10045,6 +10345,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mlock
     case TARGET_NR_mlock:
+#ifdef RISCV32_TARGET_NR_mlock
+    case RISCV32_TARGET_NR_mlock:
+#endif
 #ifdef ARM_TARGET_NR_mlock
 	case ARM_TARGET_NR_mlock:
 #endif 
@@ -10053,6 +10356,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_munlock
     case TARGET_NR_munlock:
+#ifdef RISCV32_TARGET_NR_munlock
+    case RISCV32_TARGET_NR_munlock:
+#endif
 
 #ifdef ARM_TARGET_NR_munlock
 	case ARM_TARGET_NR_munlock:
@@ -10061,6 +10367,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mlockall
     case TARGET_NR_mlockall:
+#ifdef RISCV32_TARGET_NR_mlockall
+    case RISCV32_TARGET_NR_mlockall:
+#endif
 #ifdef ARM_TARGET_NR_mlockall
 	case ARM_TARGET_NR_mlockall:
 #endif 
@@ -10069,6 +10378,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_munlockall
     case TARGET_NR_munlockall:
+#ifdef RISCV32_TARGET_NR_munlockall
+    case RISCV32_TARGET_NR_munlockall:
+#endif
 #ifdef ARM_TARGET_NR_munlockall
 	case ARM_TARGET_NR_munlockall:
 #endif 
@@ -10077,6 +10389,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_truncate
     case TARGET_NR_truncate:
+#ifdef RISCV32_TARGET_NR_truncate
+    case RISCV32_TARGET_NR_truncate:
+#endif
 #ifdef ARM_TARGET_NR_truncate
 	case ARM_TARGET_NR_truncate:
 #endif 
@@ -10089,6 +10404,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_ftruncate
     case TARGET_NR_ftruncate:
+#ifdef RISCV32_TARGET_NR_ftruncate
+    case RISCV32_TARGET_NR_ftruncate:
+#endif
 #ifdef ARM_TARGET_NR_ftruncate
 	case ARM_TARGET_NR_ftruncate:
 #endif 
@@ -10096,6 +10414,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(ftruncate(arg1, arg2));
 #endif
     case TARGET_NR_fchmod:
+#ifdef RISCV32_TARGET_NR_fchmod
+    case RISCV32_TARGET_NR_fchmod:
+#endif
 #ifdef ARM_TARGET_NR_fchmod
 	case ARM_TARGET_NR_fchmod:
 #endif 
@@ -10103,6 +10424,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(fchmod(arg1, arg2));
 #if defined(TARGET_NR_fchmodat)
     case TARGET_NR_fchmodat:
+#ifdef RISCV32_TARGET_NR_fchmodat
+    case RISCV32_TARGET_NR_fchmodat:
+#endif
 #ifdef ARM_TARGET_NR_fchmodat
 	case ARM_TARGET_NR_fchmodat:
 #endif 
@@ -10114,6 +10438,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_getpriority:
+#ifdef RISCV32_TARGET_NR_getpriority
+    case RISCV32_TARGET_NR_getpriority:
+#endif
 #ifdef ARM_TARGET_NR_getpriority
 	case ARM_TARGET_NR_getpriority:
 #endif 
@@ -10134,6 +10461,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
         return ret;
     case TARGET_NR_setpriority:
+#ifdef RISCV32_TARGET_NR_setpriority
+    case RISCV32_TARGET_NR_setpriority:
+#endif
 #ifdef ARM_TARGET_NR_setpriority
 	case ARM_TARGET_NR_setpriority:
 #endif 
@@ -10141,6 +10471,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(setpriority(arg1, arg2, arg3));
 #ifdef TARGET_NR_statfs
     case TARGET_NR_statfs:
+#ifdef RISCV32_TARGET_NR_statfs
+    case RISCV32_TARGET_NR_statfs:
+#endif
 #ifdef ARM_TARGET_NR_statfs
 	case ARM_TARGET_NR_statfs:
 #endif 
@@ -10179,6 +10512,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_fstatfs
     case TARGET_NR_fstatfs:
+#ifdef RISCV32_TARGET_NR_fstatfs
+    case RISCV32_TARGET_NR_fstatfs:
+#endif
 #ifdef ARM_TARGET_NR_fstatfs
 	case ARM_TARGET_NR_fstatfs:
 #endif 
@@ -10188,6 +10524,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_statfs64
     case TARGET_NR_statfs64:
+#ifdef RISCV32_TARGET_NR_statfs64
+    case RISCV32_TARGET_NR_statfs64:
+#endif
 #ifdef ARM_TARGET_NR_statfs64
 	case ARM_TARGET_NR_statfs64:
 #endif 
@@ -10224,6 +10563,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_fstatfs64:
+#ifdef RISCV32_TARGET_NR_fstatfs64
+    case RISCV32_TARGET_NR_fstatfs64:
+#endif
 #ifdef ARM_TARGET_NR_fstatfs64
 	case ARM_TARGET_NR_fstatfs64:
 #endif 
@@ -10233,6 +10575,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_socketcall
     case TARGET_NR_socketcall:
+#ifdef RISCV32_TARGET_NR_socketcall
+    case RISCV32_TARGET_NR_socketcall:
+#endif
 #ifdef ARM_TARGET_NR_socketcall
 #ifdef ARM_TARGET_NR_socketcall
 	case ARM_TARGET_NR_socketcall:
@@ -10243,6 +10588,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_accept
     case TARGET_NR_accept:
+#ifdef RISCV32_TARGET_NR_accept
+    case RISCV32_TARGET_NR_accept:
+#endif
 #ifdef ARM_TARGET_NR_accept
 #ifdef ARM_TARGET_NR_accept
 	case ARM_TARGET_NR_accept:
@@ -10253,6 +10601,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_accept4
     case TARGET_NR_accept4:
+#ifdef RISCV32_TARGET_NR_accept4
+    case RISCV32_TARGET_NR_accept4:
+#endif
 #ifdef ARM_TARGET_NR_accept4
 	case ARM_TARGET_NR_accept4:
 #endif 
@@ -10261,6 +10612,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_bind
     case TARGET_NR_bind:
+#ifdef RISCV32_TARGET_NR_bind
+    case RISCV32_TARGET_NR_bind:
+#endif
 #ifdef ARM_TARGET_NR_bind
 	case ARM_TARGET_NR_bind:
 #endif 
@@ -10269,6 +10623,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_connect
     case TARGET_NR_connect:
+#ifdef RISCV32_TARGET_NR_connect
+    case RISCV32_TARGET_NR_connect:
+#endif
 #ifdef ARM_TARGET_NR_connect
 	case ARM_TARGET_NR_connect:
 #endif 
@@ -10277,6 +10634,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getpeername
     case TARGET_NR_getpeername:
+#ifdef RISCV32_TARGET_NR_getpeername
+    case RISCV32_TARGET_NR_getpeername:
+#endif
 #ifdef ARM_TARGET_NR_getpeername
 	case ARM_TARGET_NR_getpeername:
 #endif 
@@ -10285,6 +10645,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getsockname
     case TARGET_NR_getsockname:
+#ifdef RISCV32_TARGET_NR_getsockname
+    case RISCV32_TARGET_NR_getsockname:
+#endif
 #ifdef ARM_TARGET_NR_getsockname
 	case ARM_TARGET_NR_getsockname:
 #endif 
@@ -10293,6 +10656,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getsockopt
     case TARGET_NR_getsockopt:
+#ifdef RISCV32_TARGET_NR_getsockopt
+    case RISCV32_TARGET_NR_getsockopt:
+#endif
 #ifdef ARM_TARGET_NR_getsockopt
 	case ARM_TARGET_NR_getsockopt:
 #endif 
@@ -10301,6 +10667,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_listen
     case TARGET_NR_listen:
+#ifdef RISCV32_TARGET_NR_listen
+    case RISCV32_TARGET_NR_listen:
+#endif
 #ifdef ARM_TARGET_NR_listen
 	case ARM_TARGET_NR_listen:
 #endif 
@@ -10309,6 +10678,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_recv
     case TARGET_NR_recv:
+#ifdef RISCV32_TARGET_NR_recv
+    case RISCV32_TARGET_NR_recv:
+#endif
 #ifdef ARM_TARGET_NR_recv
 	case ARM_TARGET_NR_recv:
 #endif 
@@ -10317,6 +10689,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_recvfrom
     case TARGET_NR_recvfrom:
+#ifdef RISCV32_TARGET_NR_recvfrom
+    case RISCV32_TARGET_NR_recvfrom:
+#endif
 #ifdef ARM_TARGET_NR_recvfrom
 	case ARM_TARGET_NR_recvfrom:
 #endif 
@@ -10325,6 +10700,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_recvmsg
     case TARGET_NR_recvmsg:
+#ifdef RISCV32_TARGET_NR_recvmsg
+    case RISCV32_TARGET_NR_recvmsg:
+#endif
 #ifdef ARM_TARGET_NR_recvmsg
 	case ARM_TARGET_NR_recvmsg:
 #endif 
@@ -10333,6 +10711,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_send
     case TARGET_NR_send:
+#ifdef RISCV32_TARGET_NR_send
+    case RISCV32_TARGET_NR_send:
+#endif
 #ifdef ARM_TARGET_NR_send
 	case ARM_TARGET_NR_send:
 #endif 
@@ -10341,6 +10722,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_sendmsg
     case TARGET_NR_sendmsg:
+#ifdef RISCV32_TARGET_NR_sendmsg
+    case RISCV32_TARGET_NR_sendmsg:
+#endif
 #ifdef ARM_TARGET_NR_sendmsg
 	case ARM_TARGET_NR_sendmsg:
 #endif 
@@ -10349,6 +10733,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_sendmmsg
     case TARGET_NR_sendmmsg:
+#ifdef RISCV32_TARGET_NR_sendmmsg
+    case RISCV32_TARGET_NR_sendmmsg:
+#endif
 #ifdef ARM_TARGET_NR_sendmmsg
 	case ARM_TARGET_NR_sendmmsg:
 #endif 
@@ -10357,6 +10744,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_recvmmsg
     case TARGET_NR_recvmmsg:
+#ifdef RISCV32_TARGET_NR_recvmmsg
+    case RISCV32_TARGET_NR_recvmmsg:
+#endif
 #ifdef ARM_TARGET_NR_recvmmsg
 	case ARM_TARGET_NR_recvmmsg:
 #endif 
@@ -10365,6 +10755,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_sendto
     case TARGET_NR_sendto:
+#ifdef RISCV32_TARGET_NR_sendto
+    case RISCV32_TARGET_NR_sendto:
+#endif
 #ifdef ARM_TARGET_NR_sendto
 	case ARM_TARGET_NR_sendto:
 #endif 
@@ -10373,6 +10766,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_shutdown
     case TARGET_NR_shutdown:
+#ifdef RISCV32_TARGET_NR_shutdown
+    case RISCV32_TARGET_NR_shutdown:
+#endif
 #ifdef ARM_TARGET_NR_shutdown
 	case ARM_TARGET_NR_shutdown:
 #endif 
@@ -10381,6 +10777,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_getrandom) && defined(__NR_getrandom)
     case TARGET_NR_getrandom:
+#ifdef RISCV32_TARGET_NR_getrandom
+    case RISCV32_TARGET_NR_getrandom:
+#endif
 #ifdef ARM_TARGET_NR_getrandom
 	case ARM_TARGET_NR_getrandom:
 #endif 
@@ -10395,6 +10794,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_socket
     case TARGET_NR_socket:
+#ifdef RISCV32_TARGET_NR_socket
+    case RISCV32_TARGET_NR_socket:
+#endif
 #ifdef ARM_TARGET_NR_socket
 	case ARM_TARGET_NR_socket:
 #endif 
@@ -10403,6 +10805,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_socketpair
     case TARGET_NR_socketpair:
+#ifdef RISCV32_TARGET_NR_socketpair
+    case RISCV32_TARGET_NR_socketpair:
+#endif
 #ifdef ARM_TARGET_NR_socketpair
 	case ARM_TARGET_NR_socketpair:
 #endif 
@@ -10411,6 +10816,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setsockopt
     case TARGET_NR_setsockopt:
+#ifdef RISCV32_TARGET_NR_setsockopt
+    case RISCV32_TARGET_NR_setsockopt:
+#endif
 #ifdef ARM_TARGET_NR_setsockopt
 	case ARM_TARGET_NR_setsockopt:
 #endif 
@@ -10419,6 +10827,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_syslog)
     case TARGET_NR_syslog:
+#ifdef RISCV32_TARGET_NR_syslog
+    case RISCV32_TARGET_NR_syslog:
+#endif
 #ifdef ARM_TARGET_NR_syslog
 	case ARM_TARGET_NR_syslog:
 #endif 
@@ -10461,6 +10872,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         break;
 #endif
     case TARGET_NR_setitimer:
+#ifdef RISCV32_TARGET_NR_setitimer
+    case RISCV32_TARGET_NR_setitimer:
+#endif
 #ifdef ARM_TARGET_NR_setitimer
 	case ARM_TARGET_NR_setitimer:
 #endif 
@@ -10488,6 +10902,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_getitimer:
+#ifdef RISCV32_TARGET_NR_getitimer
+    case RISCV32_TARGET_NR_getitimer:
+#endif
 #ifdef ARM_TARGET_NR_getitimer
 	case ARM_TARGET_NR_getitimer:
 #endif 
@@ -10507,6 +10924,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_stat
     case TARGET_NR_stat:
+#ifdef RISCV32_TARGET_NR_stat
+    case RISCV32_TARGET_NR_stat:
+#endif
 #ifdef ARM_TARGET_NR_stat
 	case ARM_TARGET_NR_stat:
 #endif 
@@ -10520,6 +10940,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_lstat
     case TARGET_NR_lstat:
+#ifdef RISCV32_TARGET_NR_lstat
+    case RISCV32_TARGET_NR_lstat:
+#endif
 #ifdef ARM_TARGET_NR_lstat
 	case ARM_TARGET_NR_lstat:
 #endif 
@@ -10533,6 +10956,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_fstat
     case TARGET_NR_fstat:
+#ifdef RISCV32_TARGET_NR_fstat
+    case RISCV32_TARGET_NR_fstat:
+#endif
 #ifdef ARM_TARGET_NR_fstat
 	case ARM_TARGET_NR_fstat:
 #endif 
@@ -10576,6 +11002,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_vhangup:
+#ifdef RISCV32_TARGET_NR_vhangup
+    case RISCV32_TARGET_NR_vhangup:
+#endif
 #ifdef ARM_TARGET_NR_vhangup
 	case ARM_TARGET_NR_vhangup:
 #endif 
@@ -10583,6 +11012,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(vhangup());
 #ifdef TARGET_NR_syscall
     case TARGET_NR_syscall:
+#ifdef RISCV32_TARGET_NR_syscall
+    case RISCV32_TARGET_NR_syscall:
+#endif
 #ifdef ARM_TARGET_NR_syscall
 	case ARM_TARGET_NR_syscall:
 #endif 
@@ -10592,6 +11024,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_wait4)
     case TARGET_NR_wait4:
+#ifdef RISCV32_TARGET_NR_wait4
+    case RISCV32_TARGET_NR_wait4:
+#endif
 #ifdef ARM_TARGET_NR_wait4
 	case ARM_TARGET_NR_wait4:
 #endif 
@@ -10625,6 +11060,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_swapoff
     case TARGET_NR_swapoff:
+#ifdef RISCV32_TARGET_NR_swapoff
+    case RISCV32_TARGET_NR_swapoff:
+#endif
 #ifdef ARM_TARGET_NR_swapoff
 	case ARM_TARGET_NR_swapoff:
 #endif 
@@ -10636,6 +11074,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_sysinfo:
+#ifdef RISCV32_TARGET_NR_sysinfo
+    case RISCV32_TARGET_NR_sysinfo:
+#endif
 #ifdef ARM_TARGET_NR_sysinfo
 	case ARM_TARGET_NR_sysinfo:
 #endif 
@@ -10668,6 +11109,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_ipc
     case TARGET_NR_ipc:
+#ifdef RISCV32_TARGET_NR_ipc
+    case RISCV32_TARGET_NR_ipc:
+#endif
 #ifdef ARM_TARGET_NR_ipc
 	case ARM_TARGET_NR_ipc:
 #endif 
@@ -10676,6 +11120,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_semget
     case TARGET_NR_semget:
+#ifdef RISCV32_TARGET_NR_semget
+    case RISCV32_TARGET_NR_semget:
+#endif
 #ifdef ARM_TARGET_NR_semget
 	case ARM_TARGET_NR_semget:
 #endif 
@@ -10684,6 +11131,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_semop
     case TARGET_NR_semop:
+#ifdef RISCV32_TARGET_NR_semop
+    case RISCV32_TARGET_NR_semop:
+#endif
 #ifdef ARM_TARGET_NR_semop
 	case ARM_TARGET_NR_semop:
 #endif 
@@ -10692,6 +11142,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_semtimedop
     case TARGET_NR_semtimedop:
+#ifdef RISCV32_TARGET_NR_semtimedop
+    case RISCV32_TARGET_NR_semtimedop:
+#endif
 #ifdef ARM_TARGET_NR_semtimedop
 	case ARM_TARGET_NR_semtimedop:
 #endif 
@@ -10700,6 +11153,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_semtimedop_time64
     case TARGET_NR_semtimedop_time64:
+#ifdef RISCV32_TARGET_NR_semtimedop_time64
+    case RISCV32_TARGET_NR_semtimedop_time64:
+#endif
 #ifdef ARM_TARGET_NR_semtimedop_time64
 	case ARM_TARGET_NR_semtimedop_time64:
 #endif 
@@ -10708,6 +11164,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_semctl
     case TARGET_NR_semctl:
+#ifdef RISCV32_TARGET_NR_semctl
+    case RISCV32_TARGET_NR_semctl:
+#endif
 #ifdef ARM_TARGET_NR_semctl
 	case ARM_TARGET_NR_semctl:
 #endif 
@@ -10716,6 +11175,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_msgctl
     case TARGET_NR_msgctl:
+#ifdef RISCV32_TARGET_NR_msgctl
+    case RISCV32_TARGET_NR_msgctl:
+#endif
 #ifdef ARM_TARGET_NR_msgctl
 	case ARM_TARGET_NR_msgctl:
 #endif 
@@ -10724,6 +11186,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_msgget
     case TARGET_NR_msgget:
+#ifdef RISCV32_TARGET_NR_msgget
+    case RISCV32_TARGET_NR_msgget:
+#endif
 #ifdef ARM_TARGET_NR_msgget
 	case ARM_TARGET_NR_msgget:
 #endif 
@@ -10732,6 +11197,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_msgrcv
     case TARGET_NR_msgrcv:
+#ifdef RISCV32_TARGET_NR_msgrcv
+    case RISCV32_TARGET_NR_msgrcv:
+#endif
 #ifdef ARM_TARGET_NR_msgrcv
 	case ARM_TARGET_NR_msgrcv:
 #endif 
@@ -10740,6 +11208,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_msgsnd
     case TARGET_NR_msgsnd:
+#ifdef RISCV32_TARGET_NR_msgsnd
+    case RISCV32_TARGET_NR_msgsnd:
+#endif
 #ifdef ARM_TARGET_NR_msgsnd
 	case ARM_TARGET_NR_msgsnd:
 #endif 
@@ -10748,6 +11219,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_shmget
     case TARGET_NR_shmget:
+#ifdef RISCV32_TARGET_NR_shmget
+    case RISCV32_TARGET_NR_shmget:
+#endif
 #ifdef ARM_TARGET_NR_shmget
 	case ARM_TARGET_NR_shmget:
 #endif 
@@ -10756,6 +11230,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_shmctl
     case TARGET_NR_shmctl:
+#ifdef RISCV32_TARGET_NR_shmctl
+    case RISCV32_TARGET_NR_shmctl:
+#endif
 #ifdef ARM_TARGET_NR_shmctl
 	case ARM_TARGET_NR_shmctl:
 #endif 
@@ -10764,6 +11241,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_shmat
     case TARGET_NR_shmat:
+#ifdef RISCV32_TARGET_NR_shmat
+    case RISCV32_TARGET_NR_shmat:
+#endif
 #ifdef ARM_TARGET_NR_shmat
 	case ARM_TARGET_NR_shmat:
 #endif 
@@ -10772,6 +11252,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_shmdt
     case TARGET_NR_shmdt:
+#ifdef RISCV32_TARGET_NR_shmdt
+    case RISCV32_TARGET_NR_shmdt:
+#endif
 #ifdef ARM_TARGET_NR_shmdt
 	case ARM_TARGET_NR_shmdt:
 #endif 
@@ -10779,12 +11262,18 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_shmdt(arg1);
 #endif
     case TARGET_NR_fsync:
+#ifdef RISCV32_TARGET_NR_fsync
+    case RISCV32_TARGET_NR_fsync:
+#endif
 #ifdef ARM_TARGET_NR_fsync
 	case ARM_TARGET_NR_fsync:
 #endif 
 
         return get_errno(fsync(arg1));
     case TARGET_NR_clone:
+#ifdef RISCV32_TARGET_NR_clone
+    case RISCV32_TARGET_NR_clone:
+#endif
 #ifdef ARM_TARGET_NR_clone
 	case ARM_TARGET_NR_clone:
 #endif 
@@ -10808,6 +11297,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef __NR_exit_group
         /* new thread calls */
     case TARGET_NR_exit_group:
+#ifdef RISCV32_TARGET_NR_exit_group
+    case RISCV32_TARGET_NR_exit_group:
+#endif
 #ifdef ARM_TARGET_NR_exit_group
 	case ARM_TARGET_NR_exit_group:
 #endif 
@@ -10816,6 +11308,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(exit_group(arg1));
 #endif
     case TARGET_NR_setdomainname:
+#ifdef RISCV32_TARGET_NR_setdomainname
+    case RISCV32_TARGET_NR_setdomainname:
+#endif
 #ifdef ARM_TARGET_NR_setdomainname
 	case ARM_TARGET_NR_setdomainname:
 #endif 
@@ -10826,6 +11321,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         unlock_user(p, arg1, 0);
         return ret;
     case TARGET_NR_uname:
+#ifdef RISCV32_TARGET_NR_uname
+    case RISCV32_TARGET_NR_uname:
+#endif
 #ifdef ARM_TARGET_NR_uname
 	case ARM_TARGET_NR_uname:
 #endif 
@@ -10853,6 +11351,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_I386
     case TARGET_NR_modify_ldt:
+#ifdef RISCV32_TARGET_NR_modify_ldt
+    case RISCV32_TARGET_NR_modify_ldt:
+#endif
 #ifdef ARM_TARGET_NR_modify_ldt
 	case ARM_TARGET_NR_modify_ldt:
 #endif 
@@ -10860,6 +11361,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_modify_ldt(cpu_env, arg1, arg2, arg3);
 #if !defined(TARGET_X86_64)
     case TARGET_NR_vm86:
+#ifdef RISCV32_TARGET_NR_vm86
+    case RISCV32_TARGET_NR_vm86:
+#endif
 #ifdef ARM_TARGET_NR_vm86
 	case ARM_TARGET_NR_vm86:
 #endif 
@@ -10869,6 +11373,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_adjtimex)
     case TARGET_NR_adjtimex:
+#ifdef RISCV32_TARGET_NR_adjtimex
+    case RISCV32_TARGET_NR_adjtimex:
+#endif
 #ifdef ARM_TARGET_NR_adjtimex
 	case ARM_TARGET_NR_adjtimex:
 #endif 
@@ -10890,6 +11397,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_clock_adjtime) && defined(CONFIG_CLOCK_ADJTIME)
     case TARGET_NR_clock_adjtime:
+#ifdef RISCV32_TARGET_NR_clock_adjtime
+    case RISCV32_TARGET_NR_clock_adjtime:
+#endif
 #ifdef ARM_TARGET_NR_clock_adjtime
 	case ARM_TARGET_NR_clock_adjtime:
 #endif 
@@ -10911,6 +11421,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_clock_adjtime64) && defined(CONFIG_CLOCK_ADJTIME)
     case TARGET_NR_clock_adjtime64:
+#ifdef RISCV32_TARGET_NR_clock_adjtime64
+    case RISCV32_TARGET_NR_clock_adjtime64:
+#endif
 #ifdef ARM_TARGET_NR_clock_adjtime64
 	case ARM_TARGET_NR_clock_adjtime64:
 #endif 
@@ -10929,18 +11442,27 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_getpgid:
+#ifdef RISCV32_TARGET_NR_getpgid
+    case RISCV32_TARGET_NR_getpgid:
+#endif
 #ifdef ARM_TARGET_NR_getpgid
 	case ARM_TARGET_NR_getpgid:
 #endif 
 
         return get_errno(getpgid(arg1));
     case TARGET_NR_fchdir:
+#ifdef RISCV32_TARGET_NR_fchdir
+    case RISCV32_TARGET_NR_fchdir:
+#endif
 #ifdef ARM_TARGET_NR_fchdir
 	case ARM_TARGET_NR_fchdir:
 #endif 
 
         return get_errno(fchdir(arg1));
     case TARGET_NR_personality:
+#ifdef RISCV32_TARGET_NR_personality
+    case RISCV32_TARGET_NR_personality:
+#endif
 #ifdef ARM_TARGET_NR_personality
 	case ARM_TARGET_NR_personality:
 #endif 
@@ -10948,6 +11470,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(personality(arg1));
 #ifdef TARGET_NR__llseek /* Not on alpha */
     case TARGET_NR__llseek:
+#ifdef RISCV32_TARGET_NR__llseek
+    case RISCV32_TARGET_NR__llseek:
+#endif
 #ifdef ARM_TARGET_NR__llseek
 	case ARM_TARGET_NR__llseek:
 #endif 
@@ -10972,6 +11497,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getdents
     case TARGET_NR_getdents:
+#ifdef RISCV32_TARGET_NR_getdents
+    case RISCV32_TARGET_NR_getdents:
+#endif
 #ifdef ARM_TARGET_NR_getdents
 	case ARM_TARGET_NR_getdents:
 #endif 
@@ -11107,6 +11635,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif /* TARGET_NR_getdents */
 #if defined(TARGET_NR_getdents64) && defined(__NR_getdents64)
     case TARGET_NR_getdents64:
+#ifdef RISCV32_TARGET_NR_getdents64
+    case RISCV32_TARGET_NR_getdents64:
+#endif
 #ifdef ARM_TARGET_NR_getdents64
 	case ARM_TARGET_NR_getdents64:
 #endif 
@@ -11139,6 +11670,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif /* TARGET_NR_getdents64 */
 #if defined(TARGET_NR__newselect)
     case TARGET_NR__newselect:
+#ifdef RISCV32_TARGET_NR__newselect
+    case RISCV32_TARGET_NR__newselect:
+#endif
 #ifdef ARM_TARGET_NR__newselect
 	case ARM_TARGET_NR__newselect:
 #endif 
@@ -11147,6 +11681,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_poll
     case TARGET_NR_poll:
+#ifdef RISCV32_TARGET_NR_poll
+    case RISCV32_TARGET_NR_poll:
+#endif
 #ifdef ARM_TARGET_NR_poll
 	case ARM_TARGET_NR_poll:
 #endif 
@@ -11155,6 +11692,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_ppoll
     case TARGET_NR_ppoll:
+#ifdef RISCV32_TARGET_NR_ppoll
+    case RISCV32_TARGET_NR_ppoll:
+#endif
 #ifdef ARM_TARGET_NR_ppoll
 	case ARM_TARGET_NR_ppoll:
 #endif 
@@ -11163,6 +11703,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_ppoll_time64
     case TARGET_NR_ppoll_time64:
+#ifdef RISCV32_TARGET_NR_ppoll_time64
+    case RISCV32_TARGET_NR_ppoll_time64:
+#endif
 #ifdef ARM_TARGET_NR_ppoll_time64
 	case ARM_TARGET_NR_ppoll_time64:
 #endif 
@@ -11170,6 +11713,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_ppoll(arg1, arg2, arg3, arg4, arg5, true, true);
 #endif
     case TARGET_NR_flock:
+#ifdef RISCV32_TARGET_NR_flock
+    case RISCV32_TARGET_NR_flock:
+#endif
 #ifdef ARM_TARGET_NR_flock
 	case ARM_TARGET_NR_flock:
 #endif 
@@ -11178,6 +11724,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
            Linux platform */
         return get_errno(safe_flock(arg1, arg2));
     case TARGET_NR_readv:
+#ifdef RISCV32_TARGET_NR_readv
+    case RISCV32_TARGET_NR_readv:
+#endif
 #ifdef ARM_TARGET_NR_readv
 	case ARM_TARGET_NR_readv:
 #endif 
@@ -11193,6 +11742,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_writev:
+#ifdef RISCV32_TARGET_NR_writev
+    case RISCV32_TARGET_NR_writev:
+#endif
 #ifdef ARM_TARGET_NR_writev
 	case ARM_TARGET_NR_writev:
 #endif 
@@ -11209,6 +11761,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #if defined(TARGET_NR_preadv)
     case TARGET_NR_preadv:
+#ifdef RISCV32_TARGET_NR_preadv
+    case RISCV32_TARGET_NR_preadv:
+#endif
 #ifdef ARM_TARGET_NR_preadv
 	case ARM_TARGET_NR_preadv:
 #endif 
@@ -11229,6 +11784,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_pwritev)
     case TARGET_NR_pwritev:
+#ifdef RISCV32_TARGET_NR_pwritev
+    case RISCV32_TARGET_NR_pwritev:
+#endif
 #ifdef ARM_TARGET_NR_pwritev
 	case ARM_TARGET_NR_pwritev:
 #endif 
@@ -11248,6 +11806,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_getsid:
+#ifdef RISCV32_TARGET_NR_getsid
+    case RISCV32_TARGET_NR_getsid:
+#endif
 #ifdef ARM_TARGET_NR_getsid
 	case ARM_TARGET_NR_getsid:
 #endif 
@@ -11255,6 +11816,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(getsid(arg1));
 #if defined(TARGET_NR_fdatasync) /* Not on alpha (osf_datasync ?) */
     case TARGET_NR_fdatasync:
+#ifdef RISCV32_TARGET_NR_fdatasync
+    case RISCV32_TARGET_NR_fdatasync:
+#endif
 #ifdef ARM_TARGET_NR_fdatasync
 	case ARM_TARGET_NR_fdatasync:
 #endif 
@@ -11262,6 +11826,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(fdatasync(arg1));
 #endif
     case TARGET_NR_sched_getaffinity:
+#ifdef RISCV32_TARGET_NR_sched_getaffinity
+    case RISCV32_TARGET_NR_sched_getaffinity:
+#endif
 #ifdef ARM_TARGET_NR_sched_getaffinity
 	case ARM_TARGET_NR_sched_getaffinity:
 #endif 
@@ -11306,6 +11873,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_sched_setaffinity:
+#ifdef RISCV32_TARGET_NR_sched_setaffinity
+    case RISCV32_TARGET_NR_sched_setaffinity:
+#endif
 #ifdef ARM_TARGET_NR_sched_setaffinity
 	case ARM_TARGET_NR_sched_setaffinity:
 #endif 
@@ -11332,6 +11902,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
             return get_errno(sys_sched_setaffinity(arg1, mask_size, mask));
         }
     case TARGET_NR_getcpu:
+#ifdef RISCV32_TARGET_NR_getcpu
+    case RISCV32_TARGET_NR_getcpu:
+#endif
 #ifdef ARM_TARGET_NR_getcpu
 	case ARM_TARGET_NR_getcpu:
 #endif 
@@ -11353,6 +11926,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_sched_setparam:
+#ifdef RISCV32_TARGET_NR_sched_setparam
+    case RISCV32_TARGET_NR_sched_setparam:
+#endif
 #ifdef ARM_TARGET_NR_sched_setparam
 	case ARM_TARGET_NR_sched_setparam:
 #endif 
@@ -11371,6 +11947,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
             return get_errno(sched_setparam(arg1, &schp));
         }
     case TARGET_NR_sched_getparam:
+#ifdef RISCV32_TARGET_NR_sched_getparam
+    case RISCV32_TARGET_NR_sched_getparam:
+#endif
 #ifdef ARM_TARGET_NR_sched_getparam
 	case ARM_TARGET_NR_sched_getparam:
 #endif 
@@ -11392,6 +11971,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_sched_setscheduler:
+#ifdef RISCV32_TARGET_NR_sched_setscheduler
+    case RISCV32_TARGET_NR_sched_setscheduler:
+#endif
 #ifdef ARM_TARGET_NR_sched_setscheduler
 	case ARM_TARGET_NR_sched_setscheduler:
 #endif 
@@ -11409,24 +11991,36 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
             return get_errno(sched_setscheduler(arg1, arg2, &schp));
         }
     case TARGET_NR_sched_getscheduler:
+#ifdef RISCV32_TARGET_NR_sched_getscheduler
+    case RISCV32_TARGET_NR_sched_getscheduler:
+#endif
 #ifdef ARM_TARGET_NR_sched_getscheduler
 	case ARM_TARGET_NR_sched_getscheduler:
 #endif 
 
         return get_errno(sched_getscheduler(arg1));
     case TARGET_NR_sched_yield:
+#ifdef RISCV32_TARGET_NR_sched_yield
+    case RISCV32_TARGET_NR_sched_yield:
+#endif
 #ifdef ARM_TARGET_NR_sched_yield
 	case ARM_TARGET_NR_sched_yield:
 #endif 
 
         return get_errno(sched_yield());
     case TARGET_NR_sched_get_priority_max:
+#ifdef RISCV32_TARGET_NR_sched_get_priority_max
+    case RISCV32_TARGET_NR_sched_get_priority_max:
+#endif
 #ifdef ARM_TARGET_NR_sched_get_priority_max
 	case ARM_TARGET_NR_sched_get_priority_max:
 #endif 
 
         return get_errno(sched_get_priority_max(arg1));
     case TARGET_NR_sched_get_priority_min:
+#ifdef RISCV32_TARGET_NR_sched_get_priority_min
+    case RISCV32_TARGET_NR_sched_get_priority_min:
+#endif
 #ifdef ARM_TARGET_NR_sched_get_priority_min
 	case ARM_TARGET_NR_sched_get_priority_min:
 #endif 
@@ -11434,6 +12028,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(sched_get_priority_min(arg1));
 #ifdef TARGET_NR_sched_rr_get_interval
     case TARGET_NR_sched_rr_get_interval:
+#ifdef RISCV32_TARGET_NR_sched_rr_get_interval
+    case RISCV32_TARGET_NR_sched_rr_get_interval:
+#endif
 #ifdef ARM_TARGET_NR_sched_rr_get_interval
 	case ARM_TARGET_NR_sched_rr_get_interval:
 #endif 
@@ -11449,6 +12046,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_sched_rr_get_interval_time64
     case TARGET_NR_sched_rr_get_interval_time64:
+#ifdef RISCV32_TARGET_NR_sched_rr_get_interval_time64
+    case RISCV32_TARGET_NR_sched_rr_get_interval_time64:
+#endif
 #ifdef ARM_TARGET_NR_sched_rr_get_interval_time64
 	case ARM_TARGET_NR_sched_rr_get_interval_time64:
 #endif 
@@ -11464,6 +12064,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_nanosleep)
     case TARGET_NR_nanosleep:
+#ifdef RISCV32_TARGET_NR_nanosleep
+    case RISCV32_TARGET_NR_nanosleep:
+#endif
 #ifdef ARM_TARGET_NR_nanosleep
 	case ARM_TARGET_NR_nanosleep:
 #endif 
@@ -11479,6 +12082,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_prctl:
+#ifdef RISCV32_TARGET_NR_prctl
+    case RISCV32_TARGET_NR_prctl:
+#endif
 #ifdef ARM_TARGET_NR_prctl
 	case ARM_TARGET_NR_prctl:
 #endif 
@@ -11703,6 +12309,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         break;
 #ifdef TARGET_NR_arch_prctl
     case TARGET_NR_arch_prctl:
+#ifdef RISCV32_TARGET_NR_arch_prctl
+    case RISCV32_TARGET_NR_arch_prctl:
+#endif
 #ifdef ARM_TARGET_NR_arch_prctl
 	case ARM_TARGET_NR_arch_prctl:
 #endif 
@@ -11711,6 +12320,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_pread64
     case TARGET_NR_pread64:
+#ifdef RISCV32_TARGET_NR_pread64
+    case RISCV32_TARGET_NR_pread64:
+#endif
 #ifdef ARM_TARGET_NR_pread64
 	case ARM_TARGET_NR_pread64:
 #endif 
@@ -11732,6 +12344,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         unlock_user(p, arg2, ret);
         return ret;
     case TARGET_NR_pwrite64:
+#ifdef RISCV32_TARGET_NR_pwrite64
+    case RISCV32_TARGET_NR_pwrite64:
+#endif
 #ifdef ARM_TARGET_NR_pwrite64
 	case ARM_TARGET_NR_pwrite64:
 #endif 
@@ -11754,6 +12369,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_getcwd:
+#ifdef RISCV32_TARGET_NR_getcwd
+    case RISCV32_TARGET_NR_getcwd:
+#endif
 #ifdef ARM_TARGET_NR_getcwd
 	case ARM_TARGET_NR_getcwd:
 #endif 
@@ -11764,11 +12382,17 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         unlock_user(p, arg1, ret);
         return ret;
     case TARGET_NR_capget:
+#ifdef RISCV32_TARGET_NR_capget
+    case RISCV32_TARGET_NR_capget:
+#endif
 #ifdef ARM_TARGET_NR_capget
 	case ARM_TARGET_NR_capget:
 #endif 
 
     case TARGET_NR_capset:
+#ifdef RISCV32_TARGET_NR_capset
+    case RISCV32_TARGET_NR_capset:
+#endif
 #ifdef ARM_TARGET_NR_capset
 	case ARM_TARGET_NR_capset:
 #endif 
@@ -11842,6 +12466,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
     }
     case TARGET_NR_sigaltstack:
+#ifdef RISCV32_TARGET_NR_sigaltstack
+    case RISCV32_TARGET_NR_sigaltstack:
+#endif
 #ifdef ARM_TARGET_NR_sigaltstack
 	case ARM_TARGET_NR_sigaltstack:
 #endif 
@@ -11852,6 +12479,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef CONFIG_SENDFILE
 #ifdef TARGET_NR_sendfile
     case TARGET_NR_sendfile:
+#ifdef RISCV32_TARGET_NR_sendfile
+    case RISCV32_TARGET_NR_sendfile:
+#endif
 #ifdef ARM_TARGET_NR_sendfile
 	case ARM_TARGET_NR_sendfile:
 #endif 
@@ -11878,6 +12508,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_sendfile64
     case TARGET_NR_sendfile64:
+#ifdef RISCV32_TARGET_NR_sendfile64
+    case RISCV32_TARGET_NR_sendfile64:
+#endif
 #ifdef ARM_TARGET_NR_sendfile64
 	case ARM_TARGET_NR_sendfile64:
 #endif 
@@ -11905,6 +12538,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_vfork
     case TARGET_NR_vfork:
+#ifdef RISCV32_TARGET_NR_vfork
+    case RISCV32_TARGET_NR_vfork:
+#endif
 #ifdef ARM_TARGET_NR_vfork
 	case ARM_TARGET_NR_vfork:
 #endif 
@@ -11915,6 +12551,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_ugetrlimit
     case TARGET_NR_ugetrlimit:
+#ifdef RISCV32_TARGET_NR_ugetrlimit
+    case RISCV32_TARGET_NR_ugetrlimit:
+#endif
 #ifdef ARM_TARGET_NR_ugetrlimit
 	case ARM_TARGET_NR_ugetrlimit:
 #endif 
@@ -11936,6 +12575,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_truncate64
     case TARGET_NR_truncate64:
+#ifdef RISCV32_TARGET_NR_truncate64
+    case RISCV32_TARGET_NR_truncate64:
+#endif
 #ifdef ARM_TARGET_NR_truncate64
 	case ARM_TARGET_NR_truncate64:
 #endif 
@@ -11948,6 +12590,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_ftruncate64
     case TARGET_NR_ftruncate64:
+#ifdef RISCV32_TARGET_NR_ftruncate64
+    case RISCV32_TARGET_NR_ftruncate64:
+#endif
 #ifdef ARM_TARGET_NR_ftruncate64
 	case ARM_TARGET_NR_ftruncate64:
 #endif 
@@ -11956,6 +12601,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_stat64
     case TARGET_NR_stat64:
+#ifdef RISCV32_TARGET_NR_stat64
+    case RISCV32_TARGET_NR_stat64:
+#endif
 #ifdef ARM_TARGET_NR_stat64
 	case ARM_TARGET_NR_stat64:
 #endif 
@@ -11971,6 +12619,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_lstat64
     case TARGET_NR_lstat64:
+#ifdef RISCV32_TARGET_NR_lstat64
+    case RISCV32_TARGET_NR_lstat64:
+#endif
 #ifdef ARM_TARGET_NR_lstat64
 	case ARM_TARGET_NR_lstat64:
 #endif 
@@ -11986,6 +12637,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_fstat64
     case TARGET_NR_fstat64:
+#ifdef RISCV32_TARGET_NR_fstat64
+    case RISCV32_TARGET_NR_fstat64:
+#endif
 #ifdef ARM_TARGET_NR_fstat64
 	case ARM_TARGET_NR_fstat64:
 #endif 
@@ -11998,6 +12652,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if (defined(TARGET_NR_fstatat64) || defined(TARGET_NR_newfstatat))
 #ifdef TARGET_NR_fstatat64
     case TARGET_NR_fstatat64:
+#ifdef RISCV32_TARGET_NR_fstatat64
+    case RISCV32_TARGET_NR_fstatat64:
+#endif
 #ifdef ARM_TARGET_NR_fstatat64
 	case ARM_TARGET_NR_fstatat64:
 #endif 
@@ -12005,6 +12662,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_newfstatat
     case TARGET_NR_newfstatat:
+#ifdef RISCV32_TARGET_NR_newfstatat
+    case RISCV32_TARGET_NR_newfstatat:
+#endif
 #ifdef ARM_TARGET_NR_newfstatat
 	case ARM_TARGET_NR_newfstatat:
 #endif 
@@ -12021,6 +12681,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_statx)
     case TARGET_NR_statx:
+#ifdef RISCV32_TARGET_NR_statx
+    case RISCV32_TARGET_NR_statx:
+#endif
 #ifdef ARM_TARGET_NR_statx
 	case ARM_TARGET_NR_statx:
 #endif 
@@ -12086,6 +12749,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_lchown
     case TARGET_NR_lchown:
+#ifdef RISCV32_TARGET_NR_lchown
+    case RISCV32_TARGET_NR_lchown:
+#endif
 #ifdef ARM_TARGET_NR_lchown
 	case ARM_TARGET_NR_lchown:
 #endif 
@@ -12098,6 +12764,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getuid
     case TARGET_NR_getuid:
+#ifdef RISCV32_TARGET_NR_getuid
+    case RISCV32_TARGET_NR_getuid:
+#endif
 #ifdef ARM_TARGET_NR_getuid
 	case ARM_TARGET_NR_getuid:
 #endif 
@@ -12106,6 +12775,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getgid
     case TARGET_NR_getgid:
+#ifdef RISCV32_TARGET_NR_getgid
+    case RISCV32_TARGET_NR_getgid:
+#endif
 #ifdef ARM_TARGET_NR_getgid
 	case ARM_TARGET_NR_getgid:
 #endif 
@@ -12114,6 +12786,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_geteuid
     case TARGET_NR_geteuid:
+#ifdef RISCV32_TARGET_NR_geteuid
+    case RISCV32_TARGET_NR_geteuid:
+#endif
 #ifdef ARM_TARGET_NR_geteuid
 	case ARM_TARGET_NR_geteuid:
 #endif 
@@ -12122,6 +12797,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getegid
     case TARGET_NR_getegid:
+#ifdef RISCV32_TARGET_NR_getegid
+    case RISCV32_TARGET_NR_getegid:
+#endif
 #ifdef ARM_TARGET_NR_getegid
 	case ARM_TARGET_NR_getegid:
 #endif 
@@ -12129,18 +12807,27 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(high2lowgid(getegid()));
 #endif
     case TARGET_NR_setreuid:
+#ifdef RISCV32_TARGET_NR_setreuid
+    case RISCV32_TARGET_NR_setreuid:
+#endif
 #ifdef ARM_TARGET_NR_setreuid
 	case ARM_TARGET_NR_setreuid:
 #endif 
 
         return get_errno(setreuid(low2highuid(arg1), low2highuid(arg2)));
     case TARGET_NR_setregid:
+#ifdef RISCV32_TARGET_NR_setregid
+    case RISCV32_TARGET_NR_setregid:
+#endif
 #ifdef ARM_TARGET_NR_setregid
 	case ARM_TARGET_NR_setregid:
 #endif 
 
         return get_errno(setregid(low2highgid(arg1), low2highgid(arg2)));
     case TARGET_NR_getgroups:
+#ifdef RISCV32_TARGET_NR_getgroups
+    case RISCV32_TARGET_NR_getgroups:
+#endif
 #ifdef ARM_TARGET_NR_getgroups
 	case ARM_TARGET_NR_getgroups:
 #endif 
@@ -12166,6 +12853,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_setgroups:
+#ifdef RISCV32_TARGET_NR_setgroups
+    case RISCV32_TARGET_NR_setgroups:
+#endif
 #ifdef ARM_TARGET_NR_setgroups
 	case ARM_TARGET_NR_setgroups:
 #endif 
@@ -12189,6 +12879,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
             return get_errno(setgroups(gidsetsize, grouplist));
         }
     case TARGET_NR_fchown:
+#ifdef RISCV32_TARGET_NR_fchown
+    case RISCV32_TARGET_NR_fchown:
+#endif
 #ifdef ARM_TARGET_NR_fchown
 	case ARM_TARGET_NR_fchown:
 #endif 
@@ -12196,6 +12889,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(fchown(arg1, low2highuid(arg2), low2highgid(arg3)));
 #if defined(TARGET_NR_fchownat)
     case TARGET_NR_fchownat:
+#ifdef RISCV32_TARGET_NR_fchownat
+    case RISCV32_TARGET_NR_fchownat:
+#endif
 #ifdef ARM_TARGET_NR_fchownat
 	case ARM_TARGET_NR_fchownat:
 #endif 
@@ -12209,6 +12905,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setresuid
     case TARGET_NR_setresuid:
+#ifdef RISCV32_TARGET_NR_setresuid
+    case RISCV32_TARGET_NR_setresuid:
+#endif
 #ifdef ARM_TARGET_NR_setresuid
 	case ARM_TARGET_NR_setresuid:
 #endif 
@@ -12219,6 +12918,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getresuid
     case TARGET_NR_getresuid:
+#ifdef RISCV32_TARGET_NR_getresuid
+    case RISCV32_TARGET_NR_getresuid:
+#endif
 #ifdef ARM_TARGET_NR_getresuid
 	case ARM_TARGET_NR_getresuid:
 #endif 
@@ -12237,6 +12939,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getresgid
     case TARGET_NR_setresgid:
+#ifdef RISCV32_TARGET_NR_setresgid
+    case RISCV32_TARGET_NR_setresgid:
+#endif
 #ifdef ARM_TARGET_NR_setresgid
 	case ARM_TARGET_NR_setresgid:
 #endif 
@@ -12247,6 +12952,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getresgid
     case TARGET_NR_getresgid:
+#ifdef RISCV32_TARGET_NR_getresgid
+    case RISCV32_TARGET_NR_getresgid:
+#endif
 #ifdef ARM_TARGET_NR_getresgid
 	case ARM_TARGET_NR_getresgid:
 #endif 
@@ -12265,6 +12973,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_chown
     case TARGET_NR_chown:
+#ifdef RISCV32_TARGET_NR_chown
+    case RISCV32_TARGET_NR_chown:
+#endif
 #ifdef ARM_TARGET_NR_chown
 	case ARM_TARGET_NR_chown:
 #endif 
@@ -12276,24 +12987,36 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_setuid:
+#ifdef RISCV32_TARGET_NR_setuid
+    case RISCV32_TARGET_NR_setuid:
+#endif
 #ifdef ARM_TARGET_NR_setuid
 	case ARM_TARGET_NR_setuid:
 #endif 
 
         return get_errno(sys_setuid(low2highuid(arg1)));
     case TARGET_NR_setgid:
+#ifdef RISCV32_TARGET_NR_setgid
+    case RISCV32_TARGET_NR_setgid:
+#endif
 #ifdef ARM_TARGET_NR_setgid
 	case ARM_TARGET_NR_setgid:
 #endif 
 
         return get_errno(sys_setgid(low2highgid(arg1)));
     case TARGET_NR_setfsuid:
+#ifdef RISCV32_TARGET_NR_setfsuid
+    case RISCV32_TARGET_NR_setfsuid:
+#endif
 #ifdef ARM_TARGET_NR_setfsuid
 	case ARM_TARGET_NR_setfsuid:
 #endif 
 
         return get_errno(setfsuid(arg1));
     case TARGET_NR_setfsgid:
+#ifdef RISCV32_TARGET_NR_setfsgid
+    case RISCV32_TARGET_NR_setfsgid:
+#endif
 #ifdef ARM_TARGET_NR_setfsgid
 	case ARM_TARGET_NR_setfsgid:
 #endif 
@@ -12302,6 +13025,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_lchown32
     case TARGET_NR_lchown32:
+#ifdef RISCV32_TARGET_NR_lchown32
+    case RISCV32_TARGET_NR_lchown32:
+#endif
 #ifdef ARM_TARGET_NR_lchown32
 	case ARM_TARGET_NR_lchown32:
 #endif 
@@ -12314,6 +13040,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getuid32
     case TARGET_NR_getuid32:
+#ifdef RISCV32_TARGET_NR_getuid32
+    case RISCV32_TARGET_NR_getuid32:
+#endif
 #ifdef ARM_TARGET_NR_getuid32
 	case ARM_TARGET_NR_getuid32:
 #endif 
@@ -12324,6 +13053,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_getxuid) && defined(TARGET_ALPHA)
    /* Alpha specific */
     case TARGET_NR_getxuid:
+#ifdef RISCV32_TARGET_NR_getxuid
+    case RISCV32_TARGET_NR_getxuid:
+#endif
 #ifdef ARM_TARGET_NR_getxuid
 	case ARM_TARGET_NR_getxuid:
 #endif 
@@ -12338,6 +13070,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_getxgid) && defined(TARGET_ALPHA)
    /* Alpha specific */
     case TARGET_NR_getxgid:
+#ifdef RISCV32_TARGET_NR_getxgid
+    case RISCV32_TARGET_NR_getxgid:
+#endif
 #ifdef ARM_TARGET_NR_getxgid
 	case ARM_TARGET_NR_getxgid:
 #endif 
@@ -12352,6 +13087,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_osf_getsysinfo) && defined(TARGET_ALPHA)
     /* Alpha specific */
     case TARGET_NR_osf_getsysinfo:
+#ifdef RISCV32_TARGET_NR_osf_getsysinfo
+    case RISCV32_TARGET_NR_osf_getsysinfo:
+#endif
 #ifdef ARM_TARGET_NR_osf_getsysinfo
 	case ARM_TARGET_NR_osf_getsysinfo:
 #endif 
@@ -12387,6 +13125,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_osf_setsysinfo) && defined(TARGET_ALPHA)
     /* Alpha specific */
     case TARGET_NR_osf_setsysinfo:
+#ifdef RISCV32_TARGET_NR_osf_setsysinfo
+    case RISCV32_TARGET_NR_osf_setsysinfo:
+#endif
 #ifdef ARM_TARGET_NR_osf_setsysinfo
 	case ARM_TARGET_NR_osf_setsysinfo:
 #endif 
@@ -12485,6 +13226,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef TARGET_NR_osf_sigprocmask
     /* Alpha specific.  */
     case TARGET_NR_osf_sigprocmask:
+#ifdef RISCV32_TARGET_NR_osf_sigprocmask
+    case RISCV32_TARGET_NR_osf_sigprocmask:
+#endif
 #ifdef ARM_TARGET_NR_osf_sigprocmask
 	case ARM_TARGET_NR_osf_sigprocmask:
 #endif 
@@ -12520,6 +13264,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_getgid32
     case TARGET_NR_getgid32:
+#ifdef RISCV32_TARGET_NR_getgid32
+    case RISCV32_TARGET_NR_getgid32:
+#endif
 #ifdef ARM_TARGET_NR_getgid32
 	case ARM_TARGET_NR_getgid32:
 #endif 
@@ -12528,6 +13275,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_geteuid32
     case TARGET_NR_geteuid32:
+#ifdef RISCV32_TARGET_NR_geteuid32
+    case RISCV32_TARGET_NR_geteuid32:
+#endif
 #ifdef ARM_TARGET_NR_geteuid32
 	case ARM_TARGET_NR_geteuid32:
 #endif 
@@ -12536,6 +13286,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getegid32
     case TARGET_NR_getegid32:
+#ifdef RISCV32_TARGET_NR_getegid32
+    case RISCV32_TARGET_NR_getegid32:
+#endif
 #ifdef ARM_TARGET_NR_getegid32
 	case ARM_TARGET_NR_getegid32:
 #endif 
@@ -12544,6 +13297,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setreuid32
     case TARGET_NR_setreuid32:
+#ifdef RISCV32_TARGET_NR_setreuid32
+    case RISCV32_TARGET_NR_setreuid32:
+#endif
 #ifdef ARM_TARGET_NR_setreuid32
 	case ARM_TARGET_NR_setreuid32:
 #endif 
@@ -12552,6 +13308,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setregid32
     case TARGET_NR_setregid32:
+#ifdef RISCV32_TARGET_NR_setregid32
+    case RISCV32_TARGET_NR_setregid32:
+#endif
 #ifdef ARM_TARGET_NR_setregid32
 	case ARM_TARGET_NR_setregid32:
 #endif 
@@ -12560,6 +13319,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getgroups32
     case TARGET_NR_getgroups32:
+#ifdef RISCV32_TARGET_NR_getgroups32
+    case RISCV32_TARGET_NR_getgroups32:
+#endif
 #ifdef ARM_TARGET_NR_getgroups32
 	case ARM_TARGET_NR_getgroups32:
 #endif 
@@ -12588,6 +13350,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setgroups32
     case TARGET_NR_setgroups32:
+#ifdef RISCV32_TARGET_NR_setgroups32
+    case RISCV32_TARGET_NR_setgroups32:
+#endif
 #ifdef ARM_TARGET_NR_setgroups32
 	case ARM_TARGET_NR_setgroups32:
 #endif 
@@ -12611,6 +13376,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_fchown32
     case TARGET_NR_fchown32:
+#ifdef RISCV32_TARGET_NR_fchown32
+    case RISCV32_TARGET_NR_fchown32:
+#endif
 #ifdef ARM_TARGET_NR_fchown32
 	case ARM_TARGET_NR_fchown32:
 #endif 
@@ -12619,6 +13387,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setresuid32
     case TARGET_NR_setresuid32:
+#ifdef RISCV32_TARGET_NR_setresuid32
+    case RISCV32_TARGET_NR_setresuid32:
+#endif
 #ifdef ARM_TARGET_NR_setresuid32
 	case ARM_TARGET_NR_setresuid32:
 #endif 
@@ -12627,6 +13398,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getresuid32
     case TARGET_NR_getresuid32:
+#ifdef RISCV32_TARGET_NR_getresuid32
+    case RISCV32_TARGET_NR_getresuid32:
+#endif
 #ifdef ARM_TARGET_NR_getresuid32
 	case ARM_TARGET_NR_getresuid32:
 #endif 
@@ -12645,6 +13419,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setresgid32
     case TARGET_NR_setresgid32:
+#ifdef RISCV32_TARGET_NR_setresgid32
+    case RISCV32_TARGET_NR_setresgid32:
+#endif
 #ifdef ARM_TARGET_NR_setresgid32
 	case ARM_TARGET_NR_setresgid32:
 #endif 
@@ -12653,6 +13430,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getresgid32
     case TARGET_NR_getresgid32:
+#ifdef RISCV32_TARGET_NR_getresgid32
+    case RISCV32_TARGET_NR_getresgid32:
+#endif
 #ifdef ARM_TARGET_NR_getresgid32
 	case ARM_TARGET_NR_getresgid32:
 #endif 
@@ -12671,6 +13451,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_chown32
     case TARGET_NR_chown32:
+#ifdef RISCV32_TARGET_NR_chown32
+    case RISCV32_TARGET_NR_chown32:
+#endif
 #ifdef ARM_TARGET_NR_chown32
 	case ARM_TARGET_NR_chown32:
 #endif 
@@ -12683,6 +13466,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setuid32
     case TARGET_NR_setuid32:
+#ifdef RISCV32_TARGET_NR_setuid32
+    case RISCV32_TARGET_NR_setuid32:
+#endif
 #ifdef ARM_TARGET_NR_setuid32
 	case ARM_TARGET_NR_setuid32:
 #endif 
@@ -12691,6 +13477,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setgid32
     case TARGET_NR_setgid32:
+#ifdef RISCV32_TARGET_NR_setgid32
+    case RISCV32_TARGET_NR_setgid32:
+#endif
 #ifdef ARM_TARGET_NR_setgid32
 	case ARM_TARGET_NR_setgid32:
 #endif 
@@ -12699,6 +13488,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setfsuid32
     case TARGET_NR_setfsuid32:
+#ifdef RISCV32_TARGET_NR_setfsuid32
+    case RISCV32_TARGET_NR_setfsuid32:
+#endif
 #ifdef ARM_TARGET_NR_setfsuid32
 	case ARM_TARGET_NR_setfsuid32:
 #endif 
@@ -12707,6 +13499,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setfsgid32
     case TARGET_NR_setfsgid32:
+#ifdef RISCV32_TARGET_NR_setfsgid32
+    case RISCV32_TARGET_NR_setfsgid32:
+#endif
 #ifdef ARM_TARGET_NR_setfsgid32
 	case ARM_TARGET_NR_setfsgid32:
 #endif 
@@ -12715,6 +13510,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mincore
     case TARGET_NR_mincore:
+#ifdef RISCV32_TARGET_NR_mincore
+    case RISCV32_TARGET_NR_mincore:
+#endif
 #ifdef ARM_TARGET_NR_mincore
 	case ARM_TARGET_NR_mincore:
 #endif 
@@ -12737,6 +13535,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_arm_fadvise64_64
     case TARGET_NR_arm_fadvise64_64:
+#ifdef RISCV32_TARGET_NR_arm_fadvise64_64
+    case RISCV32_TARGET_NR_arm_fadvise64_64:
+#endif
 #ifdef ARM_TARGET_NR_arm_fadvise64_64
 	case ARM_TARGET_NR_arm_fadvise64_64:
 #endif 
@@ -12756,6 +13557,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_fadvise64_64
     case TARGET_NR_fadvise64_64:
+#ifdef RISCV32_TARGET_NR_fadvise64_64
+    case RISCV32_TARGET_NR_fadvise64_64:
+#endif
 #ifdef ARM_TARGET_NR_fadvise64_64
 	case ARM_TARGET_NR_fadvise64_64:
 #endif 
@@ -12786,6 +13590,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_fadvise64
     case TARGET_NR_fadvise64:
+#ifdef RISCV32_TARGET_NR_fadvise64
+    case RISCV32_TARGET_NR_fadvise64:
+#endif
 #ifdef ARM_TARGET_NR_fadvise64
 	case ARM_TARGET_NR_fadvise64:
 #endif 
@@ -12806,6 +13613,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_fadvise64_64) || defined(TARGET_NR_fadvise64)
 #ifdef TARGET_NR_fadvise64_64
     case TARGET_NR_fadvise64_64:
+#ifdef RISCV32_TARGET_NR_fadvise64_64
+    case RISCV32_TARGET_NR_fadvise64_64:
+#endif
 #ifdef ARM_TARGET_NR_fadvise64_64
 	case ARM_TARGET_NR_fadvise64_64:
 #endif 
@@ -12813,6 +13623,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_fadvise64
     case TARGET_NR_fadvise64:
+#ifdef RISCV32_TARGET_NR_fadvise64
+    case RISCV32_TARGET_NR_fadvise64:
+#endif
 #ifdef ARM_TARGET_NR_fadvise64
 	case ARM_TARGET_NR_fadvise64:
 #endif 
@@ -12833,6 +13646,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_madvise
     case TARGET_NR_madvise:
+#ifdef RISCV32_TARGET_NR_madvise
+    case RISCV32_TARGET_NR_madvise:
+#endif
 #ifdef ARM_TARGET_NR_madvise
 	case ARM_TARGET_NR_madvise:
 #endif 
@@ -12845,6 +13661,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_fcntl64
     case TARGET_NR_fcntl64:
+#ifdef RISCV32_TARGET_NR_fcntl64
+    case RISCV32_TARGET_NR_fcntl64:
+#endif
 #ifdef ARM_TARGET_NR_fcntl64
 	case ARM_TARGET_NR_fcntl64:
 #endif 
@@ -12896,6 +13715,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_cacheflush
     case TARGET_NR_cacheflush:
+#ifdef RISCV32_TARGET_NR_cacheflush
+    case RISCV32_TARGET_NR_cacheflush:
+#endif
 #ifdef ARM_TARGET_NR_cacheflush
 	case ARM_TARGET_NR_cacheflush:
 #endif 
@@ -12905,6 +13727,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getpagesize
     case TARGET_NR_getpagesize:
+#ifdef RISCV32_TARGET_NR_getpagesize
+    case RISCV32_TARGET_NR_getpagesize:
+#endif
 #ifdef ARM_TARGET_NR_getpagesize
 	case ARM_TARGET_NR_getpagesize:
 #endif 
@@ -12912,6 +13737,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return TARGET_PAGE_SIZE;
 #endif
     case TARGET_NR_gettid:
+#ifdef RISCV32_TARGET_NR_gettid
+    case RISCV32_TARGET_NR_gettid:
+#endif
 #ifdef ARM_TARGET_NR_gettid
 	case ARM_TARGET_NR_gettid:
 #endif 
@@ -12919,6 +13747,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(sys_gettid());
 #ifdef TARGET_NR_readahead
     case TARGET_NR_readahead:
+#ifdef RISCV32_TARGET_NR_readahead
+    case RISCV32_TARGET_NR_readahead:
+#endif
 #ifdef ARM_TARGET_NR_readahead
 	case ARM_TARGET_NR_readahead:
 #endif 
@@ -12938,11 +13769,17 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef CONFIG_ATTR
 #ifdef TARGET_NR_setxattr
     case TARGET_NR_listxattr:
+#ifdef RISCV32_TARGET_NR_listxattr
+    case RISCV32_TARGET_NR_listxattr:
+#endif
 #ifdef ARM_TARGET_NR_listxattr
 	case ARM_TARGET_NR_listxattr:
 #endif 
 
     case TARGET_NR_llistxattr:
+#ifdef RISCV32_TARGET_NR_llistxattr
+    case RISCV32_TARGET_NR_llistxattr:
+#endif
 #ifdef ARM_TARGET_NR_llistxattr
 	case ARM_TARGET_NR_llistxattr:
 #endif 
@@ -12970,6 +13807,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
     }
     case TARGET_NR_flistxattr:
+#ifdef RISCV32_TARGET_NR_flistxattr
+    case RISCV32_TARGET_NR_flistxattr:
+#endif
 #ifdef ARM_TARGET_NR_flistxattr
 	case ARM_TARGET_NR_flistxattr:
 #endif 
@@ -12987,11 +13827,17 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
     }
     case TARGET_NR_setxattr:
+#ifdef RISCV32_TARGET_NR_setxattr
+    case RISCV32_TARGET_NR_setxattr:
+#endif
 #ifdef ARM_TARGET_NR_setxattr
 	case ARM_TARGET_NR_setxattr:
 #endif 
 
     case TARGET_NR_lsetxattr:
+#ifdef RISCV32_TARGET_NR_lsetxattr
+    case RISCV32_TARGET_NR_lsetxattr:
+#endif
 #ifdef ARM_TARGET_NR_lsetxattr
 	case ARM_TARGET_NR_lsetxattr:
 #endif 
@@ -13021,6 +13867,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_fsetxattr:
+#ifdef RISCV32_TARGET_NR_fsetxattr
+    case RISCV32_TARGET_NR_fsetxattr:
+#endif
 #ifdef ARM_TARGET_NR_fsetxattr
 	case ARM_TARGET_NR_fsetxattr:
 #endif 
@@ -13044,11 +13893,17 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_getxattr:
+#ifdef RISCV32_TARGET_NR_getxattr
+    case RISCV32_TARGET_NR_getxattr:
+#endif
 #ifdef ARM_TARGET_NR_getxattr
 	case ARM_TARGET_NR_getxattr:
 #endif 
 
     case TARGET_NR_lgetxattr:
+#ifdef RISCV32_TARGET_NR_lgetxattr
+    case RISCV32_TARGET_NR_lgetxattr:
+#endif
 #ifdef ARM_TARGET_NR_lgetxattr
 	case ARM_TARGET_NR_lgetxattr:
 #endif 
@@ -13078,6 +13933,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_fgetxattr:
+#ifdef RISCV32_TARGET_NR_fgetxattr
+    case RISCV32_TARGET_NR_fgetxattr:
+#endif
 #ifdef ARM_TARGET_NR_fgetxattr
 	case ARM_TARGET_NR_fgetxattr:
 #endif 
@@ -13101,11 +13959,17 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_removexattr:
+#ifdef RISCV32_TARGET_NR_removexattr
+    case RISCV32_TARGET_NR_removexattr:
+#endif
 #ifdef ARM_TARGET_NR_removexattr
 	case ARM_TARGET_NR_removexattr:
 #endif 
 
     case TARGET_NR_lremovexattr:
+#ifdef RISCV32_TARGET_NR_lremovexattr
+    case RISCV32_TARGET_NR_lremovexattr:
+#endif
 #ifdef ARM_TARGET_NR_lremovexattr
 	case ARM_TARGET_NR_lremovexattr:
 #endif 
@@ -13128,6 +13992,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_fremovexattr:
+#ifdef RISCV32_TARGET_NR_fremovexattr
+    case RISCV32_TARGET_NR_fremovexattr:
+#endif
 #ifdef ARM_TARGET_NR_fremovexattr
 	case ARM_TARGET_NR_fremovexattr:
 #endif 
@@ -13147,6 +14014,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif /* CONFIG_ATTR */
 #ifdef TARGET_NR_set_thread_area
     case TARGET_NR_set_thread_area:
+#ifdef RISCV32_TARGET_NR_set_thread_area
+    case RISCV32_TARGET_NR_set_thread_area:
+#endif
 #ifdef ARM_TARGET_NR_set_thread_area
 	case ARM_TARGET_NR_set_thread_area:
 #endif 
@@ -13176,6 +14046,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_get_thread_area
     case TARGET_NR_get_thread_area:
+#ifdef RISCV32_TARGET_NR_get_thread_area
+    case RISCV32_TARGET_NR_get_thread_area:
+#endif
 #ifdef ARM_TARGET_NR_get_thread_area
 	case ARM_TARGET_NR_get_thread_area:
 #endif 
@@ -13193,6 +14066,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getdomainname
     case TARGET_NR_getdomainname:
+#ifdef RISCV32_TARGET_NR_getdomainname
+    case RISCV32_TARGET_NR_getdomainname:
+#endif
 #ifdef ARM_TARGET_NR_getdomainname
 	case ARM_TARGET_NR_getdomainname:
 #endif 
@@ -13202,6 +14078,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_clock_settime
     case TARGET_NR_clock_settime:
+#ifdef RISCV32_TARGET_NR_clock_settime
+    case RISCV32_TARGET_NR_clock_settime:
+#endif
 #ifdef ARM_TARGET_NR_clock_settime
 	case ARM_TARGET_NR_clock_settime:
 #endif 
@@ -13218,6 +14097,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_settime64
     case TARGET_NR_clock_settime64:
+#ifdef RISCV32_TARGET_NR_clock_settime64
+    case RISCV32_TARGET_NR_clock_settime64:
+#endif
 #ifdef ARM_TARGET_NR_clock_settime64
 	case ARM_TARGET_NR_clock_settime64:
 #endif 
@@ -13234,6 +14116,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_gettime
     case TARGET_NR_clock_gettime:
+#ifdef RISCV32_TARGET_NR_clock_gettime
+    case RISCV32_TARGET_NR_clock_gettime:
+#endif
 #ifdef ARM_TARGET_NR_clock_gettime
 	case ARM_TARGET_NR_clock_gettime:
 #endif 
@@ -13249,6 +14134,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_gettime64
     case TARGET_NR_clock_gettime64:
+#ifdef RISCV32_TARGET_NR_clock_gettime64
+    case RISCV32_TARGET_NR_clock_gettime64:
+#endif
 #ifdef ARM_TARGET_NR_clock_gettime64
 	case ARM_TARGET_NR_clock_gettime64:
 #endif 
@@ -13264,6 +14152,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_getres
     case TARGET_NR_clock_getres:
+#ifdef RISCV32_TARGET_NR_clock_getres
+    case RISCV32_TARGET_NR_clock_getres:
+#endif
 #ifdef ARM_TARGET_NR_clock_getres
 	case ARM_TARGET_NR_clock_getres:
 #endif 
@@ -13279,6 +14170,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_getres_time64
     case TARGET_NR_clock_getres_time64:
+#ifdef RISCV32_TARGET_NR_clock_getres_time64
+    case RISCV32_TARGET_NR_clock_getres_time64:
+#endif
 #ifdef ARM_TARGET_NR_clock_getres_time64
 	case ARM_TARGET_NR_clock_getres_time64:
 #endif 
@@ -13294,6 +14188,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_nanosleep
     case TARGET_NR_clock_nanosleep:
+#ifdef RISCV32_TARGET_NR_clock_nanosleep
+    case RISCV32_TARGET_NR_clock_nanosleep:
+#endif
 #ifdef ARM_TARGET_NR_clock_nanosleep
 	case ARM_TARGET_NR_clock_nanosleep:
 #endif 
@@ -13320,6 +14217,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_nanosleep_time64
     case TARGET_NR_clock_nanosleep_time64:
+#ifdef RISCV32_TARGET_NR_clock_nanosleep_time64
+    case RISCV32_TARGET_NR_clock_nanosleep_time64:
+#endif
 #ifdef ARM_TARGET_NR_clock_nanosleep_time64
 	case ARM_TARGET_NR_clock_nanosleep_time64:
 #endif 
@@ -13344,6 +14244,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_set_tid_address) && defined(__NR_set_tid_address)
     case TARGET_NR_set_tid_address:
+#ifdef RISCV32_TARGET_NR_set_tid_address
+    case RISCV32_TARGET_NR_set_tid_address:
+#endif
 
 #ifdef ARM_TARGET_NR_set_tid_address
 	case ARM_TARGET_NR_set_tid_address:
@@ -13353,6 +14256,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 
     case TARGET_NR_tkill:
+#ifdef RISCV32_TARGET_NR_tkill
+    case RISCV32_TARGET_NR_tkill:
+#endif
 #ifdef ARM_TARGET_NR_tkill
 	case ARM_TARGET_NR_tkill:
 #endif 
@@ -13360,6 +14266,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(safe_tkill((int)arg1, target_to_host_signal(arg2)));
 
     case TARGET_NR_tgkill:
+#ifdef RISCV32_TARGET_NR_tgkill
+    case RISCV32_TARGET_NR_tgkill:
+#endif
 #ifdef ARM_TARGET_NR_tgkill
 	case ARM_TARGET_NR_tgkill:
 #endif 
@@ -13369,11 +14278,17 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_set_robust_list
     case TARGET_NR_set_robust_list:
+#ifdef RISCV32_TARGET_NR_set_robust_list
+    case RISCV32_TARGET_NR_set_robust_list:
+#endif
 #ifdef ARM_TARGET_NR_set_robust_list
 	case ARM_TARGET_NR_set_robust_list:
 #endif 
 
     case TARGET_NR_get_robust_list:
+#ifdef RISCV32_TARGET_NR_get_robust_list
+    case RISCV32_TARGET_NR_get_robust_list:
+#endif
 #ifdef ARM_TARGET_NR_get_robust_list
 	case ARM_TARGET_NR_get_robust_list:
 #endif 
@@ -13395,6 +14310,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_utimensat)
     case TARGET_NR_utimensat:
+#ifdef RISCV32_TARGET_NR_utimensat
+    case RISCV32_TARGET_NR_utimensat:
+#endif
 #ifdef ARM_TARGET_NR_utimensat
 	case ARM_TARGET_NR_utimensat:
 #endif 
@@ -13427,6 +14345,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_utimensat_time64
     case TARGET_NR_utimensat_time64:
+#ifdef RISCV32_TARGET_NR_utimensat_time64
+    case RISCV32_TARGET_NR_utimensat_time64:
+#endif
 #ifdef ARM_TARGET_NR_utimensat_time64
 	case ARM_TARGET_NR_utimensat_time64:
 #endif 
@@ -13460,6 +14381,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_futex
     case TARGET_NR_futex:
+#ifdef RISCV32_TARGET_NR_futex
+    case RISCV32_TARGET_NR_futex:
+#endif
 
 #ifdef ARM_TARGET_NR_futex
 	case ARM_TARGET_NR_futex:
@@ -13469,6 +14393,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_futex_time64
     case TARGET_NR_futex_time64:
+#ifdef RISCV32_TARGET_NR_futex_time64
+    case RISCV32_TARGET_NR_futex_time64:
+#endif
 
 #ifdef ARM_TARGET_NR_futex_time64
 	case ARM_TARGET_NR_futex_time64:
@@ -13478,6 +14405,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_inotify_init) && defined(__NR_inotify_init)
     case TARGET_NR_inotify_init:
+#ifdef RISCV32_TARGET_NR_inotify_init
+    case RISCV32_TARGET_NR_inotify_init:
+#endif
 #ifdef ARM_TARGET_NR_inotify_init
 	case ARM_TARGET_NR_inotify_init:
 #endif 
@@ -13491,6 +14421,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef CONFIG_INOTIFY1
 #if defined(TARGET_NR_inotify_init1) && defined(__NR_inotify_init1)
     case TARGET_NR_inotify_init1:
+#ifdef RISCV32_TARGET_NR_inotify_init1
+    case RISCV32_TARGET_NR_inotify_init1:
+#endif
 #ifdef ARM_TARGET_NR_inotify_init1
 	case ARM_TARGET_NR_inotify_init1:
 #endif 
@@ -13505,6 +14438,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_inotify_add_watch) && defined(__NR_inotify_add_watch)
     case TARGET_NR_inotify_add_watch:
+#ifdef RISCV32_TARGET_NR_inotify_add_watch
+    case RISCV32_TARGET_NR_inotify_add_watch:
+#endif
 #ifdef ARM_TARGET_NR_inotify_add_watch
 	case ARM_TARGET_NR_inotify_add_watch:
 #endif 
@@ -13516,6 +14452,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_inotify_rm_watch) && defined(__NR_inotify_rm_watch)
     case TARGET_NR_inotify_rm_watch:
+#ifdef RISCV32_TARGET_NR_inotify_rm_watch
+    case RISCV32_TARGET_NR_inotify_rm_watch:
+#endif
 #ifdef ARM_TARGET_NR_inotify_rm_watch
 	case ARM_TARGET_NR_inotify_rm_watch:
 #endif 
@@ -13525,6 +14464,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_mq_open) && defined(__NR_mq_open)
     case TARGET_NR_mq_open:
+#ifdef RISCV32_TARGET_NR_mq_open
+    case RISCV32_TARGET_NR_mq_open:
+#endif
 #ifdef ARM_TARGET_NR_mq_open
 	case ARM_TARGET_NR_mq_open:
 #endif 
@@ -13552,6 +14494,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 
     case TARGET_NR_mq_unlink:
+#ifdef RISCV32_TARGET_NR_mq_unlink
+    case RISCV32_TARGET_NR_mq_unlink:
+#endif
 #ifdef ARM_TARGET_NR_mq_unlink
 	case ARM_TARGET_NR_mq_unlink:
 #endif 
@@ -13566,6 +14511,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_mq_timedsend
     case TARGET_NR_mq_timedsend:
+#ifdef RISCV32_TARGET_NR_mq_timedsend
+    case RISCV32_TARGET_NR_mq_timedsend:
+#endif
 #ifdef ARM_TARGET_NR_mq_timedsend
 	case ARM_TARGET_NR_mq_timedsend:
 #endif 
@@ -13591,6 +14539,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mq_timedsend_time64
     case TARGET_NR_mq_timedsend_time64:
+#ifdef RISCV32_TARGET_NR_mq_timedsend_time64
+    case RISCV32_TARGET_NR_mq_timedsend_time64:
+#endif
 #ifdef ARM_TARGET_NR_mq_timedsend_time64
 	case ARM_TARGET_NR_mq_timedsend_time64:
 #endif 
@@ -13617,6 +14568,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_mq_timedreceive
     case TARGET_NR_mq_timedreceive:
+#ifdef RISCV32_TARGET_NR_mq_timedreceive
+    case RISCV32_TARGET_NR_mq_timedreceive:
+#endif
 #ifdef ARM_TARGET_NR_mq_timedreceive
 	case ARM_TARGET_NR_mq_timedreceive:
 #endif 
@@ -13647,6 +14601,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mq_timedreceive_time64
     case TARGET_NR_mq_timedreceive_time64:
+#ifdef RISCV32_TARGET_NR_mq_timedreceive_time64
+    case RISCV32_TARGET_NR_mq_timedreceive_time64:
+#endif
 #ifdef ARM_TARGET_NR_mq_timedreceive_time64
 	case ARM_TARGET_NR_mq_timedreceive_time64:
 #endif 
@@ -13679,6 +14636,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
     /* Not implemented for now... */
 /*     case TARGET_NR_mq_notify:
+#ifdef RISCV32_TARGET_NR_mq_notify
+    case RISCV32_TARGET_NR_mq_notify:
+#endif
 #ifdef ARM_TARGET_NR_mq_notify
 	case ARM_TARGET_NR_mq_notify:
 #endif 
@@ -13686,6 +14646,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 /*         break; */
 
     case TARGET_NR_mq_getsetattr:
+#ifdef RISCV32_TARGET_NR_mq_getsetattr
+    case RISCV32_TARGET_NR_mq_getsetattr:
+#endif
 #ifdef ARM_TARGET_NR_mq_getsetattr
 	case ARM_TARGET_NR_mq_getsetattr:
 #endif 
@@ -13710,6 +14673,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef CONFIG_SPLICE
 #ifdef TARGET_NR_tee
     case TARGET_NR_tee:
+#ifdef RISCV32_TARGET_NR_tee
+    case RISCV32_TARGET_NR_tee:
+#endif
 #ifdef ARM_TARGET_NR_tee
 	case ARM_TARGET_NR_tee:
 #endif 
@@ -13721,6 +14687,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_splice
     case TARGET_NR_splice:
+#ifdef RISCV32_TARGET_NR_splice
+    case RISCV32_TARGET_NR_splice:
+#endif
 #ifdef ARM_TARGET_NR_splice
 	case ARM_TARGET_NR_splice:
 #endif 
@@ -13775,6 +14744,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef CONFIG_EVENTFD
 #if defined(TARGET_NR_eventfd)
     case TARGET_NR_eventfd:
+#ifdef RISCV32_TARGET_NR_eventfd
+    case RISCV32_TARGET_NR_eventfd:
+#endif
 #ifdef ARM_TARGET_NR_eventfd
 	case ARM_TARGET_NR_eventfd:
 #endif 
@@ -13787,6 +14759,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_eventfd2)
     case TARGET_NR_eventfd2:
+#ifdef RISCV32_TARGET_NR_eventfd2
+    case RISCV32_TARGET_NR_eventfd2:
+#endif
 #ifdef ARM_TARGET_NR_eventfd2
 	case ARM_TARGET_NR_eventfd2:
 #endif 
@@ -13809,6 +14784,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif /* CONFIG_EVENTFD  */
 #if defined(CONFIG_FALLOCATE) && defined(TARGET_NR_fallocate)
     case TARGET_NR_fallocate:
+#ifdef RISCV32_TARGET_NR_fallocate
+    case RISCV32_TARGET_NR_fallocate:
+#endif
 #ifdef ARM_TARGET_NR_fallocate
 	case ARM_TARGET_NR_fallocate:
 #endif 
@@ -13824,6 +14802,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(CONFIG_SYNC_FILE_RANGE)
 #if defined(TARGET_NR_sync_file_range)
     case TARGET_NR_sync_file_range:
+#ifdef RISCV32_TARGET_NR_sync_file_range
+    case RISCV32_TARGET_NR_sync_file_range:
+#endif
 #ifdef ARM_TARGET_NR_sync_file_range
 	case ARM_TARGET_NR_sync_file_range:
 #endif 
@@ -13845,6 +14826,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
     defined(TARGET_NR_arm_sync_file_range)
 #if defined(TARGET_NR_sync_file_range2)
     case TARGET_NR_sync_file_range2:
+#ifdef RISCV32_TARGET_NR_sync_file_range2
+    case RISCV32_TARGET_NR_sync_file_range2:
+#endif
 #ifdef ARM_TARGET_NR_sync_file_range2
 	case ARM_TARGET_NR_sync_file_range2:
 #endif 
@@ -13852,6 +14836,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_arm_sync_file_range)
     case TARGET_NR_arm_sync_file_range:
+#ifdef RISCV32_TARGET_NR_arm_sync_file_range
+    case RISCV32_TARGET_NR_arm_sync_file_range:
+#endif
 #ifdef ARM_TARGET_NR_arm_sync_file_range
 	case ARM_TARGET_NR_arm_sync_file_range:
 #endif 
@@ -13869,6 +14856,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_signalfd4)
     case TARGET_NR_signalfd4:
+#ifdef RISCV32_TARGET_NR_signalfd4
+    case RISCV32_TARGET_NR_signalfd4:
+#endif
 #ifdef ARM_TARGET_NR_signalfd4
 	case ARM_TARGET_NR_signalfd4:
 #endif 
@@ -13877,6 +14867,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_signalfd)
     case TARGET_NR_signalfd:
+#ifdef RISCV32_TARGET_NR_signalfd
+    case RISCV32_TARGET_NR_signalfd:
+#endif
 #ifdef ARM_TARGET_NR_signalfd
 	case ARM_TARGET_NR_signalfd:
 #endif 
@@ -13886,6 +14879,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(CONFIG_EPOLL)
 #if defined(TARGET_NR_epoll_create)
     case TARGET_NR_epoll_create:
+#ifdef RISCV32_TARGET_NR_epoll_create
+    case RISCV32_TARGET_NR_epoll_create:
+#endif
 #ifdef ARM_TARGET_NR_epoll_create
 	case ARM_TARGET_NR_epoll_create:
 #endif 
@@ -13894,6 +14890,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_epoll_create1) && defined(CONFIG_EPOLL_CREATE1)
     case TARGET_NR_epoll_create1:
+#ifdef RISCV32_TARGET_NR_epoll_create1
+    case RISCV32_TARGET_NR_epoll_create1:
+#endif
 #ifdef ARM_TARGET_NR_epoll_create1
 	case ARM_TARGET_NR_epoll_create1:
 #endif 
@@ -13902,6 +14901,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_epoll_ctl)
     case TARGET_NR_epoll_ctl:
+#ifdef RISCV32_TARGET_NR_epoll_ctl
+    case RISCV32_TARGET_NR_epoll_ctl:
+#endif
 #ifdef ARM_TARGET_NR_epoll_ctl
 	case ARM_TARGET_NR_epoll_ctl:
 #endif 
@@ -13938,6 +14940,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_epoll_wait) || defined(TARGET_NR_epoll_pwait)
 #if defined(TARGET_NR_epoll_wait)
     case TARGET_NR_epoll_wait:
+#ifdef RISCV32_TARGET_NR_epoll_wait
+    case RISCV32_TARGET_NR_epoll_wait:
+#endif
 #ifdef ARM_TARGET_NR_epoll_wait
 	case ARM_TARGET_NR_epoll_wait:
 #endif 
@@ -13945,6 +14950,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_epoll_pwait)
     case TARGET_NR_epoll_pwait:
+#ifdef RISCV32_TARGET_NR_epoll_pwait
+    case RISCV32_TARGET_NR_epoll_pwait:
+#endif
 #ifdef ARM_TARGET_NR_epoll_pwait
 	case ARM_TARGET_NR_epoll_pwait:
 #endif 
@@ -13976,6 +14984,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         switch (num) {
 #if defined(TARGET_NR_epoll_pwait)
         case TARGET_NR_epoll_pwait:
+#ifdef RISCV32_TARGET_NR_epoll_pwait
+    case RISCV32_TARGET_NR_epoll_pwait:
+#endif
 #ifdef ARM_TARGET_NR_epoll_pwait
 	case ARM_TARGET_NR_epoll_pwait:
 #endif 
@@ -14009,6 +15020,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_epoll_wait)
         case TARGET_NR_epoll_wait:
+#ifdef RISCV32_TARGET_NR_epoll_wait
+    case RISCV32_TARGET_NR_epoll_wait:
+#endif
 #ifdef ARM_TARGET_NR_epoll_wait
 	case ARM_TARGET_NR_epoll_wait:
 #endif 
@@ -14038,6 +15052,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_prlimit64
     case TARGET_NR_prlimit64:
+#ifdef RISCV32_TARGET_NR_prlimit64
+    case RISCV32_TARGET_NR_prlimit64:
+#endif
 #ifdef ARM_TARGET_NR_prlimit64
 	case ARM_TARGET_NR_prlimit64:
 #endif 
@@ -14074,6 +15091,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_gethostname
     case TARGET_NR_gethostname:
+#ifdef RISCV32_TARGET_NR_gethostname
+    case RISCV32_TARGET_NR_gethostname:
+#endif
 #ifdef ARM_TARGET_NR_gethostname
 	case ARM_TARGET_NR_gethostname:
 #endif 
@@ -14091,6 +15111,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_atomic_cmpxchg_32
     case TARGET_NR_atomic_cmpxchg_32:
+#ifdef RISCV32_TARGET_NR_atomic_cmpxchg_32
+    case RISCV32_TARGET_NR_atomic_cmpxchg_32:
+#endif
 #ifdef ARM_TARGET_NR_atomic_cmpxchg_32
 	case ARM_TARGET_NR_atomic_cmpxchg_32:
 #endif 
@@ -14116,6 +15139,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_atomic_barrier
     case TARGET_NR_atomic_barrier:
+#ifdef RISCV32_TARGET_NR_atomic_barrier
+    case RISCV32_TARGET_NR_atomic_barrier:
+#endif
 #ifdef ARM_TARGET_NR_atomic_barrier
 	case ARM_TARGET_NR_atomic_barrier:
 #endif 
@@ -14127,6 +15153,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_create
     case TARGET_NR_timer_create:
+#ifdef RISCV32_TARGET_NR_timer_create
+    case RISCV32_TARGET_NR_timer_create:
+#endif
 #ifdef ARM_TARGET_NR_timer_create
 	case ARM_TARGET_NR_timer_create:
 #endif 
@@ -14167,6 +15196,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_settime
     case TARGET_NR_timer_settime:
+#ifdef RISCV32_TARGET_NR_timer_settime
+    case RISCV32_TARGET_NR_timer_settime:
+#endif
 #ifdef ARM_TARGET_NR_timer_settime
 	case ARM_TARGET_NR_timer_settime:
 #endif 
@@ -14199,6 +15231,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_settime64
     case TARGET_NR_timer_settime64:
+#ifdef RISCV32_TARGET_NR_timer_settime64
+    case RISCV32_TARGET_NR_timer_settime64:
+#endif
 #ifdef ARM_TARGET_NR_timer_settime64
 	case ARM_TARGET_NR_timer_settime64:
 #endif 
@@ -14229,6 +15264,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_gettime
     case TARGET_NR_timer_gettime:
+#ifdef RISCV32_TARGET_NR_timer_gettime
+    case RISCV32_TARGET_NR_timer_gettime:
+#endif
 #ifdef ARM_TARGET_NR_timer_gettime
 	case ARM_TARGET_NR_timer_gettime:
 #endif 
@@ -14256,6 +15294,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_gettime64
     case TARGET_NR_timer_gettime64:
+#ifdef RISCV32_TARGET_NR_timer_gettime64
+    case RISCV32_TARGET_NR_timer_gettime64:
+#endif
 #ifdef ARM_TARGET_NR_timer_gettime64
 	case ARM_TARGET_NR_timer_gettime64:
 #endif 
@@ -14283,6 +15324,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_getoverrun
     case TARGET_NR_timer_getoverrun:
+#ifdef RISCV32_TARGET_NR_timer_getoverrun
+    case RISCV32_TARGET_NR_timer_getoverrun:
+#endif
 #ifdef ARM_TARGET_NR_timer_getoverrun
 	case ARM_TARGET_NR_timer_getoverrun:
 #endif 
@@ -14303,6 +15347,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_delete
     case TARGET_NR_timer_delete:
+#ifdef RISCV32_TARGET_NR_timer_delete
+    case RISCV32_TARGET_NR_timer_delete:
+#endif
 #ifdef ARM_TARGET_NR_timer_delete
 	case ARM_TARGET_NR_timer_delete:
 #endif 
@@ -14324,6 +15371,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_timerfd_create) && defined(CONFIG_TIMERFD)
     case TARGET_NR_timerfd_create:
+#ifdef RISCV32_TARGET_NR_timerfd_create
+    case RISCV32_TARGET_NR_timerfd_create:
+#endif
 #ifdef ARM_TARGET_NR_timerfd_create
 	case ARM_TARGET_NR_timerfd_create:
 #endif 
@@ -14334,6 +15384,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_timerfd_gettime) && defined(CONFIG_TIMERFD)
     case TARGET_NR_timerfd_gettime:
+#ifdef RISCV32_TARGET_NR_timerfd_gettime
+    case RISCV32_TARGET_NR_timerfd_gettime:
+#endif
 #ifdef ARM_TARGET_NR_timerfd_gettime
 	case ARM_TARGET_NR_timerfd_gettime:
 #endif 
@@ -14352,6 +15405,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_timerfd_gettime64) && defined(CONFIG_TIMERFD)
     case TARGET_NR_timerfd_gettime64:
+#ifdef RISCV32_TARGET_NR_timerfd_gettime64
+    case RISCV32_TARGET_NR_timerfd_gettime64:
+#endif
 #ifdef ARM_TARGET_NR_timerfd_gettime64
 	case ARM_TARGET_NR_timerfd_gettime64:
 #endif 
@@ -14370,6 +15426,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_timerfd_settime) && defined(CONFIG_TIMERFD)
     case TARGET_NR_timerfd_settime:
+#ifdef RISCV32_TARGET_NR_timerfd_settime
+    case RISCV32_TARGET_NR_timerfd_settime:
+#endif
 #ifdef ARM_TARGET_NR_timerfd_settime
 	case ARM_TARGET_NR_timerfd_settime:
 #endif 
@@ -14397,6 +15456,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_timerfd_settime64) && defined(CONFIG_TIMERFD)
     case TARGET_NR_timerfd_settime64:
+#ifdef RISCV32_TARGET_NR_timerfd_settime64
+    case RISCV32_TARGET_NR_timerfd_settime64:
+#endif
 #ifdef ARM_TARGET_NR_timerfd_settime64
 	case ARM_TARGET_NR_timerfd_settime64:
 #endif 
@@ -14424,6 +15486,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_ioprio_get) && defined(__NR_ioprio_get)
     case TARGET_NR_ioprio_get:
+#ifdef RISCV32_TARGET_NR_ioprio_get
+    case RISCV32_TARGET_NR_ioprio_get:
+#endif
 #ifdef ARM_TARGET_NR_ioprio_get
 	case ARM_TARGET_NR_ioprio_get:
 #endif 
@@ -14433,6 +15498,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_ioprio_set) && defined(__NR_ioprio_set)
     case TARGET_NR_ioprio_set:
+#ifdef RISCV32_TARGET_NR_ioprio_set
+    case RISCV32_TARGET_NR_ioprio_set:
+#endif
 #ifdef ARM_TARGET_NR_ioprio_set
 	case ARM_TARGET_NR_ioprio_set:
 #endif 
@@ -14442,6 +15510,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_setns) && defined(CONFIG_SETNS)
     case TARGET_NR_setns:
+#ifdef RISCV32_TARGET_NR_setns
+    case RISCV32_TARGET_NR_setns:
+#endif
 #ifdef ARM_TARGET_NR_setns
 	case ARM_TARGET_NR_setns:
 #endif 
@@ -14450,6 +15521,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_unshare) && defined(CONFIG_SETNS)
     case TARGET_NR_unshare:
+#ifdef RISCV32_TARGET_NR_unshare
+    case RISCV32_TARGET_NR_unshare:
+#endif
 #ifdef ARM_TARGET_NR_unshare
 	case ARM_TARGET_NR_unshare:
 #endif 
@@ -14458,6 +15532,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_kcmp) && defined(__NR_kcmp)
     case TARGET_NR_kcmp:
+#ifdef RISCV32_TARGET_NR_kcmp
+    case RISCV32_TARGET_NR_kcmp:
+#endif
 #ifdef ARM_TARGET_NR_kcmp
 	case ARM_TARGET_NR_kcmp:
 #endif 
@@ -14466,6 +15543,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_swapcontext
     case TARGET_NR_swapcontext:
+#ifdef RISCV32_TARGET_NR_swapcontext
+    case RISCV32_TARGET_NR_swapcontext:
+#endif
 #ifdef ARM_TARGET_NR_swapcontext
 	case ARM_TARGET_NR_swapcontext:
 #endif 
@@ -14475,6 +15555,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_memfd_create
     case TARGET_NR_memfd_create:
+#ifdef RISCV32_TARGET_NR_memfd_create
+    case RISCV32_TARGET_NR_memfd_create:
+#endif
 #ifdef ARM_TARGET_NR_memfd_create
 	case ARM_TARGET_NR_memfd_create:
 #endif 
@@ -14490,6 +15573,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined TARGET_NR_membarrier && defined __NR_membarrier
     case TARGET_NR_membarrier:
+#ifdef RISCV32_TARGET_NR_membarrier
+    case RISCV32_TARGET_NR_membarrier:
+#endif
 
 #ifdef ARM_TARGET_NR_membarrier
 	case ARM_TARGET_NR_membarrier:

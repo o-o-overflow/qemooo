@@ -107,6 +107,7 @@ FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
 
 struct CPURISCVState {
     target_ulong gpr[32];
+    target_ulong pc;
     uint64_t fpr[32]; /* assume both F and D extensions */
 
     /* vector coprocessor state. */
@@ -117,7 +118,6 @@ struct CPURISCVState {
     target_ulong vstart;
     target_ulong vtype;
 
-    target_ulong pc;
     target_ulong load_res;
     target_ulong load_val;
 

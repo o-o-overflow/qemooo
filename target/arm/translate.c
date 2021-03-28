@@ -9282,7 +9282,7 @@ static const TranslatorOps thumb_translator_ops = {
 /* generate intermediate code for basic block 'tb'.  */
 void gen_intermediate_code_arm(CPUState *cpu, TranslationBlock *tb, int max_insns)
 {
-    if (! inited){
+    if (! inited){  //cooonjoooined
         arm_translate_init();
         inited = true;
 
