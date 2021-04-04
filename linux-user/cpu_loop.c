@@ -69,7 +69,7 @@ void cpu_loop(CPUMIPSState *env)
     int trapnr;
     unsigned int n, insn;
     abi_long ret;
-    cs->kvm_fd = 1;
+    cs->kvm_fd = 0;
 
 # ifdef TARGET_ABI_MIPSO32
     unsigned int syscall_num;

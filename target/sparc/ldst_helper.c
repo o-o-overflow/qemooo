@@ -1667,7 +1667,7 @@ void helper_st_asi(CPUSPARCState *env, target_ulong addr, target_ulong val,
             int idx = ((asi & 2) >> 1) | ((asi & 8) >> 2);
             env->dmmu.sun4v_tsb_pointers[idx] = val;
         } else {
-            helper_raise_exception(env, TT_ILL_INSN);
+            helper_raise_exception_sparc(env, TT_ILL_INSN);
         }
         break;
     case 0x33:
@@ -1679,7 +1679,7 @@ void helper_st_asi(CPUSPARCState *env, target_ulong addr, target_ulong val,
              */
             env->dmmu.sun4v_ctx_config[(asi & 8) >> 3] = val;
         } else {
-            helper_raise_exception(env, TT_ILL_INSN);
+            helper_raise_exception_sparc(env, TT_ILL_INSN);
         }
         break;
     case 0x35:
@@ -1696,7 +1696,7 @@ void helper_st_asi(CPUSPARCState *env, target_ulong addr, target_ulong val,
             int idx = ((asi & 2) >> 1) | ((asi & 8) >> 2);
             env->immu.sun4v_tsb_pointers[idx] = val;
         } else {
-            helper_raise_exception(env, TT_ILL_INSN);
+            helper_raise_exception_sparc(env, TT_ILL_INSN);
         }
       break;
     case 0x37:
@@ -1708,7 +1708,7 @@ void helper_st_asi(CPUSPARCState *env, target_ulong addr, target_ulong val,
              */
             env->immu.sun4v_ctx_config[(asi & 8) >> 3] = val;
         } else {
-          helper_raise_exception(env, TT_ILL_INSN);
+          helper_raise_exception_sparc(env, TT_ILL_INSN);
         }
         break;
     case ASI_UPA_CONFIG: /* UPA config */

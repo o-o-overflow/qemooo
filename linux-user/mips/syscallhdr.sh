@@ -47,7 +47,28 @@ grep -E "^[0-9A-Fa-fXx]+[[:space:]]+${my_abis}" "$(dirname "$in")/arm_$(basename
     done
 ) >> "$out"
 
+
 cat "$(dirname "$in")/riscv32_syscall32_nr.header">> "$out"
+offset=1000
+my_abis="(common|32)"
+
+grep -E "^[0-9A-Fa-fXx]+[[:space:]]+${my_abis}" "$(dirname "$in")/sparc_syscall.tbl" | sort -n | (
+    nxt=0
+    while read nr abi name entry compat ; do
+        if [ -z "$offset" ]; then
+            printf "#define TARGET_NR_%s%s\t%s\n" \
+                "${prefix}" "${name}" "${nr}"
+        else
+            printf "#define SPARC_TARGET_NR_%s%s\t(%s + %s)\n" \
+                "${prefix}" "${name}" "${offset}" "${nr}"
+        fi
+        nxt=$((nr+1))
+    done
+
+    printf "\n"
+
+) >> "$out"
+
 
 (printf "\n"
     printf "#endif /* %s */" "${fileguard}"

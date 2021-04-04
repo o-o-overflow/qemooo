@@ -94,7 +94,7 @@ static inline int guest_range_valid(unsigned long start, unsigned long len)
     assert(h2g_valid(x)); \
     h2g_nocheck(x); \
 })
-#else
+#else // end qemu user
 typedef target_ulong abi_ptr;
 #define TARGET_ABI_FMT_ptr TARGET_ABI_FMT_lx
 #endif

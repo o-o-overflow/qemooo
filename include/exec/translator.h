@@ -68,8 +68,8 @@ typedef enum DisasJumpType {
  */
 typedef struct DisasContextBase {
     TranslationBlock *tb;
-    target_ulong pc_first;
-    target_ulong pc_next;
+    uint32_t pc_first;  // cooonjoooined changed these to uint32_t b/c of type confusion between tcg and sparc
+    uint32_t pc_next;
     DisasJumpType is_jmp;
     int num_insns;
     int max_insns;

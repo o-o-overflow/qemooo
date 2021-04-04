@@ -96,10 +96,15 @@ static bool sparc_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
     }
     return false;
 }
-
+static int print_insn_sparc_nop(bfd_vma pc, disassemble_info *info); // cooonjoooined added
+static int print_insn_sparc_nop(bfd_vma pc, disassemble_info *info)
+{
+    return 0xdeadbeef;
+    //return print_insn_arm(pc | 1, info);
+}
 static void cpu_sparc_disas_set_info(CPUState *cpu, disassemble_info *info)
 {
-    info->print_insn = print_insn_sparc;
+    info->print_insn = print_insn_sparc_nop; // cooonjoooined changed to nop
 #ifdef TARGET_SPARC64
     info->mach = bfd_mach_sparc_v9b;
 #endif

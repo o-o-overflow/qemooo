@@ -31,6 +31,8 @@
 #include "hw/qdev-properties.h"
 #include "hw/qdev-clock.h"
 
+target_ulong regbase[32 * 16 + 8];
+
 static void mips_cpu_set_pc(CPUState *cs, vaddr value)
 {
     MIPSCPU *cpu = MIPS_CPU(cs);
@@ -111,6 +113,8 @@ static void mips_cpu_reset(DeviceState *dev)
     memset(env, 0, offsetof(CPUMIPSState, end_reset_fields));
 
     cpu_state_reset(env);
+
+    env->active_tc.regwptr = regbase;// cooonjooined for SPARC-Y and freedom
 
 #ifndef CONFIG_USER_ONLY
     if (kvm_enabled()) {
@@ -196,6 +200,8 @@ static void mips_cpu_initfn(Object *obj)
     cpu_set_cpustate_pointers(cpu);
     cpu->clock = qdev_init_clock_in(DEVICE(obj), "clk-in", NULL, cpu);
     env->cpu_model = mcc->cpu_def;
+
+    env->active_tc.regwptr = regbase;// cooonjooined for SPARC-Y and freedom
 }
 
 static char *mips_cpu_type_name(const char *cpu_model)

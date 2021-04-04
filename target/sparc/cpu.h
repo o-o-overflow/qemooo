@@ -439,9 +439,12 @@ typedef union {
 #endif
 struct CPUSPARCState {
     target_ulong gregs[8]; /* general registers */
+    target_ulong unused_mips_regs[8];
+    uint32_t pc;       /* program counter */
+    uint32_t nada_pc;
+    uint32_t npc;      /* next program counter */
+    uint32_t nada_npc;
     target_ulong *regwptr; /* pointer to current register window */
-    target_ulong pc;       /* program counter */
-    target_ulong npc;      /* next program counter */
     target_ulong y;        /* multiply/divide register */
 
     /* emulator internal flags handling */
@@ -558,7 +561,7 @@ struct SPARCCPU {
     /*< private >*/
     CPUState parent_obj;
     /*< public >*/
-
+    Clock *clock;
     CPUNegativeOffsetState neg;
     CPUSPARCState env;
 };

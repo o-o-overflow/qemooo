@@ -460,7 +460,11 @@ typedef struct mips_def_t mips_def_t;
 typedef struct TCState TCState;
 struct TCState {
     target_ulong gpr[32];
-    target_ulong PC;
+    uint32_t PC;
+    uint32_t space_PC;
+    uint32_t NPC;
+    uint32_t space_NPC;
+    target_ulong *regwptr;
     target_ulong HI[MIPS_DSP_ACC];
     target_ulong LO[MIPS_DSP_ACC];
     target_ulong ACX[MIPS_DSP_ACC];
@@ -518,6 +522,8 @@ struct TCState {
 #define MXU_CR_MXU_EN   0
 
 };
+
+
 
 struct MIPSITUState;
 typedef struct CPUMIPSState CPUMIPSState;

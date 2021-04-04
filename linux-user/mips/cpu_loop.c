@@ -67,9 +67,9 @@ void cpu_loop(CPUMIPSState *env)
     CPUState *cs = env_cpu(env);
     target_siginfo_t info;
     int trapnr;
-    unsigned int n, insn;
+    unsigned int n;//, insn;
     abi_long ret;
-    cs->kvm_fd = 1;
+
 # ifdef TARGET_ABI_MIPSO32
     unsigned int syscall_num;
 # endif
@@ -531,6 +531,9 @@ void cpu_loop(CPUMIPSState *env)
                     EXCP_DUMP(env, "qemu: unhandled CPU exception 0x%x - aborting\n", trapnr);
                     abort();
             }
+            /*
+             * RISC-V
+             */
         } else if (cs->kvm_fd == 1) {
             switch (trapnr) {
                 case EXCP_INTERRUPT:
@@ -601,7 +604,129 @@ void cpu_loop(CPUMIPSState *env)
 //                };
 //                queue_signal(env, info.si_signo, QEMU_SI_FAULT, &info);
 //            }
+
+/*
+ *  SPARC 32 bit
+ */
+        } else if (cs->kvm_fd == 0) {
+            switch (trapnr) {
+                case 0x110:
+                case 0x16d:
+                    ret = do_syscall(env, env->active_tc.gpr[2]+1000,
+                                     env->active_tc.regwptr[0], env->active_tc.regwptr[1],
+                                     env->active_tc.regwptr[2], env->active_tc.regwptr[3],
+                                     env->active_tc.regwptr[4], env->active_tc.regwptr[5],
+                                     0, 0);
+
+                    if (ret == -TARGET_ERESTARTSYS || ret == -TARGET_QEMU_ESIGRETURN) {
+                        break;
+                    }
+                    if ((abi_ulong) ret >= (abi_ulong)(-515)) {
+//#if defined(TARGET_SPARC64) && !defined(TARGET_ABI32)
+//                        env->xcc |= PSR_CARRY;
+//#else
+//                        env->psr |= PSR_CARRY;
+//#endif
+                        ret = -ret;
+                    } else {
+//#if defined(TARGET_SPARC64) && !defined(TARGET_ABI32)
+//                        env->xcc &= ~PSR_CARRY;
+//#else
+//                        env->psr &= ~PSR_CARRY;
+//#endif
+                    }
+                    env->active_tc.regwptr[0] = ret;
+                    /* next instruction */
+                    env->active_tc.PC = env->active_tc.NPC;
+                    env->active_tc.NPC = env->active_tc.NPC + 4;
+                    break;
+                case 0x83: /* flush windows */
+#ifdef TARGET_ABI32
+                    case 0x103:
+#endif
+//                    flush_windows(env);
+//                    /* next instruction */
+//                    env->active_tc.PC = env->active_tc.NPC;
+//                    env->active_tc.NPC = env->active_tc.NPC + 4;
+                    break;
+//#ifndef TARGET_SPARC64
+//                case TT_WIN_OVF: /* window overflow */
+//                    save_window(env);
+//                    break;
+//                case TT_WIN_UNF: /* window underflow */
+//                    restore_window(env);
+//                    break;
+//                case TT_TFAULT:
+//                case TT_DFAULT:
+//                {
+//                    info.si_signo = TARGET_SIGSEGV;
+//                    info.si_errno = 0;
+//                    /* XXX: check env->error_code */
+//                    info.si_code = TARGET_SEGV_MAPERR;
+//                    info._sifields._sigfault._addr = env->mmuregs[4];
+//                    queue_signal(env, info.si_signo, QEMU_SI_FAULT, &info);
+//                }
+//                    break;
+//#else
+//                    case TT_SPILL: /* window overflow */
+//            save_window(env);
+//            break;
+//        case TT_FILL: /* window underflow */
+//            restore_window(env);
+//            break;
+//        case TT_TFAULT:
+//        case TT_DFAULT:
+//            {
+//                info.si_signo = TARGET_SIGSEGV;
+//                info.si_errno = 0;
+//                /* XXX: check env->error_code */
+//                info.si_code = TARGET_SEGV_MAPERR;
+//                if (trapnr == TT_DFAULT)
+//                    info._sifields._sigfault._addr = env->dmmu.mmuregs[4];
+//                else
+//                    info._sifields._sigfault._addr = cpu_tsptr(env)->tpc;
+//                queue_signal(env, info.si_signo, QEMU_SI_FAULT, &info);
+//            }
+//            break;
+//#ifndef TARGET_ABI32
+//        case 0x16e:
+//            flush_windows(env);
+//            sparc64_get_context(env);
+//            break;
+//        case 0x16f:
+//            flush_windows(env);
+//            sparc64_set_context(env);
+//            break;
+//#endif
+//#endif
+                case EXCP_INTERRUPT:
+                    /* just indicate that signals should be handled asap */
+                    break;
+//                case TT_ILL_INSN:
+//                {
+//                    info.si_signo = TARGET_SIGILL;
+//                    info.si_errno = 0;
+//                    info.si_code = TARGET_ILL_ILLOPC;
+//                    info._sifields._sigfault._addr = env->pc;
+//                    queue_signal(env, info.si_signo, QEMU_SI_FAULT, &info);
+//                }
+//                    break;
+//                case EXCP_DEBUG:
+//                    info.si_signo = TARGET_SIGTRAP;
+//                    info.si_errno = 0;
+//                    info.si_code = TARGET_TRAP_BRKPT;
+//                    queue_signal(env, info.si_signo, QEMU_SI_FAULT, &info);
+//                    break;
+                case EXCP_ATOMIC:
+                    cpu_exec_step_atomic(cs);
+                    break;
+                default:
+                    fprintf(stderr, "Unhandled trap: 0x%x\n", trapnr);
+                    cpu_dump_state(cs, stderr, 0);
+                    exit(EXIT_FAILURE);
+            }
         }
+
         process_pending_signals(env);
     }
 }

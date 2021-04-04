@@ -66,6 +66,9 @@ static TCGv cpu_wim;
 /* Floating point registers */
 static TCGv_i64 cpu_fpr[TARGET_DPREGS];
 
+static bool inited = false; // cooonjooined artificial init check
+static int calc_sctlr_b = 0;
+
 #include "exec/gen-icount.h"
 
 typedef struct DisasContext {
@@ -101,6 +104,8 @@ typedef struct {
     bool g1, g2;
     TCGv c1, c2;
 } DisasCompare;
+
+
 
 // This function uses non-native bit order
 #define GET_FIELD(X, FROM, TO)                                  \
@@ -1077,7 +1082,7 @@ static void gen_exception(DisasContext *dc, int which)
 
     save_state(dc);
     t = tcg_const_i32(which);
-    gen_helper_raise_exception(cpu_env, t);
+    gen_helper_raise_exception_sparc(cpu_env, t);
     tcg_temp_free_i32(t);
     dc->base.is_jmp = DISAS_NORETURN;
 }
@@ -3347,7 +3352,7 @@ static void disas_sparc_insn(DisasContext * dc, unsigned int insn)
                     tcg_gen_addi_i32(trap, trap, TT_TRAP);
                 }
 
-                gen_helper_raise_exception(cpu_env, trap);
+                gen_helper_raise_exception_sparc(cpu_env, trap);
                 tcg_temp_free_i32(trap);
 
                 if (cond == 8) {
@@ -4223,7 +4228,7 @@ static void disas_sparc_insn(DisasContext * dc, unsigned int insn)
                                                cpu_src2);
                             dc->cc_op = CC_OP_DIV;
                         } else {
-                            gen_helper_udiv(cpu_dst, cpu_env, cpu_src1,
+                            gen_helper_udiv_sparc(cpu_dst, cpu_env, cpu_src1,
                                             cpu_src2);
                         }
                         break;
@@ -4234,7 +4239,7 @@ static void disas_sparc_insn(DisasContext * dc, unsigned int insn)
                                                cpu_src2);
                             dc->cc_op = CC_OP_DIV;
                         } else {
-                            gen_helper_sdiv(cpu_dst, cpu_env, cpu_src1,
+                            gen_helper_sdiv_sparc(cpu_dst, cpu_env, cpu_src1,
                                             cpu_src2);
                         }
                         break;
@@ -5824,7 +5829,8 @@ static void sparc_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
     int bound;
 
     dc->pc = dc->base.pc_first;
-    dc->npc = (target_ulong)dc->base.tb->cs_base;
+    //dc->npc = (target_ulong)dc->base.tb->cs_base;
+    dc->npc = (target_ulong)dc->pc +4 ; // cooonjoooined this may break jumps, doing this b/c cs_base is not used the same in the underlying cpu
     dc->cc_op = CC_OP_DYNAMIC;
     dc->mem_idx = dc->base.tb->flags & TB_FLAG_MMU_MASK;
     dc->def = &env->def;
@@ -5886,7 +5892,12 @@ static void sparc_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
     CPUSPARCState *env = cs->env_ptr;
     unsigned int insn;
 
+
     insn = translator_ldl(env, dc->pc);
+    if (calc_sctlr_b %2 == 0){
+        insn = bswap32(insn);
+    }
+    calc_sctlr_b++;
     dc->base.pc_next += 4;
     disas_sparc_insn(dc, insn);
 
@@ -5948,12 +5959,7 @@ static const TranslatorOps sparc_tr_ops = {
     .disas_log          = sparc_tr_disas_log,
 };
 
-void gen_intermediate_code(CPUState *cs, TranslationBlock *tb, int max_insns)
-{
-    DisasContext dc = {};
 
-    translator_loop(&sparc_tr_ops, &dc.base, cs, tb, max_insns);
-}
 
 void sparc_tcg_init(void)
 {
@@ -6040,8 +6046,16 @@ void sparc_tcg_init(void)
                                             fregnames[i]);
     }
 }
-
-void restore_state_to_opc(CPUSPARCState *env, TranslationBlock *tb,
+void gen_intermediate_code_sparc(CPUState *cs, TranslationBlock *tb, int max_insns)
+{
+    DisasContext dc = {};
+    if (! inited){  //cooonjoooined
+        sparc_tcg_init();
+        inited = true;
+    }
+    translator_loop(&sparc_tr_ops, &dc.base, cs, tb, max_insns);
+}
+void restore_state_to_opc_sparc(CPUSPARCState *env, TranslationBlock *tb,
                           target_ulong *data)
 {
     target_ulong pc = data[0];

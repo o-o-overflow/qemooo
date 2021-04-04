@@ -31,7 +31,7 @@ void cpu_raise_exception_ra(CPUSPARCState *env, int tt, uintptr_t ra)
     cpu_loop_exit_restore(cs, ra);
 }
 
-void helper_raise_exception(CPUSPARCState *env, int tt)
+void helper_raise_exception_sparc(CPUSPARCState *env, int tt)
 {
     CPUState *cs = env_cpu(env);
 
@@ -108,7 +108,7 @@ static target_ulong do_udiv(CPUSPARCState *env, target_ulong a,
     return x0;
 }
 
-target_ulong helper_udiv(CPUSPARCState *env, target_ulong a, target_ulong b)
+target_ulong helper_udiv_sparc(CPUSPARCState *env, target_ulong a, target_ulong b)
 {
     return do_udiv(env, a, b, 0, GETPC());
 }
@@ -149,7 +149,7 @@ static target_ulong do_sdiv(CPUSPARCState *env, target_ulong a,
     return x0;
 }
 
-target_ulong helper_sdiv(CPUSPARCState *env, target_ulong a, target_ulong b)
+target_ulong helper_sdiv_sparc(CPUSPARCState *env, target_ulong a, target_ulong b)
 {
     return do_sdiv(env, a, b, 0, GETPC());
 }

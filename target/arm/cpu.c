@@ -726,6 +726,7 @@ print_insn_arm_a64_nop(bfd_vma pc, disassemble_info *info)
     return 0xdeadbeef;
     //return print_insn_arm(pc | 1, info);
 }
+static int
 print_insn_arm_nop(bfd_vma pc, disassemble_info *info)
 {
 return 0xdeadbeef;

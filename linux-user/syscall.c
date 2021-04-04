@@ -8181,6 +8181,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
     switch(num) {
     case TARGET_NR_exit:
+#ifdef SPARC_TARGET_NR_exit
+    case SPARC_TARGET_NR_exit:
+#endif
 #ifdef RISCV32_TARGET_NR_exit
     case RISCV32_TARGET_NR_exit:
 #endif
@@ -8228,6 +8231,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         _exit(arg1);
         return 0; /* avoid warning */
     case TARGET_NR_read:
+#ifdef SPARC_TARGET_NR_read
+    case SPARC_TARGET_NR_read:
+#endif
 #ifdef RISCV32_TARGET_NR_read
     case RISCV32_TARGET_NR_read:
 #endif
@@ -8249,6 +8255,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_write:
+#ifdef SPARC_TARGET_NR_write
+    case SPARC_TARGET_NR_write:
+#endif
 #ifdef RISCV32_TARGET_NR_write
     case RISCV32_TARGET_NR_write:
 #endif
@@ -8277,6 +8286,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_open
     case TARGET_NR_open:
+#ifdef SPARC_TARGET_NR_open
+    case SPARC_TARGET_NR_open:
+#endif
 #ifdef RISCV32_TARGET_NR_open
     case RISCV32_TARGET_NR_open:
 #endif
@@ -8294,6 +8306,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_openat:
+#ifdef SPARC_TARGET_NR_openat
+    case SPARC_TARGET_NR_openat:
+#endif
 #ifdef RISCV32_TARGET_NR_openat
     case RISCV32_TARGET_NR_openat:
 #endif
@@ -8311,6 +8326,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #if defined(TARGET_NR_name_to_handle_at) && defined(CONFIG_OPEN_BY_HANDLE)
     case TARGET_NR_name_to_handle_at:
+#ifdef SPARC_TARGET_NR_name_to_handle_at
+    case SPARC_TARGET_NR_name_to_handle_at:
+#endif
 #ifdef RISCV32_TARGET_NR_name_to_handle_at
     case RISCV32_TARGET_NR_name_to_handle_at:
 #endif
@@ -8323,6 +8341,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_open_by_handle_at) && defined(CONFIG_OPEN_BY_HANDLE)
     case TARGET_NR_open_by_handle_at:
+#ifdef SPARC_TARGET_NR_open_by_handle_at
+    case SPARC_TARGET_NR_open_by_handle_at:
+#endif
 #ifdef RISCV32_TARGET_NR_open_by_handle_at
     case RISCV32_TARGET_NR_open_by_handle_at:
 #endif
@@ -8335,6 +8356,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_close:
+#ifdef SPARC_TARGET_NR_close
+    case SPARC_TARGET_NR_close:
+#endif
 #ifdef RISCV32_TARGET_NR_close
     case RISCV32_TARGET_NR_close:
 #endif
@@ -8346,6 +8370,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(close(arg1));
 
     case TARGET_NR_brk:
+#ifdef SPARC_TARGET_NR_brk
+    case SPARC_TARGET_NR_brk:
+#endif
 #ifdef RISCV32_TARGET_NR_brk
     case RISCV32_TARGET_NR_brk:
 #endif
@@ -8356,6 +8383,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_brk(arg1);
 #ifdef TARGET_NR_fork
     case TARGET_NR_fork:
+#ifdef SPARC_TARGET_NR_fork
+    case SPARC_TARGET_NR_fork:
+#endif
 #ifdef RISCV32_TARGET_NR_fork
     case RISCV32_TARGET_NR_fork:
 #endif
@@ -8367,6 +8397,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_waitpid
     case TARGET_NR_waitpid:
+#ifdef SPARC_TARGET_NR_waitpid
+    case SPARC_TARGET_NR_waitpid:
+#endif
 #ifdef RISCV32_TARGET_NR_waitpid
     case RISCV32_TARGET_NR_waitpid:
 #endif
@@ -8382,6 +8415,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_waitid
     case TARGET_NR_waitid:
+#ifdef SPARC_TARGET_NR_waitid
+    case SPARC_TARGET_NR_waitid:
+#endif
 #ifdef RISCV32_TARGET_NR_waitid
     case RISCV32_TARGET_NR_waitid:
 #endif
@@ -8404,6 +8440,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_creat /* not on alpha */
     case TARGET_NR_creat:
+#ifdef SPARC_TARGET_NR_creat
+    case SPARC_TARGET_NR_creat:
+#endif
 #ifdef RISCV32_TARGET_NR_creat
     case RISCV32_TARGET_NR_creat:
 #endif
@@ -8420,6 +8459,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_link
     case TARGET_NR_link:
+#ifdef SPARC_TARGET_NR_link
+    case SPARC_TARGET_NR_link:
+#endif
 #ifdef RISCV32_TARGET_NR_link
     case RISCV32_TARGET_NR_link:
 #endif
@@ -8442,6 +8484,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_linkat)
     case TARGET_NR_linkat:
+#ifdef SPARC_TARGET_NR_linkat
+    case SPARC_TARGET_NR_linkat:
+#endif
 #ifdef RISCV32_TARGET_NR_linkat
     case RISCV32_TARGET_NR_linkat:
 #endif
@@ -8466,6 +8511,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_unlink
     case TARGET_NR_unlink:
+#ifdef SPARC_TARGET_NR_unlink
+    case SPARC_TARGET_NR_unlink:
+#endif
 #ifdef RISCV32_TARGET_NR_unlink
     case RISCV32_TARGET_NR_unlink:
 #endif
@@ -8481,6 +8529,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_unlinkat)
     case TARGET_NR_unlinkat:
+#ifdef SPARC_TARGET_NR_unlinkat
+    case SPARC_TARGET_NR_unlinkat:
+#endif
 #ifdef RISCV32_TARGET_NR_unlinkat
     case RISCV32_TARGET_NR_unlinkat:
 #endif
@@ -8495,6 +8546,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_execve:
+#ifdef SPARC_TARGET_NR_execve
+    case SPARC_TARGET_NR_execve:
+#endif
 #ifdef RISCV32_TARGET_NR_execve
     case RISCV32_TARGET_NR_execve:
 #endif
@@ -8599,6 +8653,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_chdir:
+#ifdef SPARC_TARGET_NR_chdir
+    case SPARC_TARGET_NR_chdir:
+#endif
 #ifdef RISCV32_TARGET_NR_chdir
     case RISCV32_TARGET_NR_chdir:
 #endif
@@ -8613,6 +8670,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_time
     case TARGET_NR_time:
+#ifdef SPARC_TARGET_NR_time
+    case SPARC_TARGET_NR_time:
+#endif
 #ifdef RISCV32_TARGET_NR_time
     case RISCV32_TARGET_NR_time:
 #endif
@@ -8629,6 +8689,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mknod
     case TARGET_NR_mknod:
+#ifdef SPARC_TARGET_NR_mknod
+    case SPARC_TARGET_NR_mknod:
+#endif
 #ifdef RISCV32_TARGET_NR_mknod
     case RISCV32_TARGET_NR_mknod:
 #endif
@@ -8644,6 +8707,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_mknodat)
     case TARGET_NR_mknodat:
+#ifdef SPARC_TARGET_NR_mknodat
+    case SPARC_TARGET_NR_mknodat:
+#endif
 #ifdef RISCV32_TARGET_NR_mknodat
     case RISCV32_TARGET_NR_mknodat:
 #endif
@@ -8659,6 +8725,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_chmod
     case TARGET_NR_chmod:
+#ifdef SPARC_TARGET_NR_chmod
+    case SPARC_TARGET_NR_chmod:
+#endif
 #ifdef RISCV32_TARGET_NR_chmod
     case RISCV32_TARGET_NR_chmod:
 #endif
@@ -8674,6 +8743,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_lseek
     case TARGET_NR_lseek:
+#ifdef SPARC_TARGET_NR_lseek
+    case SPARC_TARGET_NR_lseek:
+#endif
 #ifdef RISCV32_TARGET_NR_lseek
     case RISCV32_TARGET_NR_lseek:
 #endif
@@ -8686,6 +8758,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_getxpid) && defined(TARGET_ALPHA)
     /* Alpha specific */
     case TARGET_NR_getxpid:
+#ifdef SPARC_TARGET_NR_getxpid
+    case SPARC_TARGET_NR_getxpid:
+#endif
 #ifdef RISCV32_TARGET_NR_getxpid
     case RISCV32_TARGET_NR_getxpid:
 #endif
@@ -8698,6 +8773,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getpid
     case TARGET_NR_getpid:
+#ifdef SPARC_TARGET_NR_getpid
+    case SPARC_TARGET_NR_getpid:
+#endif
 #ifdef RISCV32_TARGET_NR_getpid
     case RISCV32_TARGET_NR_getpid:
 #endif
@@ -8708,6 +8786,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(getpid());
 #endif
     case TARGET_NR_mount:
+#ifdef SPARC_TARGET_NR_mount
+    case SPARC_TARGET_NR_mount:
+#endif
 #ifdef RISCV32_TARGET_NR_mount
     case RISCV32_TARGET_NR_mount:
 #endif
@@ -8772,6 +8853,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_umount) || defined(TARGET_NR_oldumount)
 #if defined(TARGET_NR_umount)
     case TARGET_NR_umount:
+#ifdef SPARC_TARGET_NR_umount
+    case SPARC_TARGET_NR_umount:
+#endif
 #ifdef RISCV32_TARGET_NR_umount
     case RISCV32_TARGET_NR_umount:
 #endif
@@ -8782,6 +8866,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_oldumount)
     case TARGET_NR_oldumount:
+#ifdef SPARC_TARGET_NR_oldumount
+    case SPARC_TARGET_NR_oldumount:
+#endif
 #ifdef RISCV32_TARGET_NR_oldumount
     case RISCV32_TARGET_NR_oldumount:
 #endif
@@ -8798,6 +8885,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_stime /* not on alpha */
     case TARGET_NR_stime:
+#ifdef SPARC_TARGET_NR_stime
+    case SPARC_TARGET_NR_stime:
+#endif
 #ifdef RISCV32_TARGET_NR_stime
     case RISCV32_TARGET_NR_stime:
 #endif
@@ -8816,6 +8906,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_alarm /* not on alpha */
     case TARGET_NR_alarm:
+#ifdef SPARC_TARGET_NR_alarm
+    case SPARC_TARGET_NR_alarm:
+#endif
 #ifdef RISCV32_TARGET_NR_alarm
     case RISCV32_TARGET_NR_alarm:
 #endif
@@ -8824,6 +8917,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_pause /* not on alpha */
     case TARGET_NR_pause:
+#ifdef SPARC_TARGET_NR_pause
+    case SPARC_TARGET_NR_pause:
+#endif
 #ifdef RISCV32_TARGET_NR_pause
     case RISCV32_TARGET_NR_pause:
 #endif
@@ -8838,6 +8934,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_utime
     case TARGET_NR_utime:
+#ifdef SPARC_TARGET_NR_utime
+    case SPARC_TARGET_NR_utime:
+#endif
 #ifdef RISCV32_TARGET_NR_utime
     case RISCV32_TARGET_NR_utime:
 #endif
@@ -8863,6 +8962,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_utimes
     case TARGET_NR_utimes:
+#ifdef SPARC_TARGET_NR_utimes
+    case SPARC_TARGET_NR_utimes:
+#endif
 #ifdef RISCV32_TARGET_NR_utimes
     case RISCV32_TARGET_NR_utimes:
 #endif
@@ -8890,6 +8992,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_futimesat)
     case TARGET_NR_futimesat:
+#ifdef SPARC_TARGET_NR_futimesat
+    case SPARC_TARGET_NR_futimesat:
+#endif
 #ifdef RISCV32_TARGET_NR_futimesat
     case RISCV32_TARGET_NR_futimesat:
 #endif
@@ -8918,6 +9023,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_access
     case TARGET_NR_access:
+#ifdef SPARC_TARGET_NR_access
+    case SPARC_TARGET_NR_access:
+#endif
 #ifdef RISCV32_TARGET_NR_access
     case RISCV32_TARGET_NR_access:
 #endif
@@ -8934,6 +9042,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_faccessat) && defined(__NR_faccessat)
     case TARGET_NR_faccessat:
+#ifdef SPARC_TARGET_NR_faccessat
+    case SPARC_TARGET_NR_faccessat:
+#endif
 #ifdef RISCV32_TARGET_NR_faccessat
     case RISCV32_TARGET_NR_faccessat:
 #endif
@@ -8950,6 +9061,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_nice /* not on alpha */
     case TARGET_NR_nice:
+#ifdef SPARC_TARGET_NR_nice
+    case SPARC_TARGET_NR_nice:
+#endif
 #ifdef RISCV32_TARGET_NR_nice
     case RISCV32_TARGET_NR_nice:
 #endif
@@ -8960,6 +9074,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(nice(arg1));
 #endif
     case TARGET_NR_sync:
+#ifdef SPARC_TARGET_NR_sync
+    case SPARC_TARGET_NR_sync:
+#endif
 #ifdef RISCV32_TARGET_NR_sync
     case RISCV32_TARGET_NR_sync:
 #endif
@@ -8971,6 +9088,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return 0;
 #if defined(TARGET_NR_syncfs) && defined(CONFIG_SYNCFS)
     case TARGET_NR_syncfs:
+#ifdef SPARC_TARGET_NR_syncfs
+    case SPARC_TARGET_NR_syncfs:
+#endif
 #ifdef RISCV32_TARGET_NR_syncfs
     case RISCV32_TARGET_NR_syncfs:
 #endif
@@ -8981,6 +9101,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(syncfs(arg1));
 #endif
     case TARGET_NR_kill:
+#ifdef SPARC_TARGET_NR_kill
+    case SPARC_TARGET_NR_kill:
+#endif
 #ifdef RISCV32_TARGET_NR_kill
     case RISCV32_TARGET_NR_kill:
 #endif
@@ -8991,6 +9114,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(safe_kill(arg1, target_to_host_signal(arg2)));
 #ifdef TARGET_NR_rename
     case TARGET_NR_rename:
+#ifdef SPARC_TARGET_NR_rename
+    case SPARC_TARGET_NR_rename:
+#endif
 #ifdef RISCV32_TARGET_NR_rename
     case RISCV32_TARGET_NR_rename:
 #endif
@@ -9013,6 +9139,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_renameat)
     case TARGET_NR_renameat:
+#ifdef SPARC_TARGET_NR_renameat
+    case SPARC_TARGET_NR_renameat:
+#endif
 #ifdef RISCV32_TARGET_NR_renameat
     case RISCV32_TARGET_NR_renameat:
 #endif
@@ -9035,6 +9164,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_renameat2)
     case TARGET_NR_renameat2:
+#ifdef SPARC_TARGET_NR_renameat2
+    case SPARC_TARGET_NR_renameat2:
+#endif
 #ifdef RISCV32_TARGET_NR_renameat2
     case RISCV32_TARGET_NR_renameat2:
 #endif
@@ -9058,6 +9190,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mkdir
     case TARGET_NR_mkdir:
+#ifdef SPARC_TARGET_NR_mkdir
+    case SPARC_TARGET_NR_mkdir:
+#endif
 #ifdef RISCV32_TARGET_NR_mkdir
     case RISCV32_TARGET_NR_mkdir:
 #endif
@@ -9073,6 +9208,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_mkdirat)
     case TARGET_NR_mkdirat:
+#ifdef SPARC_TARGET_NR_mkdirat
+    case SPARC_TARGET_NR_mkdirat:
+#endif
 #ifdef RISCV32_TARGET_NR_mkdirat
     case RISCV32_TARGET_NR_mkdirat:
 #endif
@@ -9088,6 +9226,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_rmdir
     case TARGET_NR_rmdir:
+#ifdef SPARC_TARGET_NR_rmdir
+    case SPARC_TARGET_NR_rmdir:
+#endif
 #ifdef RISCV32_TARGET_NR_rmdir
     case RISCV32_TARGET_NR_rmdir:
 #endif
@@ -9102,6 +9243,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_dup:
+#ifdef SPARC_TARGET_NR_dup
+    case SPARC_TARGET_NR_dup:
+#endif
 #ifdef RISCV32_TARGET_NR_dup
     case RISCV32_TARGET_NR_dup:
 #endif
@@ -9116,6 +9260,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_pipe
     case TARGET_NR_pipe:
+#ifdef SPARC_TARGET_NR_pipe
+    case SPARC_TARGET_NR_pipe:
+#endif
 #ifdef RISCV32_TARGET_NR_pipe
     case RISCV32_TARGET_NR_pipe:
 #endif
@@ -9127,6 +9274,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_pipe2
     case TARGET_NR_pipe2:
+#ifdef SPARC_TARGET_NR_pipe2
+    case SPARC_TARGET_NR_pipe2:
+#endif
 #ifdef RISCV32_TARGET_NR_pipe2
     case RISCV32_TARGET_NR_pipe2:
 #endif
@@ -9138,6 +9288,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
                        target_to_host_bitmask(arg2, fcntl_flags_tbl), 1);
 #endif
     case TARGET_NR_times:
+#ifdef SPARC_TARGET_NR_times
+    case SPARC_TARGET_NR_times:
+#endif
 #ifdef RISCV32_TARGET_NR_times
     case RISCV32_TARGET_NR_times:
 #endif
@@ -9163,6 +9316,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_acct:
+#ifdef SPARC_TARGET_NR_acct
+    case SPARC_TARGET_NR_acct:
+#endif
 #ifdef RISCV32_TARGET_NR_acct
     case RISCV32_TARGET_NR_acct:
 #endif
@@ -9182,6 +9338,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_umount2
     case TARGET_NR_umount2:
+#ifdef SPARC_TARGET_NR_umount2
+    case SPARC_TARGET_NR_umount2:
+#endif
 #ifdef RISCV32_TARGET_NR_umount2
     case RISCV32_TARGET_NR_umount2:
 #endif
@@ -9193,6 +9352,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_ioctl:
+#ifdef SPARC_TARGET_NR_ioctl
+    case SPARC_TARGET_NR_ioctl:
+#endif
 #ifdef RISCV32_TARGET_NR_ioctl
     case RISCV32_TARGET_NR_ioctl:
 #endif
@@ -9203,6 +9365,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_ioctl(arg1, arg2, arg3);
 #ifdef TARGET_NR_fcntl
     case TARGET_NR_fcntl:
+#ifdef SPARC_TARGET_NR_fcntl
+    case SPARC_TARGET_NR_fcntl:
+#endif
 #ifdef RISCV32_TARGET_NR_fcntl
     case RISCV32_TARGET_NR_fcntl:
 #endif
@@ -9213,6 +9378,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_fcntl(arg1, arg2, arg3);
 #endif
     case TARGET_NR_setpgid:
+#ifdef SPARC_TARGET_NR_setpgid
+    case SPARC_TARGET_NR_setpgid:
+#endif
 #ifdef RISCV32_TARGET_NR_setpgid
     case RISCV32_TARGET_NR_setpgid:
 #endif
@@ -9222,6 +9390,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(setpgid(arg1, arg2));
     case TARGET_NR_umask:
+#ifdef SPARC_TARGET_NR_umask
+    case SPARC_TARGET_NR_umask:
+#endif
 #ifdef RISCV32_TARGET_NR_umask
     case RISCV32_TARGET_NR_umask:
 #endif
@@ -9231,6 +9402,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(umask(arg1));
     case TARGET_NR_chroot:
+#ifdef SPARC_TARGET_NR_chroot
+    case SPARC_TARGET_NR_chroot:
+#endif
 #ifdef RISCV32_TARGET_NR_chroot
     case RISCV32_TARGET_NR_chroot:
 #endif
@@ -9245,6 +9419,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_dup2
     case TARGET_NR_dup2:
+#ifdef SPARC_TARGET_NR_dup2
+    case SPARC_TARGET_NR_dup2:
+#endif
 #ifdef RISCV32_TARGET_NR_dup2
     case RISCV32_TARGET_NR_dup2:
 #endif
@@ -9260,6 +9437,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(CONFIG_DUP3) && defined(TARGET_NR_dup3)
     case TARGET_NR_dup3:
+#ifdef SPARC_TARGET_NR_dup3
+    case SPARC_TARGET_NR_dup3:
+#endif
 #ifdef RISCV32_TARGET_NR_dup3
     case RISCV32_TARGET_NR_dup3:
 #endif
@@ -9283,6 +9463,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getppid /* not on alpha */
     case TARGET_NR_getppid:
+#ifdef SPARC_TARGET_NR_getppid
+    case SPARC_TARGET_NR_getppid:
+#endif
 #ifdef RISCV32_TARGET_NR_getppid
     case RISCV32_TARGET_NR_getppid:
 #endif
@@ -9294,6 +9477,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getpgrp
     case TARGET_NR_getpgrp:
+#ifdef SPARC_TARGET_NR_getpgrp
+    case SPARC_TARGET_NR_getpgrp:
+#endif
 #ifdef RISCV32_TARGET_NR_getpgrp
     case RISCV32_TARGET_NR_getpgrp:
 #endif
@@ -9304,6 +9490,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(getpgrp());
 #endif
     case TARGET_NR_setsid:
+#ifdef SPARC_TARGET_NR_setsid
+    case SPARC_TARGET_NR_setsid:
+#endif
 #ifdef RISCV32_TARGET_NR_setsid
     case RISCV32_TARGET_NR_setsid:
 #endif
@@ -9314,6 +9503,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(setsid());
 #ifdef TARGET_NR_sigaction
     case TARGET_NR_sigaction:
+#ifdef SPARC_TARGET_NR_sigaction
+    case SPARC_TARGET_NR_sigaction:
+#endif
 #ifdef RISCV32_TARGET_NR_sigaction
     case RISCV32_TARGET_NR_sigaction:
 #endif
@@ -9405,6 +9597,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_rt_sigaction:
+#ifdef SPARC_TARGET_NR_rt_sigaction
+    case SPARC_TARGET_NR_rt_sigaction:
+#endif
 #ifdef RISCV32_TARGET_NR_rt_sigaction
     case RISCV32_TARGET_NR_rt_sigaction:
 #endif
@@ -9488,6 +9683,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_sgetmask /* not on alpha */
     case TARGET_NR_sgetmask:
+#ifdef SPARC_TARGET_NR_sgetmask
+    case SPARC_TARGET_NR_sgetmask:
+#endif
 #ifdef RISCV32_TARGET_NR_sgetmask
     case RISCV32_TARGET_NR_sgetmask:
 #endif
@@ -9505,6 +9703,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_ssetmask /* not on alpha */
     case TARGET_NR_ssetmask:
+#ifdef SPARC_TARGET_NR_ssetmask
+    case SPARC_TARGET_NR_ssetmask:
+#endif
 #ifdef RISCV32_TARGET_NR_ssetmask
     case RISCV32_TARGET_NR_ssetmask:
 #endif
@@ -9523,6 +9724,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_sigprocmask
     case TARGET_NR_sigprocmask:
+#ifdef SPARC_TARGET_NR_sigprocmask
+    case SPARC_TARGET_NR_sigprocmask:
+#endif
 #ifdef RISCV32_TARGET_NR_sigprocmask
     case RISCV32_TARGET_NR_sigprocmask:
 #endif
@@ -9597,6 +9801,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_rt_sigprocmask:
+#ifdef SPARC_TARGET_NR_rt_sigprocmask
+    case SPARC_TARGET_NR_rt_sigprocmask:
+#endif
 #ifdef RISCV32_TARGET_NR_rt_sigprocmask
     case RISCV32_TARGET_NR_rt_sigprocmask:
 #endif
@@ -9646,6 +9853,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_sigpending
     case TARGET_NR_sigpending:
+#ifdef SPARC_TARGET_NR_sigpending
+    case SPARC_TARGET_NR_sigpending:
+#endif
 #ifdef RISCV32_TARGET_NR_sigpending
     case RISCV32_TARGET_NR_sigpending:
 #endif
@@ -9666,6 +9876,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_rt_sigpending:
+#ifdef SPARC_TARGET_NR_rt_sigpending
+    case SPARC_TARGET_NR_rt_sigpending:
+#endif
 #ifdef RISCV32_TARGET_NR_rt_sigpending
     case RISCV32_TARGET_NR_rt_sigpending:
 #endif
@@ -9696,6 +9909,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_sigsuspend
     case TARGET_NR_sigsuspend:
+#ifdef SPARC_TARGET_NR_sigsuspend
+    case SPARC_TARGET_NR_sigsuspend:
+#endif
 #ifdef RISCV32_TARGET_NR_sigsuspend
     case RISCV32_TARGET_NR_sigsuspend:
 #endif
@@ -9723,6 +9939,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_rt_sigsuspend:
+#ifdef SPARC_TARGET_NR_rt_sigsuspend
+    case SPARC_TARGET_NR_rt_sigsuspend:
+#endif
 #ifdef RISCV32_TARGET_NR_rt_sigsuspend
     case RISCV32_TARGET_NR_rt_sigsuspend:
 #endif
@@ -9749,6 +9968,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_rt_sigtimedwait
     case TARGET_NR_rt_sigtimedwait:
+#ifdef SPARC_TARGET_NR_rt_sigtimedwait
+    case SPARC_TARGET_NR_rt_sigtimedwait:
+#endif
 #ifdef RISCV32_TARGET_NR_rt_sigtimedwait
     case RISCV32_TARGET_NR_rt_sigtimedwait:
 #endif
@@ -9796,6 +10018,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_rt_sigtimedwait_time64
     case TARGET_NR_rt_sigtimedwait_time64:
+#ifdef SPARC_TARGET_NR_rt_sigtimedwait_time64
+    case SPARC_TARGET_NR_rt_sigtimedwait_time64:
+#endif
 #ifdef RISCV32_TARGET_NR_rt_sigtimedwait_time64
     case RISCV32_TARGET_NR_rt_sigtimedwait_time64:
 #endif
@@ -9844,6 +10069,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_rt_sigqueueinfo:
+#ifdef SPARC_TARGET_NR_rt_sigqueueinfo
+    case SPARC_TARGET_NR_rt_sigqueueinfo:
+#endif
 #ifdef RISCV32_TARGET_NR_rt_sigqueueinfo
     case RISCV32_TARGET_NR_rt_sigqueueinfo:
 #endif
@@ -9864,6 +10092,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_rt_tgsigqueueinfo:
+#ifdef SPARC_TARGET_NR_rt_tgsigqueueinfo
+    case SPARC_TARGET_NR_rt_tgsigqueueinfo:
+#endif
 #ifdef RISCV32_TARGET_NR_rt_tgsigqueueinfo
     case RISCV32_TARGET_NR_rt_tgsigqueueinfo:
 #endif
@@ -9885,6 +10116,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_sigreturn
     case TARGET_NR_sigreturn:
+#ifdef SPARC_TARGET_NR_sigreturn
+    case SPARC_TARGET_NR_sigreturn:
+#endif
 #ifdef RISCV32_TARGET_NR_sigreturn
     case RISCV32_TARGET_NR_sigreturn:
 #endif
@@ -9898,6 +10132,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_sigreturn(cpu_env);
 #endif
     case TARGET_NR_rt_sigreturn:
+#ifdef SPARC_TARGET_NR_rt_sigreturn
+    case SPARC_TARGET_NR_rt_sigreturn:
+#endif
 #ifdef RISCV32_TARGET_NR_rt_sigreturn
     case RISCV32_TARGET_NR_rt_sigreturn:
 #endif
@@ -9910,6 +10147,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return do_rt_sigreturn(cpu_env);
     case TARGET_NR_sethostname:
+#ifdef SPARC_TARGET_NR_sethostname
+    case SPARC_TARGET_NR_sethostname:
+#endif
 #ifdef RISCV32_TARGET_NR_sethostname
     case RISCV32_TARGET_NR_sethostname:
 #endif
@@ -9924,6 +10164,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_setrlimit
     case TARGET_NR_setrlimit:
+#ifdef SPARC_TARGET_NR_setrlimit
+    case SPARC_TARGET_NR_setrlimit:
+#endif
 #ifdef RISCV32_TARGET_NR_setrlimit
     case RISCV32_TARGET_NR_setrlimit:
 #endif
@@ -9959,6 +10202,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getrlimit
     case TARGET_NR_getrlimit:
+#ifdef SPARC_TARGET_NR_getrlimit
+    case SPARC_TARGET_NR_getrlimit:
+#endif
 #ifdef RISCV32_TARGET_NR_getrlimit
     case RISCV32_TARGET_NR_getrlimit:
 #endif
@@ -9980,6 +10226,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_getrusage:
+#ifdef SPARC_TARGET_NR_getrusage
+    case SPARC_TARGET_NR_getrusage:
+#endif
 #ifdef RISCV32_TARGET_NR_getrusage
     case RISCV32_TARGET_NR_getrusage:
 #endif
@@ -9997,6 +10246,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #if defined(TARGET_NR_gettimeofday)
     case TARGET_NR_gettimeofday:
+#ifdef SPARC_TARGET_NR_gettimeofday
+    case SPARC_TARGET_NR_gettimeofday:
+#endif
 #ifdef RISCV32_TARGET_NR_gettimeofday
     case RISCV32_TARGET_NR_gettimeofday:
 #endif
@@ -10022,6 +10274,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_settimeofday)
     case TARGET_NR_settimeofday:
+#ifdef SPARC_TARGET_NR_settimeofday
+    case SPARC_TARGET_NR_settimeofday:
+#endif
 #ifdef RISCV32_TARGET_NR_settimeofday
     case RISCV32_TARGET_NR_settimeofday:
 #endif
@@ -10052,6 +10307,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_select)
     case TARGET_NR_select:
+#ifdef SPARC_TARGET_NR_select
+    case SPARC_TARGET_NR_select:
+#endif
 #ifdef RISCV32_TARGET_NR_select
     case RISCV32_TARGET_NR_select:
 #endif
@@ -10073,6 +10331,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_pselect6
     case TARGET_NR_pselect6:
+#ifdef SPARC_TARGET_NR_pselect6
+    case SPARC_TARGET_NR_pselect6:
+#endif
 #ifdef RISCV32_TARGET_NR_pselect6
     case RISCV32_TARGET_NR_pselect6:
 #endif
@@ -10084,6 +10345,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_pselect6_time64
     case TARGET_NR_pselect6_time64:
+#ifdef SPARC_TARGET_NR_pselect6_time64
+    case SPARC_TARGET_NR_pselect6_time64:
+#endif
 #ifdef RISCV32_TARGET_NR_pselect6_time64
     case RISCV32_TARGET_NR_pselect6_time64:
 #endif
@@ -10095,6 +10359,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_symlink
     case TARGET_NR_symlink:
+#ifdef SPARC_TARGET_NR_symlink
+    case SPARC_TARGET_NR_symlink:
+#endif
 #ifdef RISCV32_TARGET_NR_symlink
     case RISCV32_TARGET_NR_symlink:
 #endif
@@ -10117,6 +10384,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_symlinkat)
     case TARGET_NR_symlinkat:
+#ifdef SPARC_TARGET_NR_symlinkat
+    case SPARC_TARGET_NR_symlinkat:
+#endif
 #ifdef RISCV32_TARGET_NR_symlinkat
     case RISCV32_TARGET_NR_symlinkat:
 #endif
@@ -10139,6 +10409,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_readlink
     case TARGET_NR_readlink:
+#ifdef SPARC_TARGET_NR_readlink
+    case SPARC_TARGET_NR_readlink:
+#endif
 #ifdef RISCV32_TARGET_NR_readlink
     case RISCV32_TARGET_NR_readlink:
 #endif
@@ -10178,6 +10451,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_readlinkat)
     case TARGET_NR_readlinkat:
+#ifdef SPARC_TARGET_NR_readlinkat
+    case SPARC_TARGET_NR_readlinkat:
+#endif
 #ifdef RISCV32_TARGET_NR_readlinkat
     case RISCV32_TARGET_NR_readlinkat:
 #endif
@@ -10206,6 +10482,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_swapon
     case TARGET_NR_swapon:
+#ifdef SPARC_TARGET_NR_swapon
+    case SPARC_TARGET_NR_swapon:
+#endif
 #ifdef RISCV32_TARGET_NR_swapon
     case RISCV32_TARGET_NR_swapon:
 #endif
@@ -10220,6 +10499,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_reboot:
+#ifdef SPARC_TARGET_NR_reboot
+    case SPARC_TARGET_NR_reboot:
+#endif
 #ifdef RISCV32_TARGET_NR_reboot
     case RISCV32_TARGET_NR_reboot:
 #endif
@@ -10241,6 +10523,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_mmap
     case TARGET_NR_mmap:
+#ifdef SPARC_TARGET_NR_mmap
+    case SPARC_TARGET_NR_mmap:
+#endif
 #ifdef RISCV32_TARGET_NR_mmap
     case RISCV32_TARGET_NR_mmap:
 #endif
@@ -10275,6 +10560,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mmap2
     case TARGET_NR_mmap2:
+#ifdef SPARC_TARGET_NR_mmap2
+    case SPARC_TARGET_NR_mmap2:
+#endif
 #ifdef RISCV32_TARGET_NR_mmap2
     case RISCV32_TARGET_NR_mmap2:
 #endif
@@ -10291,6 +10579,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(ret);
 #endif
     case TARGET_NR_munmap:
+#ifdef SPARC_TARGET_NR_munmap
+    case SPARC_TARGET_NR_munmap:
+#endif
 #ifdef RISCV32_TARGET_NR_munmap
     case RISCV32_TARGET_NR_munmap:
 #endif
@@ -10301,6 +10592,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(target_munmap(arg1, arg2));
     case TARGET_NR_mprotect:
+#ifdef SPARC_TARGET_NR_mprotect
+    case SPARC_TARGET_NR_mprotect:
+#endif
 #ifdef RISCV32_TARGET_NR_mprotect
     case RISCV32_TARGET_NR_mprotect:
 #endif
@@ -10322,6 +10616,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(target_mprotect(arg1, arg2, arg3));
 #ifdef TARGET_NR_mremap
     case TARGET_NR_mremap:
+#ifdef SPARC_TARGET_NR_mremap
+    case SPARC_TARGET_NR_mremap:
+#endif
 #ifdef RISCV32_TARGET_NR_mremap
     case RISCV32_TARGET_NR_mremap:
 #endif
@@ -10334,6 +10631,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         /* ??? msync/mlock/munlock are broken for softmmu.  */
 #ifdef TARGET_NR_msync
     case TARGET_NR_msync:
+#ifdef SPARC_TARGET_NR_msync
+    case SPARC_TARGET_NR_msync:
+#endif
 #ifdef RISCV32_TARGET_NR_msync
     case RISCV32_TARGET_NR_msync:
 #endif
@@ -10345,6 +10645,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mlock
     case TARGET_NR_mlock:
+#ifdef SPARC_TARGET_NR_mlock
+    case SPARC_TARGET_NR_mlock:
+#endif
 #ifdef RISCV32_TARGET_NR_mlock
     case RISCV32_TARGET_NR_mlock:
 #endif
@@ -10356,6 +10659,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_munlock
     case TARGET_NR_munlock:
+#ifdef SPARC_TARGET_NR_munlock
+    case SPARC_TARGET_NR_munlock:
+#endif
 #ifdef RISCV32_TARGET_NR_munlock
     case RISCV32_TARGET_NR_munlock:
 #endif
@@ -10367,6 +10673,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mlockall
     case TARGET_NR_mlockall:
+#ifdef SPARC_TARGET_NR_mlockall
+    case SPARC_TARGET_NR_mlockall:
+#endif
 #ifdef RISCV32_TARGET_NR_mlockall
     case RISCV32_TARGET_NR_mlockall:
 #endif
@@ -10378,6 +10687,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_munlockall
     case TARGET_NR_munlockall:
+#ifdef SPARC_TARGET_NR_munlockall
+    case SPARC_TARGET_NR_munlockall:
+#endif
 #ifdef RISCV32_TARGET_NR_munlockall
     case RISCV32_TARGET_NR_munlockall:
 #endif
@@ -10389,6 +10701,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_truncate
     case TARGET_NR_truncate:
+#ifdef SPARC_TARGET_NR_truncate
+    case SPARC_TARGET_NR_truncate:
+#endif
 #ifdef RISCV32_TARGET_NR_truncate
     case RISCV32_TARGET_NR_truncate:
 #endif
@@ -10404,6 +10719,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_ftruncate
     case TARGET_NR_ftruncate:
+#ifdef SPARC_TARGET_NR_ftruncate
+    case SPARC_TARGET_NR_ftruncate:
+#endif
 #ifdef RISCV32_TARGET_NR_ftruncate
     case RISCV32_TARGET_NR_ftruncate:
 #endif
@@ -10414,6 +10732,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(ftruncate(arg1, arg2));
 #endif
     case TARGET_NR_fchmod:
+#ifdef SPARC_TARGET_NR_fchmod
+    case SPARC_TARGET_NR_fchmod:
+#endif
 #ifdef RISCV32_TARGET_NR_fchmod
     case RISCV32_TARGET_NR_fchmod:
 #endif
@@ -10424,6 +10745,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(fchmod(arg1, arg2));
 #if defined(TARGET_NR_fchmodat)
     case TARGET_NR_fchmodat:
+#ifdef SPARC_TARGET_NR_fchmodat
+    case SPARC_TARGET_NR_fchmodat:
+#endif
 #ifdef RISCV32_TARGET_NR_fchmodat
     case RISCV32_TARGET_NR_fchmodat:
 #endif
@@ -10438,6 +10762,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_getpriority:
+#ifdef SPARC_TARGET_NR_getpriority
+    case SPARC_TARGET_NR_getpriority:
+#endif
 #ifdef RISCV32_TARGET_NR_getpriority
     case RISCV32_TARGET_NR_getpriority:
 #endif
@@ -10461,6 +10788,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
         return ret;
     case TARGET_NR_setpriority:
+#ifdef SPARC_TARGET_NR_setpriority
+    case SPARC_TARGET_NR_setpriority:
+#endif
 #ifdef RISCV32_TARGET_NR_setpriority
     case RISCV32_TARGET_NR_setpriority:
 #endif
@@ -10471,6 +10801,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(setpriority(arg1, arg2, arg3));
 #ifdef TARGET_NR_statfs
     case TARGET_NR_statfs:
+#ifdef SPARC_TARGET_NR_statfs
+    case SPARC_TARGET_NR_statfs:
+#endif
 #ifdef RISCV32_TARGET_NR_statfs
     case RISCV32_TARGET_NR_statfs:
 #endif
@@ -10512,6 +10845,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_fstatfs
     case TARGET_NR_fstatfs:
+#ifdef SPARC_TARGET_NR_fstatfs
+    case SPARC_TARGET_NR_fstatfs:
+#endif
 #ifdef RISCV32_TARGET_NR_fstatfs
     case RISCV32_TARGET_NR_fstatfs:
 #endif
@@ -10524,6 +10860,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_statfs64
     case TARGET_NR_statfs64:
+#ifdef SPARC_TARGET_NR_statfs64
+    case SPARC_TARGET_NR_statfs64:
+#endif
 #ifdef RISCV32_TARGET_NR_statfs64
     case RISCV32_TARGET_NR_statfs64:
 #endif
@@ -10563,6 +10902,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_fstatfs64:
+#ifdef SPARC_TARGET_NR_fstatfs64
+    case SPARC_TARGET_NR_fstatfs64:
+#endif
 #ifdef RISCV32_TARGET_NR_fstatfs64
     case RISCV32_TARGET_NR_fstatfs64:
 #endif
@@ -10575,6 +10917,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_socketcall
     case TARGET_NR_socketcall:
+#ifdef SPARC_TARGET_NR_socketcall
+    case SPARC_TARGET_NR_socketcall:
+#endif
 #ifdef RISCV32_TARGET_NR_socketcall
     case RISCV32_TARGET_NR_socketcall:
 #endif
@@ -10588,6 +10933,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_accept
     case TARGET_NR_accept:
+#ifdef SPARC_TARGET_NR_accept
+    case SPARC_TARGET_NR_accept:
+#endif
 #ifdef RISCV32_TARGET_NR_accept
     case RISCV32_TARGET_NR_accept:
 #endif
@@ -10601,6 +10949,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_accept4
     case TARGET_NR_accept4:
+#ifdef SPARC_TARGET_NR_accept4
+    case SPARC_TARGET_NR_accept4:
+#endif
 #ifdef RISCV32_TARGET_NR_accept4
     case RISCV32_TARGET_NR_accept4:
 #endif
@@ -10612,6 +10963,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_bind
     case TARGET_NR_bind:
+#ifdef SPARC_TARGET_NR_bind
+    case SPARC_TARGET_NR_bind:
+#endif
 #ifdef RISCV32_TARGET_NR_bind
     case RISCV32_TARGET_NR_bind:
 #endif
@@ -10623,6 +10977,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_connect
     case TARGET_NR_connect:
+#ifdef SPARC_TARGET_NR_connect
+    case SPARC_TARGET_NR_connect:
+#endif
 #ifdef RISCV32_TARGET_NR_connect
     case RISCV32_TARGET_NR_connect:
 #endif
@@ -10634,6 +10991,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getpeername
     case TARGET_NR_getpeername:
+#ifdef SPARC_TARGET_NR_getpeername
+    case SPARC_TARGET_NR_getpeername:
+#endif
 #ifdef RISCV32_TARGET_NR_getpeername
     case RISCV32_TARGET_NR_getpeername:
 #endif
@@ -10645,6 +11005,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getsockname
     case TARGET_NR_getsockname:
+#ifdef SPARC_TARGET_NR_getsockname
+    case SPARC_TARGET_NR_getsockname:
+#endif
 #ifdef RISCV32_TARGET_NR_getsockname
     case RISCV32_TARGET_NR_getsockname:
 #endif
@@ -10656,6 +11019,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getsockopt
     case TARGET_NR_getsockopt:
+#ifdef SPARC_TARGET_NR_getsockopt
+    case SPARC_TARGET_NR_getsockopt:
+#endif
 #ifdef RISCV32_TARGET_NR_getsockopt
     case RISCV32_TARGET_NR_getsockopt:
 #endif
@@ -10667,6 +11033,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_listen
     case TARGET_NR_listen:
+#ifdef SPARC_TARGET_NR_listen
+    case SPARC_TARGET_NR_listen:
+#endif
 #ifdef RISCV32_TARGET_NR_listen
     case RISCV32_TARGET_NR_listen:
 #endif
@@ -10678,6 +11047,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_recv
     case TARGET_NR_recv:
+#ifdef SPARC_TARGET_NR_recv
+    case SPARC_TARGET_NR_recv:
+#endif
 #ifdef RISCV32_TARGET_NR_recv
     case RISCV32_TARGET_NR_recv:
 #endif
@@ -10689,6 +11061,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_recvfrom
     case TARGET_NR_recvfrom:
+#ifdef SPARC_TARGET_NR_recvfrom
+    case SPARC_TARGET_NR_recvfrom:
+#endif
 #ifdef RISCV32_TARGET_NR_recvfrom
     case RISCV32_TARGET_NR_recvfrom:
 #endif
@@ -10700,6 +11075,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_recvmsg
     case TARGET_NR_recvmsg:
+#ifdef SPARC_TARGET_NR_recvmsg
+    case SPARC_TARGET_NR_recvmsg:
+#endif
 #ifdef RISCV32_TARGET_NR_recvmsg
     case RISCV32_TARGET_NR_recvmsg:
 #endif
@@ -10711,6 +11089,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_send
     case TARGET_NR_send:
+#ifdef SPARC_TARGET_NR_send
+    case SPARC_TARGET_NR_send:
+#endif
 #ifdef RISCV32_TARGET_NR_send
     case RISCV32_TARGET_NR_send:
 #endif
@@ -10722,6 +11103,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_sendmsg
     case TARGET_NR_sendmsg:
+#ifdef SPARC_TARGET_NR_sendmsg
+    case SPARC_TARGET_NR_sendmsg:
+#endif
 #ifdef RISCV32_TARGET_NR_sendmsg
     case RISCV32_TARGET_NR_sendmsg:
 #endif
@@ -10733,6 +11117,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_sendmmsg
     case TARGET_NR_sendmmsg:
+#ifdef SPARC_TARGET_NR_sendmmsg
+    case SPARC_TARGET_NR_sendmmsg:
+#endif
 #ifdef RISCV32_TARGET_NR_sendmmsg
     case RISCV32_TARGET_NR_sendmmsg:
 #endif
@@ -10744,6 +11131,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_recvmmsg
     case TARGET_NR_recvmmsg:
+#ifdef SPARC_TARGET_NR_recvmmsg
+    case SPARC_TARGET_NR_recvmmsg:
+#endif
 #ifdef RISCV32_TARGET_NR_recvmmsg
     case RISCV32_TARGET_NR_recvmmsg:
 #endif
@@ -10755,6 +11145,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_sendto
     case TARGET_NR_sendto:
+#ifdef SPARC_TARGET_NR_sendto
+    case SPARC_TARGET_NR_sendto:
+#endif
 #ifdef RISCV32_TARGET_NR_sendto
     case RISCV32_TARGET_NR_sendto:
 #endif
@@ -10766,6 +11159,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_shutdown
     case TARGET_NR_shutdown:
+#ifdef SPARC_TARGET_NR_shutdown
+    case SPARC_TARGET_NR_shutdown:
+#endif
 #ifdef RISCV32_TARGET_NR_shutdown
     case RISCV32_TARGET_NR_shutdown:
 #endif
@@ -10777,6 +11173,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_getrandom) && defined(__NR_getrandom)
     case TARGET_NR_getrandom:
+#ifdef SPARC_TARGET_NR_getrandom
+    case SPARC_TARGET_NR_getrandom:
+#endif
 #ifdef RISCV32_TARGET_NR_getrandom
     case RISCV32_TARGET_NR_getrandom:
 #endif
@@ -10794,6 +11193,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_socket
     case TARGET_NR_socket:
+#ifdef SPARC_TARGET_NR_socket
+    case SPARC_TARGET_NR_socket:
+#endif
 #ifdef RISCV32_TARGET_NR_socket
     case RISCV32_TARGET_NR_socket:
 #endif
@@ -10805,6 +11207,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_socketpair
     case TARGET_NR_socketpair:
+#ifdef SPARC_TARGET_NR_socketpair
+    case SPARC_TARGET_NR_socketpair:
+#endif
 #ifdef RISCV32_TARGET_NR_socketpair
     case RISCV32_TARGET_NR_socketpair:
 #endif
@@ -10816,6 +11221,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setsockopt
     case TARGET_NR_setsockopt:
+#ifdef SPARC_TARGET_NR_setsockopt
+    case SPARC_TARGET_NR_setsockopt:
+#endif
 #ifdef RISCV32_TARGET_NR_setsockopt
     case RISCV32_TARGET_NR_setsockopt:
 #endif
@@ -10827,6 +11235,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_syslog)
     case TARGET_NR_syslog:
+#ifdef SPARC_TARGET_NR_syslog
+    case SPARC_TARGET_NR_syslog:
+#endif
 #ifdef RISCV32_TARGET_NR_syslog
     case RISCV32_TARGET_NR_syslog:
 #endif
@@ -10872,6 +11283,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         break;
 #endif
     case TARGET_NR_setitimer:
+#ifdef SPARC_TARGET_NR_setitimer
+    case SPARC_TARGET_NR_setitimer:
+#endif
 #ifdef RISCV32_TARGET_NR_setitimer
     case RISCV32_TARGET_NR_setitimer:
 #endif
@@ -10902,6 +11316,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_getitimer:
+#ifdef SPARC_TARGET_NR_getitimer
+    case SPARC_TARGET_NR_getitimer:
+#endif
 #ifdef RISCV32_TARGET_NR_getitimer
     case RISCV32_TARGET_NR_getitimer:
 #endif
@@ -10924,6 +11341,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_stat
     case TARGET_NR_stat:
+#ifdef SPARC_TARGET_NR_stat
+    case SPARC_TARGET_NR_stat:
+#endif
 #ifdef RISCV32_TARGET_NR_stat
     case RISCV32_TARGET_NR_stat:
 #endif
@@ -10940,6 +11360,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_lstat
     case TARGET_NR_lstat:
+#ifdef SPARC_TARGET_NR_lstat
+    case SPARC_TARGET_NR_lstat:
+#endif
 #ifdef RISCV32_TARGET_NR_lstat
     case RISCV32_TARGET_NR_lstat:
 #endif
@@ -10956,6 +11379,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_fstat
     case TARGET_NR_fstat:
+#ifdef SPARC_TARGET_NR_fstat
+    case SPARC_TARGET_NR_fstat:
+#endif
 #ifdef RISCV32_TARGET_NR_fstat
     case RISCV32_TARGET_NR_fstat:
 #endif
@@ -11002,6 +11428,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_vhangup:
+#ifdef SPARC_TARGET_NR_vhangup
+    case SPARC_TARGET_NR_vhangup:
+#endif
 #ifdef RISCV32_TARGET_NR_vhangup
     case RISCV32_TARGET_NR_vhangup:
 #endif
@@ -11012,6 +11441,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(vhangup());
 #ifdef TARGET_NR_syscall
     case TARGET_NR_syscall:
+#ifdef SPARC_TARGET_NR_syscall
+    case SPARC_TARGET_NR_syscall:
+#endif
 #ifdef RISCV32_TARGET_NR_syscall
     case RISCV32_TARGET_NR_syscall:
 #endif
@@ -11024,6 +11456,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_wait4)
     case TARGET_NR_wait4:
+#ifdef SPARC_TARGET_NR_wait4
+    case SPARC_TARGET_NR_wait4:
+#endif
 #ifdef RISCV32_TARGET_NR_wait4
     case RISCV32_TARGET_NR_wait4:
 #endif
@@ -11060,6 +11495,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_swapoff
     case TARGET_NR_swapoff:
+#ifdef SPARC_TARGET_NR_swapoff
+    case SPARC_TARGET_NR_swapoff:
+#endif
 #ifdef RISCV32_TARGET_NR_swapoff
     case RISCV32_TARGET_NR_swapoff:
 #endif
@@ -11074,6 +11512,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_sysinfo:
+#ifdef SPARC_TARGET_NR_sysinfo
+    case SPARC_TARGET_NR_sysinfo:
+#endif
 #ifdef RISCV32_TARGET_NR_sysinfo
     case RISCV32_TARGET_NR_sysinfo:
 #endif
@@ -11109,6 +11550,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_NR_ipc
     case TARGET_NR_ipc:
+#ifdef SPARC_TARGET_NR_ipc
+    case SPARC_TARGET_NR_ipc:
+#endif
 #ifdef RISCV32_TARGET_NR_ipc
     case RISCV32_TARGET_NR_ipc:
 #endif
@@ -11120,6 +11564,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_semget
     case TARGET_NR_semget:
+#ifdef SPARC_TARGET_NR_semget
+    case SPARC_TARGET_NR_semget:
+#endif
 #ifdef RISCV32_TARGET_NR_semget
     case RISCV32_TARGET_NR_semget:
 #endif
@@ -11131,6 +11578,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_semop
     case TARGET_NR_semop:
+#ifdef SPARC_TARGET_NR_semop
+    case SPARC_TARGET_NR_semop:
+#endif
 #ifdef RISCV32_TARGET_NR_semop
     case RISCV32_TARGET_NR_semop:
 #endif
@@ -11142,6 +11592,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_semtimedop
     case TARGET_NR_semtimedop:
+#ifdef SPARC_TARGET_NR_semtimedop
+    case SPARC_TARGET_NR_semtimedop:
+#endif
 #ifdef RISCV32_TARGET_NR_semtimedop
     case RISCV32_TARGET_NR_semtimedop:
 #endif
@@ -11153,6 +11606,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_semtimedop_time64
     case TARGET_NR_semtimedop_time64:
+#ifdef SPARC_TARGET_NR_semtimedop_time64
+    case SPARC_TARGET_NR_semtimedop_time64:
+#endif
 #ifdef RISCV32_TARGET_NR_semtimedop_time64
     case RISCV32_TARGET_NR_semtimedop_time64:
 #endif
@@ -11164,6 +11620,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_semctl
     case TARGET_NR_semctl:
+#ifdef SPARC_TARGET_NR_semctl
+    case SPARC_TARGET_NR_semctl:
+#endif
 #ifdef RISCV32_TARGET_NR_semctl
     case RISCV32_TARGET_NR_semctl:
 #endif
@@ -11175,6 +11634,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_msgctl
     case TARGET_NR_msgctl:
+#ifdef SPARC_TARGET_NR_msgctl
+    case SPARC_TARGET_NR_msgctl:
+#endif
 #ifdef RISCV32_TARGET_NR_msgctl
     case RISCV32_TARGET_NR_msgctl:
 #endif
@@ -11186,6 +11648,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_msgget
     case TARGET_NR_msgget:
+#ifdef SPARC_TARGET_NR_msgget
+    case SPARC_TARGET_NR_msgget:
+#endif
 #ifdef RISCV32_TARGET_NR_msgget
     case RISCV32_TARGET_NR_msgget:
 #endif
@@ -11197,6 +11662,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_msgrcv
     case TARGET_NR_msgrcv:
+#ifdef SPARC_TARGET_NR_msgrcv
+    case SPARC_TARGET_NR_msgrcv:
+#endif
 #ifdef RISCV32_TARGET_NR_msgrcv
     case RISCV32_TARGET_NR_msgrcv:
 #endif
@@ -11208,6 +11676,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_msgsnd
     case TARGET_NR_msgsnd:
+#ifdef SPARC_TARGET_NR_msgsnd
+    case SPARC_TARGET_NR_msgsnd:
+#endif
 #ifdef RISCV32_TARGET_NR_msgsnd
     case RISCV32_TARGET_NR_msgsnd:
 #endif
@@ -11219,6 +11690,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_shmget
     case TARGET_NR_shmget:
+#ifdef SPARC_TARGET_NR_shmget
+    case SPARC_TARGET_NR_shmget:
+#endif
 #ifdef RISCV32_TARGET_NR_shmget
     case RISCV32_TARGET_NR_shmget:
 #endif
@@ -11230,6 +11704,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_shmctl
     case TARGET_NR_shmctl:
+#ifdef SPARC_TARGET_NR_shmctl
+    case SPARC_TARGET_NR_shmctl:
+#endif
 #ifdef RISCV32_TARGET_NR_shmctl
     case RISCV32_TARGET_NR_shmctl:
 #endif
@@ -11241,6 +11718,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_shmat
     case TARGET_NR_shmat:
+#ifdef SPARC_TARGET_NR_shmat
+    case SPARC_TARGET_NR_shmat:
+#endif
 #ifdef RISCV32_TARGET_NR_shmat
     case RISCV32_TARGET_NR_shmat:
 #endif
@@ -11252,6 +11732,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_shmdt
     case TARGET_NR_shmdt:
+#ifdef SPARC_TARGET_NR_shmdt
+    case SPARC_TARGET_NR_shmdt:
+#endif
 #ifdef RISCV32_TARGET_NR_shmdt
     case RISCV32_TARGET_NR_shmdt:
 #endif
@@ -11262,6 +11745,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_shmdt(arg1);
 #endif
     case TARGET_NR_fsync:
+#ifdef SPARC_TARGET_NR_fsync
+    case SPARC_TARGET_NR_fsync:
+#endif
 #ifdef RISCV32_TARGET_NR_fsync
     case RISCV32_TARGET_NR_fsync:
 #endif
@@ -11271,6 +11757,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(fsync(arg1));
     case TARGET_NR_clone:
+#ifdef SPARC_TARGET_NR_clone
+    case SPARC_TARGET_NR_clone:
+#endif
 #ifdef RISCV32_TARGET_NR_clone
     case RISCV32_TARGET_NR_clone:
 #endif
@@ -11297,6 +11786,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef __NR_exit_group
         /* new thread calls */
     case TARGET_NR_exit_group:
+#ifdef SPARC_TARGET_NR_exit_group
+    case SPARC_TARGET_NR_exit_group:
+#endif
 #ifdef RISCV32_TARGET_NR_exit_group
     case RISCV32_TARGET_NR_exit_group:
 #endif
@@ -11308,6 +11800,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(exit_group(arg1));
 #endif
     case TARGET_NR_setdomainname:
+#ifdef SPARC_TARGET_NR_setdomainname
+    case SPARC_TARGET_NR_setdomainname:
+#endif
 #ifdef RISCV32_TARGET_NR_setdomainname
     case RISCV32_TARGET_NR_setdomainname:
 #endif
@@ -11321,6 +11816,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         unlock_user(p, arg1, 0);
         return ret;
     case TARGET_NR_uname:
+#ifdef SPARC_TARGET_NR_uname
+    case SPARC_TARGET_NR_uname:
+#endif
 #ifdef RISCV32_TARGET_NR_uname
     case RISCV32_TARGET_NR_uname:
 #endif
@@ -11351,6 +11849,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #ifdef TARGET_I386
     case TARGET_NR_modify_ldt:
+#ifdef SPARC_TARGET_NR_modify_ldt
+    case SPARC_TARGET_NR_modify_ldt:
+#endif
 #ifdef RISCV32_TARGET_NR_modify_ldt
     case RISCV32_TARGET_NR_modify_ldt:
 #endif
@@ -11361,6 +11862,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_modify_ldt(cpu_env, arg1, arg2, arg3);
 #if !defined(TARGET_X86_64)
     case TARGET_NR_vm86:
+#ifdef SPARC_TARGET_NR_vm86
+    case SPARC_TARGET_NR_vm86:
+#endif
 #ifdef RISCV32_TARGET_NR_vm86
     case RISCV32_TARGET_NR_vm86:
 #endif
@@ -11373,6 +11877,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_adjtimex)
     case TARGET_NR_adjtimex:
+#ifdef SPARC_TARGET_NR_adjtimex
+    case SPARC_TARGET_NR_adjtimex:
+#endif
 #ifdef RISCV32_TARGET_NR_adjtimex
     case RISCV32_TARGET_NR_adjtimex:
 #endif
@@ -11397,6 +11904,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_clock_adjtime) && defined(CONFIG_CLOCK_ADJTIME)
     case TARGET_NR_clock_adjtime:
+#ifdef SPARC_TARGET_NR_clock_adjtime
+    case SPARC_TARGET_NR_clock_adjtime:
+#endif
 #ifdef RISCV32_TARGET_NR_clock_adjtime
     case RISCV32_TARGET_NR_clock_adjtime:
 #endif
@@ -11421,6 +11931,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_clock_adjtime64) && defined(CONFIG_CLOCK_ADJTIME)
     case TARGET_NR_clock_adjtime64:
+#ifdef SPARC_TARGET_NR_clock_adjtime64
+    case SPARC_TARGET_NR_clock_adjtime64:
+#endif
 #ifdef RISCV32_TARGET_NR_clock_adjtime64
     case RISCV32_TARGET_NR_clock_adjtime64:
 #endif
@@ -11442,6 +11955,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_getpgid:
+#ifdef SPARC_TARGET_NR_getpgid
+    case SPARC_TARGET_NR_getpgid:
+#endif
 #ifdef RISCV32_TARGET_NR_getpgid
     case RISCV32_TARGET_NR_getpgid:
 #endif
@@ -11451,6 +11967,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(getpgid(arg1));
     case TARGET_NR_fchdir:
+#ifdef SPARC_TARGET_NR_fchdir
+    case SPARC_TARGET_NR_fchdir:
+#endif
 #ifdef RISCV32_TARGET_NR_fchdir
     case RISCV32_TARGET_NR_fchdir:
 #endif
@@ -11460,6 +11979,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(fchdir(arg1));
     case TARGET_NR_personality:
+#ifdef SPARC_TARGET_NR_personality
+    case SPARC_TARGET_NR_personality:
+#endif
 #ifdef RISCV32_TARGET_NR_personality
     case RISCV32_TARGET_NR_personality:
 #endif
@@ -11470,6 +11992,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(personality(arg1));
 #ifdef TARGET_NR__llseek /* Not on alpha */
     case TARGET_NR__llseek:
+#ifdef SPARC_TARGET_NR__llseek
+    case SPARC_TARGET_NR__llseek:
+#endif
 #ifdef RISCV32_TARGET_NR__llseek
     case RISCV32_TARGET_NR__llseek:
 #endif
@@ -11497,6 +12022,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getdents
     case TARGET_NR_getdents:
+#ifdef SPARC_TARGET_NR_getdents
+    case SPARC_TARGET_NR_getdents:
+#endif
 #ifdef RISCV32_TARGET_NR_getdents
     case RISCV32_TARGET_NR_getdents:
 #endif
@@ -11635,6 +12163,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif /* TARGET_NR_getdents */
 #if defined(TARGET_NR_getdents64) && defined(__NR_getdents64)
     case TARGET_NR_getdents64:
+#ifdef SPARC_TARGET_NR_getdents64
+    case SPARC_TARGET_NR_getdents64:
+#endif
 #ifdef RISCV32_TARGET_NR_getdents64
     case RISCV32_TARGET_NR_getdents64:
 #endif
@@ -11670,6 +12201,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif /* TARGET_NR_getdents64 */
 #if defined(TARGET_NR__newselect)
     case TARGET_NR__newselect:
+#ifdef SPARC_TARGET_NR__newselect
+    case SPARC_TARGET_NR__newselect:
+#endif
 #ifdef RISCV32_TARGET_NR__newselect
     case RISCV32_TARGET_NR__newselect:
 #endif
@@ -11681,6 +12215,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_poll
     case TARGET_NR_poll:
+#ifdef SPARC_TARGET_NR_poll
+    case SPARC_TARGET_NR_poll:
+#endif
 #ifdef RISCV32_TARGET_NR_poll
     case RISCV32_TARGET_NR_poll:
 #endif
@@ -11692,6 +12229,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_ppoll
     case TARGET_NR_ppoll:
+#ifdef SPARC_TARGET_NR_ppoll
+    case SPARC_TARGET_NR_ppoll:
+#endif
 #ifdef RISCV32_TARGET_NR_ppoll
     case RISCV32_TARGET_NR_ppoll:
 #endif
@@ -11703,6 +12243,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_ppoll_time64
     case TARGET_NR_ppoll_time64:
+#ifdef SPARC_TARGET_NR_ppoll_time64
+    case SPARC_TARGET_NR_ppoll_time64:
+#endif
 #ifdef RISCV32_TARGET_NR_ppoll_time64
     case RISCV32_TARGET_NR_ppoll_time64:
 #endif
@@ -11713,6 +12256,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return do_ppoll(arg1, arg2, arg3, arg4, arg5, true, true);
 #endif
     case TARGET_NR_flock:
+#ifdef SPARC_TARGET_NR_flock
+    case SPARC_TARGET_NR_flock:
+#endif
 #ifdef RISCV32_TARGET_NR_flock
     case RISCV32_TARGET_NR_flock:
 #endif
@@ -11724,6 +12270,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
            Linux platform */
         return get_errno(safe_flock(arg1, arg2));
     case TARGET_NR_readv:
+#ifdef SPARC_TARGET_NR_readv
+    case SPARC_TARGET_NR_readv:
+#endif
 #ifdef RISCV32_TARGET_NR_readv
     case RISCV32_TARGET_NR_readv:
 #endif
@@ -11742,6 +12291,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_writev:
+#ifdef SPARC_TARGET_NR_writev
+    case SPARC_TARGET_NR_writev:
+#endif
 #ifdef RISCV32_TARGET_NR_writev
     case RISCV32_TARGET_NR_writev:
 #endif
@@ -11761,6 +12313,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #if defined(TARGET_NR_preadv)
     case TARGET_NR_preadv:
+#ifdef SPARC_TARGET_NR_preadv
+    case SPARC_TARGET_NR_preadv:
+#endif
 #ifdef RISCV32_TARGET_NR_preadv
     case RISCV32_TARGET_NR_preadv:
 #endif
@@ -11784,6 +12339,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_pwritev)
     case TARGET_NR_pwritev:
+#ifdef SPARC_TARGET_NR_pwritev
+    case SPARC_TARGET_NR_pwritev:
+#endif
 #ifdef RISCV32_TARGET_NR_pwritev
     case RISCV32_TARGET_NR_pwritev:
 #endif
@@ -11806,6 +12364,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_getsid:
+#ifdef SPARC_TARGET_NR_getsid
+    case SPARC_TARGET_NR_getsid:
+#endif
 #ifdef RISCV32_TARGET_NR_getsid
     case RISCV32_TARGET_NR_getsid:
 #endif
@@ -11816,6 +12377,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(getsid(arg1));
 #if defined(TARGET_NR_fdatasync) /* Not on alpha (osf_datasync ?) */
     case TARGET_NR_fdatasync:
+#ifdef SPARC_TARGET_NR_fdatasync
+    case SPARC_TARGET_NR_fdatasync:
+#endif
 #ifdef RISCV32_TARGET_NR_fdatasync
     case RISCV32_TARGET_NR_fdatasync:
 #endif
@@ -11826,6 +12390,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(fdatasync(arg1));
 #endif
     case TARGET_NR_sched_getaffinity:
+#ifdef SPARC_TARGET_NR_sched_getaffinity
+    case SPARC_TARGET_NR_sched_getaffinity:
+#endif
 #ifdef RISCV32_TARGET_NR_sched_getaffinity
     case RISCV32_TARGET_NR_sched_getaffinity:
 #endif
@@ -11873,6 +12440,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_sched_setaffinity:
+#ifdef SPARC_TARGET_NR_sched_setaffinity
+    case SPARC_TARGET_NR_sched_setaffinity:
+#endif
 #ifdef RISCV32_TARGET_NR_sched_setaffinity
     case RISCV32_TARGET_NR_sched_setaffinity:
 #endif
@@ -11902,6 +12472,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
             return get_errno(sys_sched_setaffinity(arg1, mask_size, mask));
         }
     case TARGET_NR_getcpu:
+#ifdef SPARC_TARGET_NR_getcpu
+    case SPARC_TARGET_NR_getcpu:
+#endif
 #ifdef RISCV32_TARGET_NR_getcpu
     case RISCV32_TARGET_NR_getcpu:
 #endif
@@ -11926,6 +12499,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_sched_setparam:
+#ifdef SPARC_TARGET_NR_sched_setparam
+    case SPARC_TARGET_NR_sched_setparam:
+#endif
 #ifdef RISCV32_TARGET_NR_sched_setparam
     case RISCV32_TARGET_NR_sched_setparam:
 #endif
@@ -11947,6 +12523,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
             return get_errno(sched_setparam(arg1, &schp));
         }
     case TARGET_NR_sched_getparam:
+#ifdef SPARC_TARGET_NR_sched_getparam
+    case SPARC_TARGET_NR_sched_getparam:
+#endif
 #ifdef RISCV32_TARGET_NR_sched_getparam
     case RISCV32_TARGET_NR_sched_getparam:
 #endif
@@ -11971,6 +12550,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_sched_setscheduler:
+#ifdef SPARC_TARGET_NR_sched_setscheduler
+    case SPARC_TARGET_NR_sched_setscheduler:
+#endif
 #ifdef RISCV32_TARGET_NR_sched_setscheduler
     case RISCV32_TARGET_NR_sched_setscheduler:
 #endif
@@ -11991,6 +12573,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
             return get_errno(sched_setscheduler(arg1, arg2, &schp));
         }
     case TARGET_NR_sched_getscheduler:
+#ifdef SPARC_TARGET_NR_sched_getscheduler
+    case SPARC_TARGET_NR_sched_getscheduler:
+#endif
 #ifdef RISCV32_TARGET_NR_sched_getscheduler
     case RISCV32_TARGET_NR_sched_getscheduler:
 #endif
@@ -12000,6 +12585,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(sched_getscheduler(arg1));
     case TARGET_NR_sched_yield:
+#ifdef SPARC_TARGET_NR_sched_yield
+    case SPARC_TARGET_NR_sched_yield:
+#endif
 #ifdef RISCV32_TARGET_NR_sched_yield
     case RISCV32_TARGET_NR_sched_yield:
 #endif
@@ -12009,6 +12597,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(sched_yield());
     case TARGET_NR_sched_get_priority_max:
+#ifdef SPARC_TARGET_NR_sched_get_priority_max
+    case SPARC_TARGET_NR_sched_get_priority_max:
+#endif
 #ifdef RISCV32_TARGET_NR_sched_get_priority_max
     case RISCV32_TARGET_NR_sched_get_priority_max:
 #endif
@@ -12018,6 +12609,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(sched_get_priority_max(arg1));
     case TARGET_NR_sched_get_priority_min:
+#ifdef SPARC_TARGET_NR_sched_get_priority_min
+    case SPARC_TARGET_NR_sched_get_priority_min:
+#endif
 #ifdef RISCV32_TARGET_NR_sched_get_priority_min
     case RISCV32_TARGET_NR_sched_get_priority_min:
 #endif
@@ -12028,6 +12622,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(sched_get_priority_min(arg1));
 #ifdef TARGET_NR_sched_rr_get_interval
     case TARGET_NR_sched_rr_get_interval:
+#ifdef SPARC_TARGET_NR_sched_rr_get_interval
+    case SPARC_TARGET_NR_sched_rr_get_interval:
+#endif
 #ifdef RISCV32_TARGET_NR_sched_rr_get_interval
     case RISCV32_TARGET_NR_sched_rr_get_interval:
 #endif
@@ -12046,6 +12643,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_sched_rr_get_interval_time64
     case TARGET_NR_sched_rr_get_interval_time64:
+#ifdef SPARC_TARGET_NR_sched_rr_get_interval_time64
+    case SPARC_TARGET_NR_sched_rr_get_interval_time64:
+#endif
 #ifdef RISCV32_TARGET_NR_sched_rr_get_interval_time64
     case RISCV32_TARGET_NR_sched_rr_get_interval_time64:
 #endif
@@ -12064,6 +12664,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_nanosleep)
     case TARGET_NR_nanosleep:
+#ifdef SPARC_TARGET_NR_nanosleep
+    case SPARC_TARGET_NR_nanosleep:
+#endif
 #ifdef RISCV32_TARGET_NR_nanosleep
     case RISCV32_TARGET_NR_nanosleep:
 #endif
@@ -12082,6 +12685,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_prctl:
+#ifdef SPARC_TARGET_NR_prctl
+    case SPARC_TARGET_NR_prctl:
+#endif
 #ifdef RISCV32_TARGET_NR_prctl
     case RISCV32_TARGET_NR_prctl:
 #endif
@@ -12309,6 +12915,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         break;
 #ifdef TARGET_NR_arch_prctl
     case TARGET_NR_arch_prctl:
+#ifdef SPARC_TARGET_NR_arch_prctl
+    case SPARC_TARGET_NR_arch_prctl:
+#endif
 #ifdef RISCV32_TARGET_NR_arch_prctl
     case RISCV32_TARGET_NR_arch_prctl:
 #endif
@@ -12320,6 +12929,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_pread64
     case TARGET_NR_pread64:
+#ifdef SPARC_TARGET_NR_pread64
+    case SPARC_TARGET_NR_pread64:
+#endif
 #ifdef RISCV32_TARGET_NR_pread64
     case RISCV32_TARGET_NR_pread64:
 #endif
@@ -12344,6 +12956,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         unlock_user(p, arg2, ret);
         return ret;
     case TARGET_NR_pwrite64:
+#ifdef SPARC_TARGET_NR_pwrite64
+    case SPARC_TARGET_NR_pwrite64:
+#endif
 #ifdef RISCV32_TARGET_NR_pwrite64
     case RISCV32_TARGET_NR_pwrite64:
 #endif
@@ -12369,6 +12984,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_getcwd:
+#ifdef SPARC_TARGET_NR_getcwd
+    case SPARC_TARGET_NR_getcwd:
+#endif
 #ifdef RISCV32_TARGET_NR_getcwd
     case RISCV32_TARGET_NR_getcwd:
 #endif
@@ -12382,6 +13000,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         unlock_user(p, arg1, ret);
         return ret;
     case TARGET_NR_capget:
+#ifdef SPARC_TARGET_NR_capget
+    case SPARC_TARGET_NR_capget:
+#endif
 #ifdef RISCV32_TARGET_NR_capget
     case RISCV32_TARGET_NR_capget:
 #endif
@@ -12390,6 +13011,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif 
 
     case TARGET_NR_capset:
+#ifdef SPARC_TARGET_NR_capset
+    case SPARC_TARGET_NR_capset:
+#endif
 #ifdef RISCV32_TARGET_NR_capset
     case RISCV32_TARGET_NR_capset:
 #endif
@@ -12466,6 +13090,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
     }
     case TARGET_NR_sigaltstack:
+#ifdef SPARC_TARGET_NR_sigaltstack
+    case SPARC_TARGET_NR_sigaltstack:
+#endif
 #ifdef RISCV32_TARGET_NR_sigaltstack
     case RISCV32_TARGET_NR_sigaltstack:
 #endif
@@ -12479,6 +13106,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef CONFIG_SENDFILE
 #ifdef TARGET_NR_sendfile
     case TARGET_NR_sendfile:
+#ifdef SPARC_TARGET_NR_sendfile
+    case SPARC_TARGET_NR_sendfile:
+#endif
 #ifdef RISCV32_TARGET_NR_sendfile
     case RISCV32_TARGET_NR_sendfile:
 #endif
@@ -12508,6 +13138,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_sendfile64
     case TARGET_NR_sendfile64:
+#ifdef SPARC_TARGET_NR_sendfile64
+    case SPARC_TARGET_NR_sendfile64:
+#endif
 #ifdef RISCV32_TARGET_NR_sendfile64
     case RISCV32_TARGET_NR_sendfile64:
 #endif
@@ -12538,6 +13171,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_vfork
     case TARGET_NR_vfork:
+#ifdef SPARC_TARGET_NR_vfork
+    case SPARC_TARGET_NR_vfork:
+#endif
 #ifdef RISCV32_TARGET_NR_vfork
     case RISCV32_TARGET_NR_vfork:
 #endif
@@ -12551,6 +13187,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_ugetrlimit
     case TARGET_NR_ugetrlimit:
+#ifdef SPARC_TARGET_NR_ugetrlimit
+    case SPARC_TARGET_NR_ugetrlimit:
+#endif
 #ifdef RISCV32_TARGET_NR_ugetrlimit
     case RISCV32_TARGET_NR_ugetrlimit:
 #endif
@@ -12575,6 +13214,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_truncate64
     case TARGET_NR_truncate64:
+#ifdef SPARC_TARGET_NR_truncate64
+    case SPARC_TARGET_NR_truncate64:
+#endif
 #ifdef RISCV32_TARGET_NR_truncate64
     case RISCV32_TARGET_NR_truncate64:
 #endif
@@ -12590,6 +13232,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_ftruncate64
     case TARGET_NR_ftruncate64:
+#ifdef SPARC_TARGET_NR_ftruncate64
+    case SPARC_TARGET_NR_ftruncate64:
+#endif
 #ifdef RISCV32_TARGET_NR_ftruncate64
     case RISCV32_TARGET_NR_ftruncate64:
 #endif
@@ -12601,6 +13246,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_stat64
     case TARGET_NR_stat64:
+#ifdef SPARC_TARGET_NR_stat64
+    case SPARC_TARGET_NR_stat64:
+#endif
 #ifdef RISCV32_TARGET_NR_stat64
     case RISCV32_TARGET_NR_stat64:
 #endif
@@ -12619,6 +13267,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_lstat64
     case TARGET_NR_lstat64:
+#ifdef SPARC_TARGET_NR_lstat64
+    case SPARC_TARGET_NR_lstat64:
+#endif
 #ifdef RISCV32_TARGET_NR_lstat64
     case RISCV32_TARGET_NR_lstat64:
 #endif
@@ -12637,6 +13288,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_fstat64
     case TARGET_NR_fstat64:
+#ifdef SPARC_TARGET_NR_fstat64
+    case SPARC_TARGET_NR_fstat64:
+#endif
 #ifdef RISCV32_TARGET_NR_fstat64
     case RISCV32_TARGET_NR_fstat64:
 #endif
@@ -12652,6 +13306,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if (defined(TARGET_NR_fstatat64) || defined(TARGET_NR_newfstatat))
 #ifdef TARGET_NR_fstatat64
     case TARGET_NR_fstatat64:
+#ifdef SPARC_TARGET_NR_fstatat64
+    case SPARC_TARGET_NR_fstatat64:
+#endif
 #ifdef RISCV32_TARGET_NR_fstatat64
     case RISCV32_TARGET_NR_fstatat64:
 #endif
@@ -12662,6 +13319,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_newfstatat
     case TARGET_NR_newfstatat:
+#ifdef SPARC_TARGET_NR_newfstatat
+    case SPARC_TARGET_NR_newfstatat:
+#endif
 #ifdef RISCV32_TARGET_NR_newfstatat
     case RISCV32_TARGET_NR_newfstatat:
 #endif
@@ -12681,6 +13341,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_statx)
     case TARGET_NR_statx:
+#ifdef SPARC_TARGET_NR_statx
+    case SPARC_TARGET_NR_statx:
+#endif
 #ifdef RISCV32_TARGET_NR_statx
     case RISCV32_TARGET_NR_statx:
 #endif
@@ -12749,6 +13412,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_lchown
     case TARGET_NR_lchown:
+#ifdef SPARC_TARGET_NR_lchown
+    case SPARC_TARGET_NR_lchown:
+#endif
 #ifdef RISCV32_TARGET_NR_lchown
     case RISCV32_TARGET_NR_lchown:
 #endif
@@ -12764,6 +13430,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getuid
     case TARGET_NR_getuid:
+#ifdef SPARC_TARGET_NR_getuid
+    case SPARC_TARGET_NR_getuid:
+#endif
 #ifdef RISCV32_TARGET_NR_getuid
     case RISCV32_TARGET_NR_getuid:
 #endif
@@ -12775,6 +13444,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getgid
     case TARGET_NR_getgid:
+#ifdef SPARC_TARGET_NR_getgid
+    case SPARC_TARGET_NR_getgid:
+#endif
 #ifdef RISCV32_TARGET_NR_getgid
     case RISCV32_TARGET_NR_getgid:
 #endif
@@ -12786,6 +13458,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_geteuid
     case TARGET_NR_geteuid:
+#ifdef SPARC_TARGET_NR_geteuid
+    case SPARC_TARGET_NR_geteuid:
+#endif
 #ifdef RISCV32_TARGET_NR_geteuid
     case RISCV32_TARGET_NR_geteuid:
 #endif
@@ -12797,6 +13472,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getegid
     case TARGET_NR_getegid:
+#ifdef SPARC_TARGET_NR_getegid
+    case SPARC_TARGET_NR_getegid:
+#endif
 #ifdef RISCV32_TARGET_NR_getegid
     case RISCV32_TARGET_NR_getegid:
 #endif
@@ -12807,6 +13485,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(high2lowgid(getegid()));
 #endif
     case TARGET_NR_setreuid:
+#ifdef SPARC_TARGET_NR_setreuid
+    case SPARC_TARGET_NR_setreuid:
+#endif
 #ifdef RISCV32_TARGET_NR_setreuid
     case RISCV32_TARGET_NR_setreuid:
 #endif
@@ -12816,6 +13497,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(setreuid(low2highuid(arg1), low2highuid(arg2)));
     case TARGET_NR_setregid:
+#ifdef SPARC_TARGET_NR_setregid
+    case SPARC_TARGET_NR_setregid:
+#endif
 #ifdef RISCV32_TARGET_NR_setregid
     case RISCV32_TARGET_NR_setregid:
 #endif
@@ -12825,6 +13509,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(setregid(low2highgid(arg1), low2highgid(arg2)));
     case TARGET_NR_getgroups:
+#ifdef SPARC_TARGET_NR_getgroups
+    case SPARC_TARGET_NR_getgroups:
+#endif
 #ifdef RISCV32_TARGET_NR_getgroups
     case RISCV32_TARGET_NR_getgroups:
 #endif
@@ -12853,6 +13540,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_setgroups:
+#ifdef SPARC_TARGET_NR_setgroups
+    case SPARC_TARGET_NR_setgroups:
+#endif
 #ifdef RISCV32_TARGET_NR_setgroups
     case RISCV32_TARGET_NR_setgroups:
 #endif
@@ -12879,6 +13569,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
             return get_errno(setgroups(gidsetsize, grouplist));
         }
     case TARGET_NR_fchown:
+#ifdef SPARC_TARGET_NR_fchown
+    case SPARC_TARGET_NR_fchown:
+#endif
 #ifdef RISCV32_TARGET_NR_fchown
     case RISCV32_TARGET_NR_fchown:
 #endif
@@ -12889,6 +13582,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(fchown(arg1, low2highuid(arg2), low2highgid(arg3)));
 #if defined(TARGET_NR_fchownat)
     case TARGET_NR_fchownat:
+#ifdef SPARC_TARGET_NR_fchownat
+    case SPARC_TARGET_NR_fchownat:
+#endif
 #ifdef RISCV32_TARGET_NR_fchownat
     case RISCV32_TARGET_NR_fchownat:
 #endif
@@ -12905,6 +13601,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setresuid
     case TARGET_NR_setresuid:
+#ifdef SPARC_TARGET_NR_setresuid
+    case SPARC_TARGET_NR_setresuid:
+#endif
 #ifdef RISCV32_TARGET_NR_setresuid
     case RISCV32_TARGET_NR_setresuid:
 #endif
@@ -12918,6 +13617,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getresuid
     case TARGET_NR_getresuid:
+#ifdef SPARC_TARGET_NR_getresuid
+    case SPARC_TARGET_NR_getresuid:
+#endif
 #ifdef RISCV32_TARGET_NR_getresuid
     case RISCV32_TARGET_NR_getresuid:
 #endif
@@ -12939,6 +13641,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getresgid
     case TARGET_NR_setresgid:
+#ifdef SPARC_TARGET_NR_setresgid
+    case SPARC_TARGET_NR_setresgid:
+#endif
 #ifdef RISCV32_TARGET_NR_setresgid
     case RISCV32_TARGET_NR_setresgid:
 #endif
@@ -12952,6 +13657,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getresgid
     case TARGET_NR_getresgid:
+#ifdef SPARC_TARGET_NR_getresgid
+    case SPARC_TARGET_NR_getresgid:
+#endif
 #ifdef RISCV32_TARGET_NR_getresgid
     case RISCV32_TARGET_NR_getresgid:
 #endif
@@ -12973,6 +13681,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_chown
     case TARGET_NR_chown:
+#ifdef SPARC_TARGET_NR_chown
+    case SPARC_TARGET_NR_chown:
+#endif
 #ifdef RISCV32_TARGET_NR_chown
     case RISCV32_TARGET_NR_chown:
 #endif
@@ -12987,6 +13698,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 #endif
     case TARGET_NR_setuid:
+#ifdef SPARC_TARGET_NR_setuid
+    case SPARC_TARGET_NR_setuid:
+#endif
 #ifdef RISCV32_TARGET_NR_setuid
     case RISCV32_TARGET_NR_setuid:
 #endif
@@ -12996,6 +13710,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(sys_setuid(low2highuid(arg1)));
     case TARGET_NR_setgid:
+#ifdef SPARC_TARGET_NR_setgid
+    case SPARC_TARGET_NR_setgid:
+#endif
 #ifdef RISCV32_TARGET_NR_setgid
     case RISCV32_TARGET_NR_setgid:
 #endif
@@ -13005,6 +13722,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(sys_setgid(low2highgid(arg1)));
     case TARGET_NR_setfsuid:
+#ifdef SPARC_TARGET_NR_setfsuid
+    case SPARC_TARGET_NR_setfsuid:
+#endif
 #ifdef RISCV32_TARGET_NR_setfsuid
     case RISCV32_TARGET_NR_setfsuid:
 #endif
@@ -13014,6 +13734,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
         return get_errno(setfsuid(arg1));
     case TARGET_NR_setfsgid:
+#ifdef SPARC_TARGET_NR_setfsgid
+    case SPARC_TARGET_NR_setfsgid:
+#endif
 #ifdef RISCV32_TARGET_NR_setfsgid
     case RISCV32_TARGET_NR_setfsgid:
 #endif
@@ -13025,6 +13748,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_lchown32
     case TARGET_NR_lchown32:
+#ifdef SPARC_TARGET_NR_lchown32
+    case SPARC_TARGET_NR_lchown32:
+#endif
 #ifdef RISCV32_TARGET_NR_lchown32
     case RISCV32_TARGET_NR_lchown32:
 #endif
@@ -13040,6 +13766,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getuid32
     case TARGET_NR_getuid32:
+#ifdef SPARC_TARGET_NR_getuid32
+    case SPARC_TARGET_NR_getuid32:
+#endif
 #ifdef RISCV32_TARGET_NR_getuid32
     case RISCV32_TARGET_NR_getuid32:
 #endif
@@ -13053,6 +13782,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_getxuid) && defined(TARGET_ALPHA)
    /* Alpha specific */
     case TARGET_NR_getxuid:
+#ifdef SPARC_TARGET_NR_getxuid
+    case SPARC_TARGET_NR_getxuid:
+#endif
 #ifdef RISCV32_TARGET_NR_getxuid
     case RISCV32_TARGET_NR_getxuid:
 #endif
@@ -13070,6 +13802,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_getxgid) && defined(TARGET_ALPHA)
    /* Alpha specific */
     case TARGET_NR_getxgid:
+#ifdef SPARC_TARGET_NR_getxgid
+    case SPARC_TARGET_NR_getxgid:
+#endif
 #ifdef RISCV32_TARGET_NR_getxgid
     case RISCV32_TARGET_NR_getxgid:
 #endif
@@ -13087,6 +13822,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_osf_getsysinfo) && defined(TARGET_ALPHA)
     /* Alpha specific */
     case TARGET_NR_osf_getsysinfo:
+#ifdef SPARC_TARGET_NR_osf_getsysinfo
+    case SPARC_TARGET_NR_osf_getsysinfo:
+#endif
 #ifdef RISCV32_TARGET_NR_osf_getsysinfo
     case RISCV32_TARGET_NR_osf_getsysinfo:
 #endif
@@ -13125,6 +13863,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_osf_setsysinfo) && defined(TARGET_ALPHA)
     /* Alpha specific */
     case TARGET_NR_osf_setsysinfo:
+#ifdef SPARC_TARGET_NR_osf_setsysinfo
+    case SPARC_TARGET_NR_osf_setsysinfo:
+#endif
 #ifdef RISCV32_TARGET_NR_osf_setsysinfo
     case RISCV32_TARGET_NR_osf_setsysinfo:
 #endif
@@ -13226,6 +13967,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef TARGET_NR_osf_sigprocmask
     /* Alpha specific.  */
     case TARGET_NR_osf_sigprocmask:
+#ifdef SPARC_TARGET_NR_osf_sigprocmask
+    case SPARC_TARGET_NR_osf_sigprocmask:
+#endif
 #ifdef RISCV32_TARGET_NR_osf_sigprocmask
     case RISCV32_TARGET_NR_osf_sigprocmask:
 #endif
@@ -13264,6 +14008,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_getgid32
     case TARGET_NR_getgid32:
+#ifdef SPARC_TARGET_NR_getgid32
+    case SPARC_TARGET_NR_getgid32:
+#endif
 #ifdef RISCV32_TARGET_NR_getgid32
     case RISCV32_TARGET_NR_getgid32:
 #endif
@@ -13275,6 +14022,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_geteuid32
     case TARGET_NR_geteuid32:
+#ifdef SPARC_TARGET_NR_geteuid32
+    case SPARC_TARGET_NR_geteuid32:
+#endif
 #ifdef RISCV32_TARGET_NR_geteuid32
     case RISCV32_TARGET_NR_geteuid32:
 #endif
@@ -13286,6 +14036,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getegid32
     case TARGET_NR_getegid32:
+#ifdef SPARC_TARGET_NR_getegid32
+    case SPARC_TARGET_NR_getegid32:
+#endif
 #ifdef RISCV32_TARGET_NR_getegid32
     case RISCV32_TARGET_NR_getegid32:
 #endif
@@ -13297,6 +14050,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setreuid32
     case TARGET_NR_setreuid32:
+#ifdef SPARC_TARGET_NR_setreuid32
+    case SPARC_TARGET_NR_setreuid32:
+#endif
 #ifdef RISCV32_TARGET_NR_setreuid32
     case RISCV32_TARGET_NR_setreuid32:
 #endif
@@ -13308,6 +14064,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setregid32
     case TARGET_NR_setregid32:
+#ifdef SPARC_TARGET_NR_setregid32
+    case SPARC_TARGET_NR_setregid32:
+#endif
 #ifdef RISCV32_TARGET_NR_setregid32
     case RISCV32_TARGET_NR_setregid32:
 #endif
@@ -13319,6 +14078,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getgroups32
     case TARGET_NR_getgroups32:
+#ifdef SPARC_TARGET_NR_getgroups32
+    case SPARC_TARGET_NR_getgroups32:
+#endif
 #ifdef RISCV32_TARGET_NR_getgroups32
     case RISCV32_TARGET_NR_getgroups32:
 #endif
@@ -13350,6 +14112,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setgroups32
     case TARGET_NR_setgroups32:
+#ifdef SPARC_TARGET_NR_setgroups32
+    case SPARC_TARGET_NR_setgroups32:
+#endif
 #ifdef RISCV32_TARGET_NR_setgroups32
     case RISCV32_TARGET_NR_setgroups32:
 #endif
@@ -13376,6 +14141,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_fchown32
     case TARGET_NR_fchown32:
+#ifdef SPARC_TARGET_NR_fchown32
+    case SPARC_TARGET_NR_fchown32:
+#endif
 #ifdef RISCV32_TARGET_NR_fchown32
     case RISCV32_TARGET_NR_fchown32:
 #endif
@@ -13387,6 +14155,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setresuid32
     case TARGET_NR_setresuid32:
+#ifdef SPARC_TARGET_NR_setresuid32
+    case SPARC_TARGET_NR_setresuid32:
+#endif
 #ifdef RISCV32_TARGET_NR_setresuid32
     case RISCV32_TARGET_NR_setresuid32:
 #endif
@@ -13398,6 +14169,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getresuid32
     case TARGET_NR_getresuid32:
+#ifdef SPARC_TARGET_NR_getresuid32
+    case SPARC_TARGET_NR_getresuid32:
+#endif
 #ifdef RISCV32_TARGET_NR_getresuid32
     case RISCV32_TARGET_NR_getresuid32:
 #endif
@@ -13419,6 +14193,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setresgid32
     case TARGET_NR_setresgid32:
+#ifdef SPARC_TARGET_NR_setresgid32
+    case SPARC_TARGET_NR_setresgid32:
+#endif
 #ifdef RISCV32_TARGET_NR_setresgid32
     case RISCV32_TARGET_NR_setresgid32:
 #endif
@@ -13430,6 +14207,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getresgid32
     case TARGET_NR_getresgid32:
+#ifdef SPARC_TARGET_NR_getresgid32
+    case SPARC_TARGET_NR_getresgid32:
+#endif
 #ifdef RISCV32_TARGET_NR_getresgid32
     case RISCV32_TARGET_NR_getresgid32:
 #endif
@@ -13451,6 +14231,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_chown32
     case TARGET_NR_chown32:
+#ifdef SPARC_TARGET_NR_chown32
+    case SPARC_TARGET_NR_chown32:
+#endif
 #ifdef RISCV32_TARGET_NR_chown32
     case RISCV32_TARGET_NR_chown32:
 #endif
@@ -13466,6 +14249,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setuid32
     case TARGET_NR_setuid32:
+#ifdef SPARC_TARGET_NR_setuid32
+    case SPARC_TARGET_NR_setuid32:
+#endif
 #ifdef RISCV32_TARGET_NR_setuid32
     case RISCV32_TARGET_NR_setuid32:
 #endif
@@ -13477,6 +14263,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setgid32
     case TARGET_NR_setgid32:
+#ifdef SPARC_TARGET_NR_setgid32
+    case SPARC_TARGET_NR_setgid32:
+#endif
 #ifdef RISCV32_TARGET_NR_setgid32
     case RISCV32_TARGET_NR_setgid32:
 #endif
@@ -13488,6 +14277,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setfsuid32
     case TARGET_NR_setfsuid32:
+#ifdef SPARC_TARGET_NR_setfsuid32
+    case SPARC_TARGET_NR_setfsuid32:
+#endif
 #ifdef RISCV32_TARGET_NR_setfsuid32
     case RISCV32_TARGET_NR_setfsuid32:
 #endif
@@ -13499,6 +14291,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_setfsgid32
     case TARGET_NR_setfsgid32:
+#ifdef SPARC_TARGET_NR_setfsgid32
+    case SPARC_TARGET_NR_setfsgid32:
+#endif
 #ifdef RISCV32_TARGET_NR_setfsgid32
     case RISCV32_TARGET_NR_setfsgid32:
 #endif
@@ -13510,6 +14305,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mincore
     case TARGET_NR_mincore:
+#ifdef SPARC_TARGET_NR_mincore
+    case SPARC_TARGET_NR_mincore:
+#endif
 #ifdef RISCV32_TARGET_NR_mincore
     case RISCV32_TARGET_NR_mincore:
 #endif
@@ -13535,6 +14333,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_arm_fadvise64_64
     case TARGET_NR_arm_fadvise64_64:
+#ifdef SPARC_TARGET_NR_arm_fadvise64_64
+    case SPARC_TARGET_NR_arm_fadvise64_64:
+#endif
 #ifdef RISCV32_TARGET_NR_arm_fadvise64_64
     case RISCV32_TARGET_NR_arm_fadvise64_64:
 #endif
@@ -13557,6 +14358,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_fadvise64_64
     case TARGET_NR_fadvise64_64:
+#ifdef SPARC_TARGET_NR_fadvise64_64
+    case SPARC_TARGET_NR_fadvise64_64:
+#endif
 #ifdef RISCV32_TARGET_NR_fadvise64_64
     case RISCV32_TARGET_NR_fadvise64_64:
 #endif
@@ -13590,6 +14394,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_fadvise64
     case TARGET_NR_fadvise64:
+#ifdef SPARC_TARGET_NR_fadvise64
+    case SPARC_TARGET_NR_fadvise64:
+#endif
 #ifdef RISCV32_TARGET_NR_fadvise64
     case RISCV32_TARGET_NR_fadvise64:
 #endif
@@ -13613,6 +14420,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_fadvise64_64) || defined(TARGET_NR_fadvise64)
 #ifdef TARGET_NR_fadvise64_64
     case TARGET_NR_fadvise64_64:
+#ifdef SPARC_TARGET_NR_fadvise64_64
+    case SPARC_TARGET_NR_fadvise64_64:
+#endif
 #ifdef RISCV32_TARGET_NR_fadvise64_64
     case RISCV32_TARGET_NR_fadvise64_64:
 #endif
@@ -13623,6 +14433,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_fadvise64
     case TARGET_NR_fadvise64:
+#ifdef SPARC_TARGET_NR_fadvise64
+    case SPARC_TARGET_NR_fadvise64:
+#endif
 #ifdef RISCV32_TARGET_NR_fadvise64
     case RISCV32_TARGET_NR_fadvise64:
 #endif
@@ -13646,6 +14459,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_madvise
     case TARGET_NR_madvise:
+#ifdef SPARC_TARGET_NR_madvise
+    case SPARC_TARGET_NR_madvise:
+#endif
 #ifdef RISCV32_TARGET_NR_madvise
     case RISCV32_TARGET_NR_madvise:
 #endif
@@ -13661,6 +14477,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_fcntl64
     case TARGET_NR_fcntl64:
+#ifdef SPARC_TARGET_NR_fcntl64
+    case SPARC_TARGET_NR_fcntl64:
+#endif
 #ifdef RISCV32_TARGET_NR_fcntl64
     case RISCV32_TARGET_NR_fcntl64:
 #endif
@@ -13715,6 +14534,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_cacheflush
     case TARGET_NR_cacheflush:
+#ifdef SPARC_TARGET_NR_cacheflush
+    case SPARC_TARGET_NR_cacheflush:
+#endif
 #ifdef RISCV32_TARGET_NR_cacheflush
     case RISCV32_TARGET_NR_cacheflush:
 #endif
@@ -13727,6 +14549,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getpagesize
     case TARGET_NR_getpagesize:
+#ifdef SPARC_TARGET_NR_getpagesize
+    case SPARC_TARGET_NR_getpagesize:
+#endif
 #ifdef RISCV32_TARGET_NR_getpagesize
     case RISCV32_TARGET_NR_getpagesize:
 #endif
@@ -13737,6 +14562,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return TARGET_PAGE_SIZE;
 #endif
     case TARGET_NR_gettid:
+#ifdef SPARC_TARGET_NR_gettid
+    case SPARC_TARGET_NR_gettid:
+#endif
 #ifdef RISCV32_TARGET_NR_gettid
     case RISCV32_TARGET_NR_gettid:
 #endif
@@ -13747,6 +14575,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(sys_gettid());
 #ifdef TARGET_NR_readahead
     case TARGET_NR_readahead:
+#ifdef SPARC_TARGET_NR_readahead
+    case SPARC_TARGET_NR_readahead:
+#endif
 #ifdef RISCV32_TARGET_NR_readahead
     case RISCV32_TARGET_NR_readahead:
 #endif
@@ -13769,6 +14600,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef CONFIG_ATTR
 #ifdef TARGET_NR_setxattr
     case TARGET_NR_listxattr:
+#ifdef SPARC_TARGET_NR_listxattr
+    case SPARC_TARGET_NR_listxattr:
+#endif
 #ifdef RISCV32_TARGET_NR_listxattr
     case RISCV32_TARGET_NR_listxattr:
 #endif
@@ -13777,6 +14611,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif 
 
     case TARGET_NR_llistxattr:
+#ifdef SPARC_TARGET_NR_llistxattr
+    case SPARC_TARGET_NR_llistxattr:
+#endif
 #ifdef RISCV32_TARGET_NR_llistxattr
     case RISCV32_TARGET_NR_llistxattr:
 #endif
@@ -13807,6 +14644,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
     }
     case TARGET_NR_flistxattr:
+#ifdef SPARC_TARGET_NR_flistxattr
+    case SPARC_TARGET_NR_flistxattr:
+#endif
 #ifdef RISCV32_TARGET_NR_flistxattr
     case RISCV32_TARGET_NR_flistxattr:
 #endif
@@ -13827,6 +14667,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
     }
     case TARGET_NR_setxattr:
+#ifdef SPARC_TARGET_NR_setxattr
+    case SPARC_TARGET_NR_setxattr:
+#endif
 #ifdef RISCV32_TARGET_NR_setxattr
     case RISCV32_TARGET_NR_setxattr:
 #endif
@@ -13835,6 +14678,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif 
 
     case TARGET_NR_lsetxattr:
+#ifdef SPARC_TARGET_NR_lsetxattr
+    case SPARC_TARGET_NR_lsetxattr:
+#endif
 #ifdef RISCV32_TARGET_NR_lsetxattr
     case RISCV32_TARGET_NR_lsetxattr:
 #endif
@@ -13867,6 +14713,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_fsetxattr:
+#ifdef SPARC_TARGET_NR_fsetxattr
+    case SPARC_TARGET_NR_fsetxattr:
+#endif
 #ifdef RISCV32_TARGET_NR_fsetxattr
     case RISCV32_TARGET_NR_fsetxattr:
 #endif
@@ -13893,6 +14742,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_getxattr:
+#ifdef SPARC_TARGET_NR_getxattr
+    case SPARC_TARGET_NR_getxattr:
+#endif
 #ifdef RISCV32_TARGET_NR_getxattr
     case RISCV32_TARGET_NR_getxattr:
 #endif
@@ -13901,6 +14753,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif 
 
     case TARGET_NR_lgetxattr:
+#ifdef SPARC_TARGET_NR_lgetxattr
+    case SPARC_TARGET_NR_lgetxattr:
+#endif
 #ifdef RISCV32_TARGET_NR_lgetxattr
     case RISCV32_TARGET_NR_lgetxattr:
 #endif
@@ -13933,6 +14788,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_fgetxattr:
+#ifdef SPARC_TARGET_NR_fgetxattr
+    case SPARC_TARGET_NR_fgetxattr:
+#endif
 #ifdef RISCV32_TARGET_NR_fgetxattr
     case RISCV32_TARGET_NR_fgetxattr:
 #endif
@@ -13959,6 +14817,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_removexattr:
+#ifdef SPARC_TARGET_NR_removexattr
+    case SPARC_TARGET_NR_removexattr:
+#endif
 #ifdef RISCV32_TARGET_NR_removexattr
     case RISCV32_TARGET_NR_removexattr:
 #endif
@@ -13967,6 +14828,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif 
 
     case TARGET_NR_lremovexattr:
+#ifdef SPARC_TARGET_NR_lremovexattr
+    case SPARC_TARGET_NR_lremovexattr:
+#endif
 #ifdef RISCV32_TARGET_NR_lremovexattr
     case RISCV32_TARGET_NR_lremovexattr:
 #endif
@@ -13992,6 +14856,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         }
         return ret;
     case TARGET_NR_fremovexattr:
+#ifdef SPARC_TARGET_NR_fremovexattr
+    case SPARC_TARGET_NR_fremovexattr:
+#endif
 #ifdef RISCV32_TARGET_NR_fremovexattr
     case RISCV32_TARGET_NR_fremovexattr:
 #endif
@@ -14014,6 +14881,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif /* CONFIG_ATTR */
 #ifdef TARGET_NR_set_thread_area
     case TARGET_NR_set_thread_area:
+#ifdef SPARC_TARGET_NR_set_thread_area
+    case SPARC_TARGET_NR_set_thread_area:
+#endif
 #ifdef RISCV32_TARGET_NR_set_thread_area
     case RISCV32_TARGET_NR_set_thread_area:
 #endif
@@ -14046,6 +14916,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_get_thread_area
     case TARGET_NR_get_thread_area:
+#ifdef SPARC_TARGET_NR_get_thread_area
+    case SPARC_TARGET_NR_get_thread_area:
+#endif
 #ifdef RISCV32_TARGET_NR_get_thread_area
     case RISCV32_TARGET_NR_get_thread_area:
 #endif
@@ -14066,6 +14939,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_getdomainname
     case TARGET_NR_getdomainname:
+#ifdef SPARC_TARGET_NR_getdomainname
+    case SPARC_TARGET_NR_getdomainname:
+#endif
 #ifdef RISCV32_TARGET_NR_getdomainname
     case RISCV32_TARGET_NR_getdomainname:
 #endif
@@ -14078,6 +14954,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_clock_settime
     case TARGET_NR_clock_settime:
+#ifdef SPARC_TARGET_NR_clock_settime
+    case SPARC_TARGET_NR_clock_settime:
+#endif
 #ifdef RISCV32_TARGET_NR_clock_settime
     case RISCV32_TARGET_NR_clock_settime:
 #endif
@@ -14097,6 +14976,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_settime64
     case TARGET_NR_clock_settime64:
+#ifdef SPARC_TARGET_NR_clock_settime64
+    case SPARC_TARGET_NR_clock_settime64:
+#endif
 #ifdef RISCV32_TARGET_NR_clock_settime64
     case RISCV32_TARGET_NR_clock_settime64:
 #endif
@@ -14116,6 +14998,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_gettime
     case TARGET_NR_clock_gettime:
+#ifdef SPARC_TARGET_NR_clock_gettime
+    case SPARC_TARGET_NR_clock_gettime:
+#endif
 #ifdef RISCV32_TARGET_NR_clock_gettime
     case RISCV32_TARGET_NR_clock_gettime:
 #endif
@@ -14134,6 +15019,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_gettime64
     case TARGET_NR_clock_gettime64:
+#ifdef SPARC_TARGET_NR_clock_gettime64
+    case SPARC_TARGET_NR_clock_gettime64:
+#endif
 #ifdef RISCV32_TARGET_NR_clock_gettime64
     case RISCV32_TARGET_NR_clock_gettime64:
 #endif
@@ -14152,6 +15040,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_getres
     case TARGET_NR_clock_getres:
+#ifdef SPARC_TARGET_NR_clock_getres
+    case SPARC_TARGET_NR_clock_getres:
+#endif
 #ifdef RISCV32_TARGET_NR_clock_getres
     case RISCV32_TARGET_NR_clock_getres:
 #endif
@@ -14170,6 +15061,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_getres_time64
     case TARGET_NR_clock_getres_time64:
+#ifdef SPARC_TARGET_NR_clock_getres_time64
+    case SPARC_TARGET_NR_clock_getres_time64:
+#endif
 #ifdef RISCV32_TARGET_NR_clock_getres_time64
     case RISCV32_TARGET_NR_clock_getres_time64:
 #endif
@@ -14188,6 +15082,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_nanosleep
     case TARGET_NR_clock_nanosleep:
+#ifdef SPARC_TARGET_NR_clock_nanosleep
+    case SPARC_TARGET_NR_clock_nanosleep:
+#endif
 #ifdef RISCV32_TARGET_NR_clock_nanosleep
     case RISCV32_TARGET_NR_clock_nanosleep:
 #endif
@@ -14217,6 +15114,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_clock_nanosleep_time64
     case TARGET_NR_clock_nanosleep_time64:
+#ifdef SPARC_TARGET_NR_clock_nanosleep_time64
+    case SPARC_TARGET_NR_clock_nanosleep_time64:
+#endif
 #ifdef RISCV32_TARGET_NR_clock_nanosleep_time64
     case RISCV32_TARGET_NR_clock_nanosleep_time64:
 #endif
@@ -14244,6 +15144,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_set_tid_address) && defined(__NR_set_tid_address)
     case TARGET_NR_set_tid_address:
+#ifdef SPARC_TARGET_NR_set_tid_address
+    case SPARC_TARGET_NR_set_tid_address:
+#endif
 #ifdef RISCV32_TARGET_NR_set_tid_address
     case RISCV32_TARGET_NR_set_tid_address:
 #endif
@@ -14256,6 +15159,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 
     case TARGET_NR_tkill:
+#ifdef SPARC_TARGET_NR_tkill
+    case SPARC_TARGET_NR_tkill:
+#endif
 #ifdef RISCV32_TARGET_NR_tkill
     case RISCV32_TARGET_NR_tkill:
 #endif
@@ -14266,6 +15172,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return get_errno(safe_tkill((int)arg1, target_to_host_signal(arg2)));
 
     case TARGET_NR_tgkill:
+#ifdef SPARC_TARGET_NR_tgkill
+    case SPARC_TARGET_NR_tgkill:
+#endif
 #ifdef RISCV32_TARGET_NR_tgkill
     case RISCV32_TARGET_NR_tgkill:
 #endif
@@ -14278,6 +15187,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_set_robust_list
     case TARGET_NR_set_robust_list:
+#ifdef SPARC_TARGET_NR_set_robust_list
+    case SPARC_TARGET_NR_set_robust_list:
+#endif
 #ifdef RISCV32_TARGET_NR_set_robust_list
     case RISCV32_TARGET_NR_set_robust_list:
 #endif
@@ -14286,6 +15198,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif 
 
     case TARGET_NR_get_robust_list:
+#ifdef SPARC_TARGET_NR_get_robust_list
+    case SPARC_TARGET_NR_get_robust_list:
+#endif
 #ifdef RISCV32_TARGET_NR_get_robust_list
     case RISCV32_TARGET_NR_get_robust_list:
 #endif
@@ -14310,6 +15225,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_utimensat)
     case TARGET_NR_utimensat:
+#ifdef SPARC_TARGET_NR_utimensat
+    case SPARC_TARGET_NR_utimensat:
+#endif
 #ifdef RISCV32_TARGET_NR_utimensat
     case RISCV32_TARGET_NR_utimensat:
 #endif
@@ -14345,6 +15263,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_utimensat_time64
     case TARGET_NR_utimensat_time64:
+#ifdef SPARC_TARGET_NR_utimensat_time64
+    case SPARC_TARGET_NR_utimensat_time64:
+#endif
 #ifdef RISCV32_TARGET_NR_utimensat_time64
     case RISCV32_TARGET_NR_utimensat_time64:
 #endif
@@ -14381,6 +15302,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_futex
     case TARGET_NR_futex:
+#ifdef SPARC_TARGET_NR_futex
+    case SPARC_TARGET_NR_futex:
+#endif
 #ifdef RISCV32_TARGET_NR_futex
     case RISCV32_TARGET_NR_futex:
 #endif
@@ -14393,6 +15317,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_futex_time64
     case TARGET_NR_futex_time64:
+#ifdef SPARC_TARGET_NR_futex_time64
+    case SPARC_TARGET_NR_futex_time64:
+#endif
 #ifdef RISCV32_TARGET_NR_futex_time64
     case RISCV32_TARGET_NR_futex_time64:
 #endif
@@ -14405,6 +15332,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_inotify_init) && defined(__NR_inotify_init)
     case TARGET_NR_inotify_init:
+#ifdef SPARC_TARGET_NR_inotify_init
+    case SPARC_TARGET_NR_inotify_init:
+#endif
 #ifdef RISCV32_TARGET_NR_inotify_init
     case RISCV32_TARGET_NR_inotify_init:
 #endif
@@ -14421,6 +15351,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef CONFIG_INOTIFY1
 #if defined(TARGET_NR_inotify_init1) && defined(__NR_inotify_init1)
     case TARGET_NR_inotify_init1:
+#ifdef SPARC_TARGET_NR_inotify_init1
+    case SPARC_TARGET_NR_inotify_init1:
+#endif
 #ifdef RISCV32_TARGET_NR_inotify_init1
     case RISCV32_TARGET_NR_inotify_init1:
 #endif
@@ -14438,6 +15371,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_inotify_add_watch) && defined(__NR_inotify_add_watch)
     case TARGET_NR_inotify_add_watch:
+#ifdef SPARC_TARGET_NR_inotify_add_watch
+    case SPARC_TARGET_NR_inotify_add_watch:
+#endif
 #ifdef RISCV32_TARGET_NR_inotify_add_watch
     case RISCV32_TARGET_NR_inotify_add_watch:
 #endif
@@ -14452,6 +15388,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_inotify_rm_watch) && defined(__NR_inotify_rm_watch)
     case TARGET_NR_inotify_rm_watch:
+#ifdef SPARC_TARGET_NR_inotify_rm_watch
+    case SPARC_TARGET_NR_inotify_rm_watch:
+#endif
 #ifdef RISCV32_TARGET_NR_inotify_rm_watch
     case RISCV32_TARGET_NR_inotify_rm_watch:
 #endif
@@ -14464,6 +15403,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_mq_open) && defined(__NR_mq_open)
     case TARGET_NR_mq_open:
+#ifdef SPARC_TARGET_NR_mq_open
+    case SPARC_TARGET_NR_mq_open:
+#endif
 #ifdef RISCV32_TARGET_NR_mq_open
     case RISCV32_TARGET_NR_mq_open:
 #endif
@@ -14494,6 +15436,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         return ret;
 
     case TARGET_NR_mq_unlink:
+#ifdef SPARC_TARGET_NR_mq_unlink
+    case SPARC_TARGET_NR_mq_unlink:
+#endif
 #ifdef RISCV32_TARGET_NR_mq_unlink
     case RISCV32_TARGET_NR_mq_unlink:
 #endif
@@ -14511,6 +15456,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_mq_timedsend
     case TARGET_NR_mq_timedsend:
+#ifdef SPARC_TARGET_NR_mq_timedsend
+    case SPARC_TARGET_NR_mq_timedsend:
+#endif
 #ifdef RISCV32_TARGET_NR_mq_timedsend
     case RISCV32_TARGET_NR_mq_timedsend:
 #endif
@@ -14539,6 +15487,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mq_timedsend_time64
     case TARGET_NR_mq_timedsend_time64:
+#ifdef SPARC_TARGET_NR_mq_timedsend_time64
+    case SPARC_TARGET_NR_mq_timedsend_time64:
+#endif
 #ifdef RISCV32_TARGET_NR_mq_timedsend_time64
     case RISCV32_TARGET_NR_mq_timedsend_time64:
 #endif
@@ -14568,6 +15519,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_mq_timedreceive
     case TARGET_NR_mq_timedreceive:
+#ifdef SPARC_TARGET_NR_mq_timedreceive
+    case SPARC_TARGET_NR_mq_timedreceive:
+#endif
 #ifdef RISCV32_TARGET_NR_mq_timedreceive
     case RISCV32_TARGET_NR_mq_timedreceive:
 #endif
@@ -14601,6 +15555,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_mq_timedreceive_time64
     case TARGET_NR_mq_timedreceive_time64:
+#ifdef SPARC_TARGET_NR_mq_timedreceive_time64
+    case SPARC_TARGET_NR_mq_timedreceive_time64:
+#endif
 #ifdef RISCV32_TARGET_NR_mq_timedreceive_time64
     case RISCV32_TARGET_NR_mq_timedreceive_time64:
 #endif
@@ -14636,6 +15593,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
     /* Not implemented for now... */
 /*     case TARGET_NR_mq_notify:
+#ifdef SPARC_TARGET_NR_mq_notify
+    case SPARC_TARGET_NR_mq_notify:
+#endif
 #ifdef RISCV32_TARGET_NR_mq_notify
     case RISCV32_TARGET_NR_mq_notify:
 #endif
@@ -14646,6 +15606,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 /*         break; */
 
     case TARGET_NR_mq_getsetattr:
+#ifdef SPARC_TARGET_NR_mq_getsetattr
+    case SPARC_TARGET_NR_mq_getsetattr:
+#endif
 #ifdef RISCV32_TARGET_NR_mq_getsetattr
     case RISCV32_TARGET_NR_mq_getsetattr:
 #endif
@@ -14673,6 +15636,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef CONFIG_SPLICE
 #ifdef TARGET_NR_tee
     case TARGET_NR_tee:
+#ifdef SPARC_TARGET_NR_tee
+    case SPARC_TARGET_NR_tee:
+#endif
 #ifdef RISCV32_TARGET_NR_tee
     case RISCV32_TARGET_NR_tee:
 #endif
@@ -14687,6 +15653,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_splice
     case TARGET_NR_splice:
+#ifdef SPARC_TARGET_NR_splice
+    case SPARC_TARGET_NR_splice:
+#endif
 #ifdef RISCV32_TARGET_NR_splice
     case RISCV32_TARGET_NR_splice:
 #endif
@@ -14744,6 +15713,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #ifdef CONFIG_EVENTFD
 #if defined(TARGET_NR_eventfd)
     case TARGET_NR_eventfd:
+#ifdef SPARC_TARGET_NR_eventfd
+    case SPARC_TARGET_NR_eventfd:
+#endif
 #ifdef RISCV32_TARGET_NR_eventfd
     case RISCV32_TARGET_NR_eventfd:
 #endif
@@ -14759,6 +15731,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_eventfd2)
     case TARGET_NR_eventfd2:
+#ifdef SPARC_TARGET_NR_eventfd2
+    case SPARC_TARGET_NR_eventfd2:
+#endif
 #ifdef RISCV32_TARGET_NR_eventfd2
     case RISCV32_TARGET_NR_eventfd2:
 #endif
@@ -14784,6 +15759,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif /* CONFIG_EVENTFD  */
 #if defined(CONFIG_FALLOCATE) && defined(TARGET_NR_fallocate)
     case TARGET_NR_fallocate:
+#ifdef SPARC_TARGET_NR_fallocate
+    case SPARC_TARGET_NR_fallocate:
+#endif
 #ifdef RISCV32_TARGET_NR_fallocate
     case RISCV32_TARGET_NR_fallocate:
 #endif
@@ -14802,6 +15780,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(CONFIG_SYNC_FILE_RANGE)
 #if defined(TARGET_NR_sync_file_range)
     case TARGET_NR_sync_file_range:
+#ifdef SPARC_TARGET_NR_sync_file_range
+    case SPARC_TARGET_NR_sync_file_range:
+#endif
 #ifdef RISCV32_TARGET_NR_sync_file_range
     case RISCV32_TARGET_NR_sync_file_range:
 #endif
@@ -14826,6 +15807,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
     defined(TARGET_NR_arm_sync_file_range)
 #if defined(TARGET_NR_sync_file_range2)
     case TARGET_NR_sync_file_range2:
+#ifdef SPARC_TARGET_NR_sync_file_range2
+    case SPARC_TARGET_NR_sync_file_range2:
+#endif
 #ifdef RISCV32_TARGET_NR_sync_file_range2
     case RISCV32_TARGET_NR_sync_file_range2:
 #endif
@@ -14836,6 +15820,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_arm_sync_file_range)
     case TARGET_NR_arm_sync_file_range:
+#ifdef SPARC_TARGET_NR_arm_sync_file_range
+    case SPARC_TARGET_NR_arm_sync_file_range:
+#endif
 #ifdef RISCV32_TARGET_NR_arm_sync_file_range
     case RISCV32_TARGET_NR_arm_sync_file_range:
 #endif
@@ -14856,6 +15843,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_signalfd4)
     case TARGET_NR_signalfd4:
+#ifdef SPARC_TARGET_NR_signalfd4
+    case SPARC_TARGET_NR_signalfd4:
+#endif
 #ifdef RISCV32_TARGET_NR_signalfd4
     case RISCV32_TARGET_NR_signalfd4:
 #endif
@@ -14867,6 +15857,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_signalfd)
     case TARGET_NR_signalfd:
+#ifdef SPARC_TARGET_NR_signalfd
+    case SPARC_TARGET_NR_signalfd:
+#endif
 #ifdef RISCV32_TARGET_NR_signalfd
     case RISCV32_TARGET_NR_signalfd:
 #endif
@@ -14879,6 +15872,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(CONFIG_EPOLL)
 #if defined(TARGET_NR_epoll_create)
     case TARGET_NR_epoll_create:
+#ifdef SPARC_TARGET_NR_epoll_create
+    case SPARC_TARGET_NR_epoll_create:
+#endif
 #ifdef RISCV32_TARGET_NR_epoll_create
     case RISCV32_TARGET_NR_epoll_create:
 #endif
@@ -14890,6 +15886,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_epoll_create1) && defined(CONFIG_EPOLL_CREATE1)
     case TARGET_NR_epoll_create1:
+#ifdef SPARC_TARGET_NR_epoll_create1
+    case SPARC_TARGET_NR_epoll_create1:
+#endif
 #ifdef RISCV32_TARGET_NR_epoll_create1
     case RISCV32_TARGET_NR_epoll_create1:
 #endif
@@ -14901,6 +15900,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_epoll_ctl)
     case TARGET_NR_epoll_ctl:
+#ifdef SPARC_TARGET_NR_epoll_ctl
+    case SPARC_TARGET_NR_epoll_ctl:
+#endif
 #ifdef RISCV32_TARGET_NR_epoll_ctl
     case RISCV32_TARGET_NR_epoll_ctl:
 #endif
@@ -14940,6 +15942,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #if defined(TARGET_NR_epoll_wait) || defined(TARGET_NR_epoll_pwait)
 #if defined(TARGET_NR_epoll_wait)
     case TARGET_NR_epoll_wait:
+#ifdef SPARC_TARGET_NR_epoll_wait
+    case SPARC_TARGET_NR_epoll_wait:
+#endif
 #ifdef RISCV32_TARGET_NR_epoll_wait
     case RISCV32_TARGET_NR_epoll_wait:
 #endif
@@ -14950,6 +15955,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_epoll_pwait)
     case TARGET_NR_epoll_pwait:
+#ifdef SPARC_TARGET_NR_epoll_pwait
+    case SPARC_TARGET_NR_epoll_pwait:
+#endif
 #ifdef RISCV32_TARGET_NR_epoll_pwait
     case RISCV32_TARGET_NR_epoll_pwait:
 #endif
@@ -14984,6 +15992,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
         switch (num) {
 #if defined(TARGET_NR_epoll_pwait)
         case TARGET_NR_epoll_pwait:
+#ifdef SPARC_TARGET_NR_epoll_pwait
+    case SPARC_TARGET_NR_epoll_pwait:
+#endif
 #ifdef RISCV32_TARGET_NR_epoll_pwait
     case RISCV32_TARGET_NR_epoll_pwait:
 #endif
@@ -15020,6 +16031,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_epoll_wait)
         case TARGET_NR_epoll_wait:
+#ifdef SPARC_TARGET_NR_epoll_wait
+    case SPARC_TARGET_NR_epoll_wait:
+#endif
 #ifdef RISCV32_TARGET_NR_epoll_wait
     case RISCV32_TARGET_NR_epoll_wait:
 #endif
@@ -15052,6 +16066,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_prlimit64
     case TARGET_NR_prlimit64:
+#ifdef SPARC_TARGET_NR_prlimit64
+    case SPARC_TARGET_NR_prlimit64:
+#endif
 #ifdef RISCV32_TARGET_NR_prlimit64
     case RISCV32_TARGET_NR_prlimit64:
 #endif
@@ -15091,6 +16108,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_gethostname
     case TARGET_NR_gethostname:
+#ifdef SPARC_TARGET_NR_gethostname
+    case SPARC_TARGET_NR_gethostname:
+#endif
 #ifdef RISCV32_TARGET_NR_gethostname
     case RISCV32_TARGET_NR_gethostname:
 #endif
@@ -15111,6 +16131,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_atomic_cmpxchg_32
     case TARGET_NR_atomic_cmpxchg_32:
+#ifdef SPARC_TARGET_NR_atomic_cmpxchg_32
+    case SPARC_TARGET_NR_atomic_cmpxchg_32:
+#endif
 #ifdef RISCV32_TARGET_NR_atomic_cmpxchg_32
     case RISCV32_TARGET_NR_atomic_cmpxchg_32:
 #endif
@@ -15139,6 +16162,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_atomic_barrier
     case TARGET_NR_atomic_barrier:
+#ifdef SPARC_TARGET_NR_atomic_barrier
+    case SPARC_TARGET_NR_atomic_barrier:
+#endif
 #ifdef RISCV32_TARGET_NR_atomic_barrier
     case RISCV32_TARGET_NR_atomic_barrier:
 #endif
@@ -15153,6 +16179,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_create
     case TARGET_NR_timer_create:
+#ifdef SPARC_TARGET_NR_timer_create
+    case SPARC_TARGET_NR_timer_create:
+#endif
 #ifdef RISCV32_TARGET_NR_timer_create
     case RISCV32_TARGET_NR_timer_create:
 #endif
@@ -15196,6 +16225,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_settime
     case TARGET_NR_timer_settime:
+#ifdef SPARC_TARGET_NR_timer_settime
+    case SPARC_TARGET_NR_timer_settime:
+#endif
 #ifdef RISCV32_TARGET_NR_timer_settime
     case RISCV32_TARGET_NR_timer_settime:
 #endif
@@ -15231,6 +16263,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_settime64
     case TARGET_NR_timer_settime64:
+#ifdef SPARC_TARGET_NR_timer_settime64
+    case SPARC_TARGET_NR_timer_settime64:
+#endif
 #ifdef RISCV32_TARGET_NR_timer_settime64
     case RISCV32_TARGET_NR_timer_settime64:
 #endif
@@ -15264,6 +16299,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_gettime
     case TARGET_NR_timer_gettime:
+#ifdef SPARC_TARGET_NR_timer_gettime
+    case SPARC_TARGET_NR_timer_gettime:
+#endif
 #ifdef RISCV32_TARGET_NR_timer_gettime
     case RISCV32_TARGET_NR_timer_gettime:
 #endif
@@ -15294,6 +16332,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_gettime64
     case TARGET_NR_timer_gettime64:
+#ifdef SPARC_TARGET_NR_timer_gettime64
+    case SPARC_TARGET_NR_timer_gettime64:
+#endif
 #ifdef RISCV32_TARGET_NR_timer_gettime64
     case RISCV32_TARGET_NR_timer_gettime64:
 #endif
@@ -15324,6 +16365,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_getoverrun
     case TARGET_NR_timer_getoverrun:
+#ifdef SPARC_TARGET_NR_timer_getoverrun
+    case SPARC_TARGET_NR_timer_getoverrun:
+#endif
 #ifdef RISCV32_TARGET_NR_timer_getoverrun
     case RISCV32_TARGET_NR_timer_getoverrun:
 #endif
@@ -15347,6 +16391,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #ifdef TARGET_NR_timer_delete
     case TARGET_NR_timer_delete:
+#ifdef SPARC_TARGET_NR_timer_delete
+    case SPARC_TARGET_NR_timer_delete:
+#endif
 #ifdef RISCV32_TARGET_NR_timer_delete
     case RISCV32_TARGET_NR_timer_delete:
 #endif
@@ -15371,6 +16418,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_timerfd_create) && defined(CONFIG_TIMERFD)
     case TARGET_NR_timerfd_create:
+#ifdef SPARC_TARGET_NR_timerfd_create
+    case SPARC_TARGET_NR_timerfd_create:
+#endif
 #ifdef RISCV32_TARGET_NR_timerfd_create
     case RISCV32_TARGET_NR_timerfd_create:
 #endif
@@ -15384,6 +16434,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_timerfd_gettime) && defined(CONFIG_TIMERFD)
     case TARGET_NR_timerfd_gettime:
+#ifdef SPARC_TARGET_NR_timerfd_gettime
+    case SPARC_TARGET_NR_timerfd_gettime:
+#endif
 #ifdef RISCV32_TARGET_NR_timerfd_gettime
     case RISCV32_TARGET_NR_timerfd_gettime:
 #endif
@@ -15405,6 +16458,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_timerfd_gettime64) && defined(CONFIG_TIMERFD)
     case TARGET_NR_timerfd_gettime64:
+#ifdef SPARC_TARGET_NR_timerfd_gettime64
+    case SPARC_TARGET_NR_timerfd_gettime64:
+#endif
 #ifdef RISCV32_TARGET_NR_timerfd_gettime64
     case RISCV32_TARGET_NR_timerfd_gettime64:
 #endif
@@ -15426,6 +16482,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_timerfd_settime) && defined(CONFIG_TIMERFD)
     case TARGET_NR_timerfd_settime:
+#ifdef SPARC_TARGET_NR_timerfd_settime
+    case SPARC_TARGET_NR_timerfd_settime:
+#endif
 #ifdef RISCV32_TARGET_NR_timerfd_settime
     case RISCV32_TARGET_NR_timerfd_settime:
 #endif
@@ -15456,6 +16515,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_timerfd_settime64) && defined(CONFIG_TIMERFD)
     case TARGET_NR_timerfd_settime64:
+#ifdef SPARC_TARGET_NR_timerfd_settime64
+    case SPARC_TARGET_NR_timerfd_settime64:
+#endif
 #ifdef RISCV32_TARGET_NR_timerfd_settime64
     case RISCV32_TARGET_NR_timerfd_settime64:
 #endif
@@ -15486,6 +16548,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_ioprio_get) && defined(__NR_ioprio_get)
     case TARGET_NR_ioprio_get:
+#ifdef SPARC_TARGET_NR_ioprio_get
+    case SPARC_TARGET_NR_ioprio_get:
+#endif
 #ifdef RISCV32_TARGET_NR_ioprio_get
     case RISCV32_TARGET_NR_ioprio_get:
 #endif
@@ -15498,6 +16563,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_ioprio_set) && defined(__NR_ioprio_set)
     case TARGET_NR_ioprio_set:
+#ifdef SPARC_TARGET_NR_ioprio_set
+    case SPARC_TARGET_NR_ioprio_set:
+#endif
 #ifdef RISCV32_TARGET_NR_ioprio_set
     case RISCV32_TARGET_NR_ioprio_set:
 #endif
@@ -15510,6 +16578,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 
 #if defined(TARGET_NR_setns) && defined(CONFIG_SETNS)
     case TARGET_NR_setns:
+#ifdef SPARC_TARGET_NR_setns
+    case SPARC_TARGET_NR_setns:
+#endif
 #ifdef RISCV32_TARGET_NR_setns
     case RISCV32_TARGET_NR_setns:
 #endif
@@ -15521,6 +16592,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_unshare) && defined(CONFIG_SETNS)
     case TARGET_NR_unshare:
+#ifdef SPARC_TARGET_NR_unshare
+    case SPARC_TARGET_NR_unshare:
+#endif
 #ifdef RISCV32_TARGET_NR_unshare
     case RISCV32_TARGET_NR_unshare:
 #endif
@@ -15532,6 +16606,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined(TARGET_NR_kcmp) && defined(__NR_kcmp)
     case TARGET_NR_kcmp:
+#ifdef SPARC_TARGET_NR_kcmp
+    case SPARC_TARGET_NR_kcmp:
+#endif
 #ifdef RISCV32_TARGET_NR_kcmp
     case RISCV32_TARGET_NR_kcmp:
 #endif
@@ -15543,6 +16620,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_swapcontext
     case TARGET_NR_swapcontext:
+#ifdef SPARC_TARGET_NR_swapcontext
+    case SPARC_TARGET_NR_swapcontext:
+#endif
 #ifdef RISCV32_TARGET_NR_swapcontext
     case RISCV32_TARGET_NR_swapcontext:
 #endif
@@ -15555,6 +16635,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #ifdef TARGET_NR_memfd_create
     case TARGET_NR_memfd_create:
+#ifdef SPARC_TARGET_NR_memfd_create
+    case SPARC_TARGET_NR_memfd_create:
+#endif
 #ifdef RISCV32_TARGET_NR_memfd_create
     case RISCV32_TARGET_NR_memfd_create:
 #endif
@@ -15573,6 +16656,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
 #endif
 #if defined TARGET_NR_membarrier && defined __NR_membarrier
     case TARGET_NR_membarrier:
+#ifdef SPARC_TARGET_NR_membarrier
+    case SPARC_TARGET_NR_membarrier:
+#endif
 #ifdef RISCV32_TARGET_NR_membarrier
     case RISCV32_TARGET_NR_membarrier:
 #endif

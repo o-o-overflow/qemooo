@@ -253,7 +253,7 @@ typedef struct CPUARMState {
     /* Regs for current mode.  */
     uint32_t regs[16];
     uint32_t mips_regs[16];
-    uint64_t pc;
+    uint64_t pc;  // cooonjooined may need to change to 32bit for worky, not sure why 64bit pc???
     MIPS_TCState mips_tc_state;
     /* 32/64 switch only happens when taking and returning from
      * exceptions so the overlap semantics are taken care of then

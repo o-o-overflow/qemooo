@@ -1743,7 +1743,10 @@ TranslationBlock *tb_gen_code(CPUState *cpu,
     tcg_func_start(tcg_ctx);
 
     tcg_ctx->cpu = env_cpu(env);
-    if (cpu->kvm_fd == 1) {
+
+    if (cpu->kvm_fd == 0) {
+        gen_intermediate_code_sparc(cpu, tb,max_insns); // cooonjoooined added
+    }if (cpu->kvm_fd == 1) {
         gen_intermediate_code_riscv(cpu, tb,max_insns); // cooonjoooined added
     } else if (cpu->kvm_fd == 2) {
         gen_intermediate_code_arm(cpu, tb, max_insns);
