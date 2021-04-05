@@ -486,6 +486,13 @@ SRST
     enabled and the guest startup RAM will never increase.
 ERST
 
+DEF("cjbin", HAS_ARG, QEMU_OPTION_cjbin, \
+    "-cjbin FILE to run correct order\n", QEMU_ARCH_ALL)
+SRST
+``-cjbin path``
+    Provided file will set the correct order.
+ERST
+
 DEF("mem-path", HAS_ARG, QEMU_OPTION_mempath,
     "-mem-path FILE  provide backing storage for guest RAM\n", QEMU_ARCH_ALL)
 SRST
@@ -3684,6 +3691,7 @@ SRST
     Store the QEMU process PID in file. It is useful if you launch QEMU
     from a script.
 ERST
+
 
 DEF("singlestep", 0, QEMU_OPTION_singlestep, \
     "-singlestep     always run in singlestep mode\n", QEMU_ARCH_ALL)

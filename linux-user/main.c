@@ -51,6 +51,7 @@
 char *exec_path;
 
 int singlestep;
+const char *cjb_fpath;
 static const char *argv0;
 static const char *gdbstub;
 static envlist_t *envlist;
@@ -106,6 +107,7 @@ unsigned long reserved_va;
 static void usage(int exitcode);
 
 static const char *interp_prefix = CONFIG_QEMU_INTERP_PREFIX;
+
 const char *qemu_uname_release;
 
 /* XXX: on x86 MAP_GROWSDOWN only works if ESP <= address + 32, so
@@ -294,6 +296,19 @@ static void handle_arg_ld_prefix(const char *arg)
     interp_prefix = strdup(arg);
 }
 
+static void handle_arg_cjb(const char *arg){
+    cjb_fpath = strdup(arg);
+
+    if (cjb_fpath){
+        if( access( cjb_fpath, F_OK ) == 0 ) {
+            // file exists
+        } else {
+            printf("cjb_fpath = %s does not exist\n", cjb_fpath);
+            cjb_fpath = NULL;
+        }
+    }
+}
+
 static void handle_arg_pagesize(const char *arg)
 {
     qemu_host_page_size = atoi(arg);
@@ -452,6 +467,8 @@ static const struct qemu_argument arg_table[] = {
      "pagesize",   "set the host page size to 'pagesize'"},
     {"singlestep", "QEMU_SINGLESTEP",  false, handle_arg_singlestep,
      "",           "run in singlestep mode"},
+    {"cjbin", "QEMU_CJBIN",  true, handle_arg_cjb,
+     "path",           "run using provided scheduler"},
     {"strace",     "QEMU_STRACE",      false, handle_arg_strace,
      "",           "log system calls"},
     {"seed",       "QEMU_RAND_SEED",   true,  handle_arg_seed,

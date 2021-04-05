@@ -613,9 +613,9 @@ void cpu_loop(CPUMIPSState *env)
                 case 0x110:
                 case 0x16d:
                     ret = do_syscall(env, env->active_tc.gpr[2]+1000,
-                                     env->active_tc.regwptr[0], env->active_tc.regwptr[1],
-                                     env->active_tc.regwptr[2], env->active_tc.regwptr[3],
-                                     env->active_tc.regwptr[4], env->active_tc.regwptr[5],
+                                     env->active_tc.regwptr[0], env->active_tc.regwptr[2],
+                                     env->active_tc.regwptr[4], env->active_tc.regwptr[6],
+                                     env->active_tc.regwptr[8], env->active_tc.regwptr[10],
                                      0, 0);
 
                     if (ret == -TARGET_ERESTARTSYS || ret == -TARGET_QEMU_ESIGRETURN) {

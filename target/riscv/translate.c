@@ -765,30 +765,42 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
 
 static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
 {
+    // only accepting fixed 32 bit instructions now cooonjoooined
     /* check for compressed insn */
-    if (extract16(opcode, 0, 2) != 3) {
+//    if (extract16(opcode, 0, 2) != 3) {
 //        if (!has_ext(ctx, RVC)) {
 //            gen_exception_illegal(ctx);
 //        } else {
-            ctx->pc_succ_insn = ctx->base.pc_next + 2;
-            if (!decode_insn16(ctx, opcode)) {
-                /* fall back to old decoder */
-                decode_RV32_64C(ctx, opcode);
-            }
+//            ctx->pc_succ_insn = ctx->base.pc_next + 2;
+//            printf("insn=%04x\n", opcode);
+//            if (!decode_insn16(ctx, opcode)) {
+//                /* fall back to old decoder */
+//                decode_RV32_64C(ctx, opcode);
+//            }
 //        }
-    } else {
+//    } else {
 
-        uint32_t opcode32 = opcode;
-        uint16_t temp = translator_lduw(env, ctx->base.pc_next + 2);
+//        uint32_t opcode32 = opcode;
+//        uint16_t temp = translator_lduw(env, ctx->base.pc_next + 2);
+//
+//        opcode32 = deposit32(opcode32, 16, 16, temp);
+
+       // swap for BE
+        uint32_t opcode32 = translator_ldl(env, ctx->base.pc_next);
+        char endian = 'L';
+        which_endian++;
         if ((which_endian % 2) == 0) {
-            temp = bswap16(temp);
+            opcode32 = bswap32(opcode32);
+            endian = 'B';
         }
-        opcode32 = deposit32(opcode32, 16, 16, temp);
         ctx->pc_succ_insn = ctx->base.pc_next + 4;
+
+
+        printf("RISCV\t%x\tinsn=%08x\t%c\n", ctx->base.pc_next, opcode32, endian);
         if (!decode_insn32(ctx, opcode32)) {
             gen_exception_illegal(ctx);
         }
-    }
+  //  }
 }
 
 static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
@@ -855,9 +867,10 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
     DisasContext *ctx = container_of(dcbase, DisasContext, base);
     CPURISCVState *env = cpu->env_ptr;
     uint16_t opcode16 = translator_lduw(env, ctx->base.pc_next);
-    if ((which_endian % 2) == 0) {
-        opcode16 = bswap16(opcode16);
-    }
+    // swap for BE
+//    if ((which_endian % 2) == 1) {
+//        opcode16 = bswap16(opcode16);
+//    }
     decode_opc(env, ctx, opcode16);
     //which_endian++;
     ctx->base.pc_next = ctx->pc_succ_insn;

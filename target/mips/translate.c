@@ -31495,12 +31495,15 @@ static void mips_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
         insn_bytes = decode_nanomips_opc(env, ctx);
     } else if (!(ctx->hflags & MIPS_HFLAG_M16)) {
         int temp = cpu_ldl_code(env, ctx->base.pc_next);
+        which_endian++;
+        char endian = 'L';
         if ((which_endian % 2) == 0) {
             temp = bswap32(temp);
+            endian = 'B';
         }
-        which_endian++;
         ctx->opcode = temp;
-        printf("new opc = %x %x \n", temp, ctx->opcode);
+        printf("MIPS\t%x\tinsn=%08x\t%c\n", ctx->base.pc_next, temp, endian);
+
         //ctx->opcode = le_bswap(tempinsn, 32);
 
         insn_bytes = 4;

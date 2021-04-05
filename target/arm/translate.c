@@ -8815,8 +8815,10 @@ static void arm_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
             dc->vec_stride = FIELD_EX32(tb_flags, TBFLAG_A32, VECSTRIDE);
         }
     }
-    calc_sctlr_b++;
+    //cooonjoooined oscilation of BE/LE
     dc->sctlr_b = (calc_sctlr_b % 2);
+    calc_sctlr_b++;
+
     dc->cp_regs = cpu->cp_regs;
     dc->features = env->features;
 
@@ -8990,12 +8992,18 @@ static void arm_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
         return;
     }
     // this does oscilation of instructions
-
-    printf("dc->sctlr_b=%d\n",dc->sctlr_b);
     //dc->sctlr_b = (dc->current_one % 2);
+    //printf("dc->sctlr_b=%d\n",dc->sctlr_b);
+    // or look at translate.c:8820
 
     dc->pc_curr = dc->base.pc_next;
+    char endian = 'L';
+    if (dc->sctlr_b == 1){
+        endian = 'B';
+    }
     insn = arm_ldl_code(env, dc->base.pc_next, dc->sctlr_b);
+
+    printf("ARM \t%x\tinsn=%08x %c\n", dc->base.pc_next, insn, endian);
     dc->insn = insn;
     dc->base.pc_next += 4;
     disas_arm_insn(dc, insn);

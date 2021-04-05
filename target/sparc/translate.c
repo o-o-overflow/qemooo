@@ -5892,12 +5892,14 @@ static void sparc_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
     CPUSPARCState *env = cs->env_ptr;
     unsigned int insn;
 
-
     insn = translator_ldl(env, dc->pc);
+    calc_sctlr_b++;
+    char endian = 'L';
     if (calc_sctlr_b %2 == 0){
         insn = bswap32(insn);
+        endian = 'B';
     }
-    calc_sctlr_b++;
+    printf("SPARC\t%x:\tinsn=%08x\t%c\n", dc->pc, insn, endian);
     dc->base.pc_next += 4;
     disas_sparc_insn(dc, insn);
 

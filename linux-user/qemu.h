@@ -127,6 +127,7 @@ typedef struct TaskState {
     abi_ulong heap_base;
     abi_ulong heap_limit;
 #endif
+
     abi_ulong stack_base;
     int used; /* non zero if used */
     struct image_info *info;
@@ -165,6 +166,8 @@ void task_settid(TaskState *);
 void stop_all_tasks(void);
 extern const char *qemu_uname_release;
 extern unsigned long mmap_min_addr;
+
+extern const char *cjb_fpath; // cooonjoooined added
 
 /* ??? See if we can avoid exposing so much of the loader internals.  */
 

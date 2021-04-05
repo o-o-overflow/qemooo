@@ -143,6 +143,8 @@ Command line options
    the size.
 
 Debug options:
+``-cjbin file ``
+   use the cjbin scheduling file.
 
 ``-d item1,...``
    Activate logging of the specified items (use '-d help' for a list of

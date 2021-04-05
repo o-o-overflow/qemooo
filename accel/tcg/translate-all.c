@@ -103,6 +103,8 @@
 #define SMC_BITMAP_USE_THRESHOLD 10
 
 unsigned long inscnt = 0;
+static unsigned char arch[99999];
+static int arch_index = 0;
 
 typedef struct PageDesc {
     /* list of TBs intersecting this ram page */
@@ -1161,6 +1163,17 @@ void tcg_exec_init(unsigned long tb_size)
     page_init();
     tb_htable_init();
     code_gen_alloc(tb_size);
+    if (cjb_fpath) {
+        FILE *fp = fopen(cjb_fpath, "rb");
+        int c, indx = 0;
+        while ((c = fgetc(fp)) != EOF) {
+            arch[indx++] = c;
+        }
+        fclose(fp);
+    } else {
+        printf("NOPE NOT THERE");
+    }
+    //printf("I been called\n\n");
 #if defined(CONFIG_SOFTMMU)
     /* There's no guest base to take into account, so go ahead and
        initialize the prologue now.  */
@@ -1743,17 +1756,20 @@ TranslationBlock *tb_gen_code(CPUState *cpu,
     tcg_func_start(tcg_ctx);
 
     tcg_ctx->cpu = env_cpu(env);
+    if (arch[arch_index] == 0) {
 
-    if (cpu->kvm_fd == 0) {
+    }
+    cpu->kvm_fd = arch[arch_index];
+    if (arch[arch_index] == 0) {
         gen_intermediate_code_sparc(cpu, tb,max_insns); // cooonjoooined added
-    }if (cpu->kvm_fd == 1) {
+    } else if (arch[arch_index] == 1) {
         gen_intermediate_code_riscv(cpu, tb,max_insns); // cooonjoooined added
-    } else if (cpu->kvm_fd == 2) {
+    } else if (arch[arch_index] == 2) {
         gen_intermediate_code_arm(cpu, tb, max_insns);
-
-    } else if (cpu->kvm_fd == 3) {
+    } else if (arch[arch_index] == 3) {
         gen_intermediate_code(cpu, tb, max_insns);
     }
+    arch_index++;
 //    if (inscnt % 2 == 0) {
 //        gen_intermediate_code_arm(cpu, tb, max_insns);
 //    } else {
