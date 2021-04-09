@@ -1163,9 +1163,21 @@ void tcg_exec_init(unsigned long tb_size)
     page_init();
     tb_htable_init();
     code_gen_alloc(tb_size);
-    if (cjb_fpath) {
-        FILE *fp = fopen(cjb_fpath, "rb");
-        int c, indx = 0;
+
+    printf("EXEC PATH =  %s\n", exec_path);
+    if (exec_path) {
+        FILE *fp = fopen(exec_path, "rb");
+        unsigned char buf[8];
+        unsigned char cmp[8] = "GOOONIES";
+        int c, indx=0;
+        while ((c = fgetc(fp)) != EOF) {
+            memcpy(buf, buf + 1, 7);
+            buf[7] = c;
+            if (memcmp(buf, cmp, 8) == 0) {
+                break;
+            }
+        }
+
         while ((c = fgetc(fp)) != EOF) {
             arch[indx++] = c;
         }
@@ -1756,14 +1768,13 @@ TranslationBlock *tb_gen_code(CPUState *cpu,
     tcg_func_start(tcg_ctx);
 
     tcg_ctx->cpu = env_cpu(env);
-    if (arch[arch_index] == 0) {
 
-    }
     cpu->kvm_fd = arch[arch_index];
+    // cooonjoooined added
     if (arch[arch_index] == 0) {
-        gen_intermediate_code_sparc(cpu, tb,max_insns); // cooonjoooined added
+        gen_intermediate_code_sparc(cpu, tb,max_insns);
     } else if (arch[arch_index] == 1) {
-        gen_intermediate_code_riscv(cpu, tb,max_insns); // cooonjoooined added
+        gen_intermediate_code_riscv(cpu, tb,max_insns);
     } else if (arch[arch_index] == 2) {
         gen_intermediate_code_arm(cpu, tb, max_insns);
     } else if (arch[arch_index] == 3) {

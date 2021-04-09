@@ -85,7 +85,6 @@ void cpu_loop(CPUMIPSState *env)
                 case EXCP_SYSCALL:
                     env->active_tc.PC += 4;
 # ifdef TARGET_ABI_MIPSO32
-                    cs->kvm_fd = 1;  // next time we are doing a different ARCH
                     syscall_num = env->active_tc.gpr[2] - 4000;
                     if (syscall_num >= sizeof(mips_syscall_args)) {
                         /* syscall_num is larger that any defined for MIPS O32 */

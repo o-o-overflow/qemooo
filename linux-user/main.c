@@ -51,7 +51,6 @@
 char *exec_path;
 
 int singlestep;
-const char *cjb_fpath;
 static const char *argv0;
 static const char *gdbstub;
 static envlist_t *envlist;
@@ -296,19 +295,6 @@ static void handle_arg_ld_prefix(const char *arg)
     interp_prefix = strdup(arg);
 }
 
-static void handle_arg_cjb(const char *arg){
-    cjb_fpath = strdup(arg);
-
-    if (cjb_fpath){
-        if( access( cjb_fpath, F_OK ) == 0 ) {
-            // file exists
-        } else {
-            printf("cjb_fpath = %s does not exist\n", cjb_fpath);
-            cjb_fpath = NULL;
-        }
-    }
-}
-
 static void handle_arg_pagesize(const char *arg)
 {
     qemu_host_page_size = atoi(arg);
@@ -386,7 +372,7 @@ static void handle_arg_reserved_va(const char *arg)
 
 static void handle_arg_singlestep(const char *arg)
 {
-    singlestep = 1;
+    singlestep = 0;
 }
 
 static void handle_arg_strace(const char *arg)
@@ -465,10 +451,8 @@ static const struct qemu_argument arg_table[] = {
      "logfile",     "write logs to 'logfile' (default stderr)"},
     {"p",          "QEMU_PAGESIZE",    true,  handle_arg_pagesize,
      "pagesize",   "set the host page size to 'pagesize'"},
-    {"singlestep", "QEMU_SINGLESTEP",  false, handle_arg_singlestep,
-     "",           "run in singlestep mode"},
-    {"cjbin", "QEMU_CJBIN",  true, handle_arg_cjb,
-     "path",           "run using provided scheduler"},
+    {"nosinglestep", "QEMU_SINGLESTEP",  false, handle_arg_singlestep,
+     "",           "run multistep mode"},
     {"strace",     "QEMU_STRACE",      false, handle_arg_strace,
      "",           "log system calls"},
     {"seed",       "QEMU_RAND_SEED",   true,  handle_arg_seed,
@@ -653,6 +637,7 @@ int main(int argc, char **argv, char **envp)
     qemu_init_cpu_list();
     module_call_init(MODULE_INIT_QOM);
 
+    singlestep = 1;
     envlist = envlist_create();
 
     /* add current environment into the list */

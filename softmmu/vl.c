@@ -167,7 +167,6 @@ bool wakeup_suspend_enabled;
 int icount_align_option;
 static const char *qtest_chrdev;
 static const char *qtest_log;
-static const char *cjbin_path;
 
 /* The bytes in qemu_uuid are in the order specified by RFC4122, _not_ in the
  * little-endian "wire format" described in the SMBIOS 2.6 specification.
@@ -3201,9 +3200,6 @@ void qemu_init(int argc, char **argv, char **envp)
 #endif
             case QEMU_OPTION_mempath:
                 mem_path = optarg;
-                break;
-            case QEMU_OPTION_cjbin:
-                cjbin_path = optarg;
                 break;
             case QEMU_OPTION_mem_prealloc:
                 mem_prealloc = 1;

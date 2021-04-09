@@ -166,9 +166,6 @@ void task_settid(TaskState *);
 void stop_all_tasks(void);
 extern const char *qemu_uname_release;
 extern unsigned long mmap_min_addr;
-
-extern const char *cjb_fpath; // cooonjoooined added
-
 /* ??? See if we can avoid exposing so much of the loader internals.  */
 
 /* Read a good amount of data initially, to hopefully get all the
