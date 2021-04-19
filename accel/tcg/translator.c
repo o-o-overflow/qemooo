@@ -102,7 +102,6 @@ void translator_loop(const TranslatorOps *ops, DisasContextBase *db,
         } else {
             ops->translate_insn(db, cpu);
         }
-
         /* Stop translation if translate_insn so indicated.  */
         if (db->is_jmp != DISAS_NEXT) {
             break;

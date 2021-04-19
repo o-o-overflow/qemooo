@@ -243,6 +243,9 @@ void init_qemu_uname_release(void);
 void fork_start(void);
 void fork_end(int child);
 
+extern unsigned char tmap_arch[99999];
+
+
 /**
  * probe_guest_base:
  * @image_name: the executable being loaded

@@ -41,7 +41,7 @@
 #include "qemu/qemu-print.h"
 
 #define MIPS_DEBUG_DISAS 0
-static int which_endian = 0;
+static bool do_big_endian = false;
 
 /* MIPS major opcodes */
 #define MASK_OP_MAJOR(op)       (op & (0x3F << 26))
@@ -31486,6 +31486,7 @@ static void mips_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
 {
     CPUMIPSState *env = cs->env_ptr;
     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+
     int insn_bytes;
     int is_slot;
 
@@ -31495,17 +31496,18 @@ static void mips_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
         insn_bytes = decode_nanomips_opc(env, ctx);
     } else if (!(ctx->hflags & MIPS_HFLAG_M16)) {
         int temp = cpu_ldl_code(env, ctx->base.pc_next);
-        which_endian++;
+
         char endian = 'L';
-        if ((which_endian % 2) == 0) {
+        if (do_big_endian) {
             temp = bswap32(temp);
             endian = 'B';
         }
         ctx->opcode = temp;
-        printf("MIPS\t%x\tinsn=%08x\t%c\n", ctx->base.pc_next, temp, endian);
-
+        //printf("MIPS\t%x\tinsn=%08x\t%c\n", ctx->base.pc_next, temp, endian);
+#ifdef SHOW_HELP
+        fprintf(stderr, "\x1b[33mMIPS  \x1b[0m\t0x%x\tinsn=\x1b[36m%08x \x1b[0m%c\t", ctx->base.pc_next, temp, endian);
         //ctx->opcode = le_bswap(tempinsn, 32);
-
+#endif
         insn_bytes = 4;
         decode_opc(env, ctx);
 
@@ -31539,6 +31541,7 @@ static void mips_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
             is_slot = 1;
         }
     }
+    //printf("hflags=%x, btarget=%x\n", ctx->hflags, ctx->btarget);
     if (is_slot) {
         gen_branch(ctx, insn_bytes);
     }
@@ -31560,6 +31563,7 @@ static void mips_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
     if (ctx->base.pc_next - ctx->page_start >= TARGET_PAGE_SIZE) {
         ctx->base.is_jmp = DISAS_TOO_MANY;
     }
+
 }
 
 static void mips_tr_tb_stop(DisasContextBase *dcbase, CPUState *cs)
@@ -31607,10 +31611,10 @@ static const TranslatorOps mips_tr_ops = {
     .disas_log          = mips_tr_disas_log,
 };
 
-void gen_intermediate_code(CPUState *cs, TranslationBlock *tb, int max_insns)
+void gen_intermediate_code(CPUState *cs, TranslationBlock *tb, int max_insns, bool endianess)
 {
     DisasContext ctx;
-
+    do_big_endian = endianess;
     translator_loop(&mips_tr_ops, &ctx.base, cs, tb, max_insns);
 }
 
@@ -31689,6 +31693,40 @@ void mips_cpu_dump_state(CPUState *cs, FILE *f, int flags)
     if ((flags & CPU_DUMP_FPU) && (env->hflags & MIPS_HFLAG_FPU)) {
         fpu_dump_state(env, f, flags);
     }
+#ifdef SHOW_HELP
+    if (env->active_tc.regwptr){
+        for (i=0; i <  16; i=i+2){
+            if ((i % 16) == 0) {
+                qemu_fprintf(f, "SPROUT:");
+            }
+            qemu_fprintf(f, " " TARGET_FMT_lx, env->active_tc.regwptr[i]);
+        }
+        qemu_fprintf(f, "\n");
+    }
+    if (env->active_tc.gpr[29]){
+        unsigned long tmp =  env->active_tc.gpr[29] + 0x10000;
+        uint32_t * stack = (uint32_t*) tmp;
+        for (i=0; i <  10; i++){
+            if ((i % 2) == 0){
+                qemu_fprintf(f, "STK 0x%08x : ", stack+i);
+            }
+            qemu_fprintf(f, "%08x ", *(stack+i));
+            if (((*(stack+i) & 0x40800000) == 0x40800000  && *(stack+i) <= 0x408fffff) ||
+                (*(stack+i) >= 21000 && *(stack+i) <= 0x22000)){
+                unsigned long tmp2 =  *(stack+i) + 0x10000;
+                uint32_t * ptr2 = (uint32_t*) tmp2;
+                qemu_fprintf(f, "--> %08x\t", *(ptr2));
+            }
+            else {
+                qemu_fprintf(f, "            \t");
+            }
+            if ((i % 2) == 1){
+                qemu_fprintf(f,"\n");
+            }
+        }
+    }
+#endif
+
 }
 
 void mips_tcg_init(void)

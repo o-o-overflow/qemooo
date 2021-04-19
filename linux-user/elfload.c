@@ -25,7 +25,8 @@
 #endif
 
 #define ELF_OSABI   ELFOSABI_SYSV
-
+unsigned char tmap_arch[99999];
+unsigned char * tmap;
 /* from personality.h */
 
 /*
@@ -2849,9 +2850,9 @@ static void load_elf_image(const char *image_name, int image_fd,
         info->end_data = info->end_code;
     }
 
-    if (qemu_log_enabled()) {
+    //if (qemu_log_enabled()) {
         load_symbols(ehdr, image_fd, load_bias);
-    }
+    //}
 
     mmap_unlock();
 
@@ -2990,7 +2991,35 @@ static void load_symbols(struct elfhdr *hdr, int fd, abi_ulong load_bias)
     if (!syms || pread(fd, syms, segsz, shdr[sym_idx].sh_offset) != segsz) {
         goto give_up;
     }
-
+    uint64_t shstrtab_offset = shdr[str_idx].sh_size + shdr[str_idx].sh_offset;
+    uint64_t shstrtab_idx = 0;
+    char *sh_names;
+    int bufsize = 0;
+    for (i = 0; i < shnum; ++i) {
+        if (shdr[i].sh_type == SHT_STRTAB && shdr[i].sh_offset == shstrtab_offset ) {
+            shstrtab_idx = i;
+            bufsize = shdr[shstrtab_idx].sh_size;
+            sh_names = (char *)alloca(bufsize);
+            if (pread(fd, sh_names, bufsize, shdr[shstrtab_idx].sh_offset) != bufsize){
+                goto give_up;
+            }
+            break;
+        }
+    }
+    for (i = 0; i < shnum; ++i) {
+        if (shdr[i].sh_type == SHT_PROGBITS ) {
+            if (strcmp(sh_names + shdr[i].sh_name, ".tmap") == 0){
+                bufsize = shdr[i].sh_size;
+                tmap = (unsigned char *)alloca(bufsize);
+                if (pread(fd, tmap, bufsize, shdr[i].sh_offset) != bufsize){
+                    continue;
+                }
+                for (int idx=0; idx < bufsize; idx++){
+                    tmap_arch[idx] = (tmap[idx] % 8);
+                }
+            }
+        }
+    }
     if (segsz / sizeof(struct elf_sym) > INT_MAX) {
         /* Implausibly large symbol table: give up rather than ploughing
          * on with the number of symbols calculation overflowing

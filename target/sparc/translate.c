@@ -67,7 +67,7 @@ static TCGv cpu_wim;
 static TCGv_i64 cpu_fpr[TARGET_DPREGS];
 
 static bool inited = false; // cooonjooined artificial init check
-static int calc_sctlr_b = 0;
+static bool do_big_endian  = false;
 
 #include "exec/gen-icount.h"
 
@@ -5893,13 +5893,15 @@ static void sparc_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
     unsigned int insn;
 
     insn = translator_ldl(env, dc->pc);
-    calc_sctlr_b++;
+
     char endian = 'L';
-    if (calc_sctlr_b %2 == 0){
+    if (do_big_endian){
         insn = bswap32(insn);
         endian = 'B';
     }
-    printf("SPARC\t%x:\tinsn=%08x\t%c\n", dc->pc, insn, endian);
+#ifdef SHOW_HELP
+    fprintf(stderr, "\x1b[33mSPARC \x1b[0m\t0x%lx\tinsn=\x1b[36m%08x \x1b[0m%c\t", dc->pc, insn, endian);
+#endif
     dc->base.pc_next += 4;
     disas_sparc_insn(dc, insn);
 
@@ -6048,13 +6050,14 @@ void sparc_tcg_init(void)
                                             fregnames[i]);
     }
 }
-void gen_intermediate_code_sparc(CPUState *cs, TranslationBlock *tb, int max_insns)
+void gen_intermediate_code_sparc(CPUState *cs, TranslationBlock *tb, int max_insns, bool endianess)
 {
     DisasContext dc = {};
     if (! inited){  //cooonjoooined
         sparc_tcg_init();
         inited = true;
     }
+    do_big_endian = endianess;
     translator_loop(&sparc_tr_ops, &dc.base, cs, tb, max_insns);
 }
 void restore_state_to_opc_sparc(CPUSPARCState *env, TranslationBlock *tb,

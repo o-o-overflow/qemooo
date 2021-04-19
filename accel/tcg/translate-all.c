@@ -103,8 +103,19 @@
 #define SMC_BITMAP_USE_THRESHOLD 10
 
 unsigned long inscnt = 0;
-static unsigned char arch[99999];
+
 static int arch_index = 0;
+static unsigned long base_pc = 0;
+
+struct line_info_t {
+    uint64_t addr;
+    char insn_disas[30];
+};
+
+typedef struct line_info_t line_info_t;
+
+static line_info_t line_info[2000];
+
 
 typedef struct PageDesc {
     /* list of TBs intersecting this ram page */
@@ -1152,7 +1163,49 @@ static void tb_htable_init(void)
 
     qht_init(&tb_ctx.htable, tb_cmp, CODE_GEN_HTABLE_SIZE, mode);
 }
-
+// cooonjoooined TBD
+#ifdef SHOW_HELP
+void load_dump();
+void load_dump() {
+    if (exec_path) {
+        int pathlen = strlen(exec_path);
+        char dump_path[pathlen+5];
+        char *line = NULL;
+        int idx = 0;
+        char *token;
+        size_t len, read;
+        memset(dump_path,0, pathlen+5);
+        strcat(dump_path, exec_path);
+        strcat(dump_path,".dump");
+        FILE *fp = fopen(dump_path, "r");
+        if (fp == NULL) {
+            return;
+        }
+        while ((read = getline(&line, &len, fp)) != -1) {
+            token = strtok(line, " ");
+            token = strtok(NULL, "\t");
+            if (token != NULL ) {
+                uint64_t addr = strtol(token, NULL, 16);
+                token = strtok(NULL, "\t"); // arch
+                token = strtok(NULL, "\t"); // raw insn
+                token = strtok(NULL, "\t"); // disas ins
+                if (token != NULL) {
+                    line_info[idx].addr = addr;
+                    strncpy(line_info[idx].insn_disas, token, 29);
+                    idx++;
+                    assert(idx < 2000);
+                }
+            }
+        }
+        if (line) {
+            free(line);
+        }
+        fclose(fp);
+    } else {
+        printf("NO HOPE THERE %s is missing\n", exec_path);
+    }
+}
+#endif
 /* Must be called before using the QEMU cpus. 'tb_size' is the size
    (in bytes) allocated to the translation buffer. Zero means default
    size. */
@@ -1163,29 +1216,10 @@ void tcg_exec_init(unsigned long tb_size)
     page_init();
     tb_htable_init();
     code_gen_alloc(tb_size);
+#ifdef SHOW_HELP
+    load_dump();
+#endif
 
-    printf("EXEC PATH =  %s\n", exec_path);
-    if (exec_path) {
-        FILE *fp = fopen(exec_path, "rb");
-        unsigned char buf[8];
-        unsigned char cmp[8] = "GOOONIES";
-        int c, indx=0;
-        while ((c = fgetc(fp)) != EOF) {
-            memcpy(buf, buf + 1, 7);
-            buf[7] = c;
-            if (memcmp(buf, cmp, 8) == 0) {
-                break;
-            }
-        }
-
-        while ((c = fgetc(fp)) != EOF) {
-            arch[indx++] = c;
-        }
-        fclose(fp);
-    } else {
-        printf("NOPE NOT THERE");
-    }
-    //printf("I been called\n\n");
 #if defined(CONFIG_SOFTMMU)
     /* There's no guest base to take into account, so go ahead and
        initialize the prologue now.  */
@@ -1696,7 +1730,23 @@ tb_link_page(TranslationBlock *tb, tb_page_addr_t phys_pc,
 #endif
     return tb;
 }
+#ifdef SHOW_HELP
+void print_pc_disas(uint64_t pc) {
 
+    for (int i =0; i < 1999; i++) {
+        if (line_info[i].addr == 0 && i > 0) {
+            break;
+        }
+        if (line_info[i].addr == pc) {
+            if (line_info[i].insn_disas){
+                fprintf(stderr, "%s", line_info[i].insn_disas);
+            }
+            break;
+        }
+    }
+
+}
+#endif
 /* Called with mmap_lock held for user mode emulation.  */
 TranslationBlock *tb_gen_code(CPUState *cpu,
                               target_ulong pc, target_ulong cs_base,
@@ -1768,19 +1818,28 @@ TranslationBlock *tb_gen_code(CPUState *cpu,
     tcg_func_start(tcg_ctx);
 
     tcg_ctx->cpu = env_cpu(env);
-
-    cpu->kvm_fd = arch[arch_index];
-    // cooonjoooined added
-    if (arch[arch_index] == 0) {
-        gen_intermediate_code_sparc(cpu, tb,max_insns);
-    } else if (arch[arch_index] == 1) {
-        gen_intermediate_code_riscv(cpu, tb,max_insns);
-    } else if (arch[arch_index] == 2) {
-        gen_intermediate_code_arm(cpu, tb, max_insns);
-    } else if (arch[arch_index] == 3) {
-        gen_intermediate_code(cpu, tb, max_insns);
+    if (base_pc == 0) {
+        base_pc = pc;
     }
-    arch_index++;
+    arch_index = (pc-base_pc)/4;  // only works b/c all instructions are 32bit
+
+    cpu->kvm_fd = tmap_arch[arch_index];
+    // cooonjoooined added
+    bool do_big_endian = (tmap_arch[arch_index] % 2) == 1;
+    if (tmap_arch[arch_index] == 0 || tmap_arch[arch_index] == 1 ) {
+        gen_intermediate_code_sparc(cpu, tb,max_insns, do_big_endian );
+    } else if (tmap_arch[arch_index] == 2 || tmap_arch[arch_index] == 3 ) {
+        gen_intermediate_code_riscv(cpu, tb,max_insns , do_big_endian);
+    } else if (tmap_arch[arch_index] == 4 || tmap_arch[arch_index] == 5 ) {
+        gen_intermediate_code_arm(cpu, tb, max_insns , do_big_endian);
+    } else if (tmap_arch[arch_index] == 6 || tmap_arch[arch_index] == 7 ) {
+        gen_intermediate_code(cpu, tb, max_insns , do_big_endian);
+    }
+#ifdef SHOW_HELP
+    print_pc_disas(pc);
+    fprintf(stderr,"\n");
+#endif
+    //arch_index++;
 //    if (inscnt % 2 == 0) {
 //        gen_intermediate_code_arm(cpu, tb, max_insns);
 //    } else {

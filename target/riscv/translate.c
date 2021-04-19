@@ -38,7 +38,7 @@ static TCGv load_res;
 static TCGv load_val;
 
 static bool inited = false; // cooonjoooined
-static int which_endian = 0;
+static bool do_big_endian = false;
 
 #include "exec/gen-icount.h"
 
@@ -788,15 +788,15 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
        // swap for BE
         uint32_t opcode32 = translator_ldl(env, ctx->base.pc_next);
         char endian = 'L';
-        which_endian++;
-        if ((which_endian % 2) == 0) {
+
+        if (do_big_endian) {
             opcode32 = bswap32(opcode32);
             endian = 'B';
         }
+#ifdef SHOW_HELP
+        fprintf(stderr, "\x1b[33mRISCV \x1b[0m\t0x%x\tinsn=\x1b[36m%08x \x1b[0m%c\t", ctx->base.pc_next, opcode32, endian);
+#endif
         ctx->pc_succ_insn = ctx->base.pc_next + 4;
-
-
-        printf("RISCV\t%x\tinsn=%08x\t%c\n", ctx->base.pc_next, opcode32, endian);
         if (!decode_insn32(ctx, opcode32)) {
             gen_exception_illegal(ctx);
         }
@@ -924,7 +924,7 @@ static const TranslatorOps riscv_tr_ops = {
     .disas_log          = riscv_tr_disas_log,
 };
 
-void gen_intermediate_code_riscv(CPUState *cs, TranslationBlock *tb, int max_insns)  // cooonjoooined changed to riscv
+void gen_intermediate_code_riscv(CPUState *cs, TranslationBlock *tb, int max_insns, bool endianess)  // cooonjoooined changed to riscv
 {
     DisasContext ctx;
     if (! inited){
@@ -932,6 +932,7 @@ void gen_intermediate_code_riscv(CPUState *cs, TranslationBlock *tb, int max_ins
         inited = true;
 
     }
+    do_big_endian = endianess;
     translator_loop(&riscv_tr_ops, &ctx.base, cs, tb, max_insns);
 }
 

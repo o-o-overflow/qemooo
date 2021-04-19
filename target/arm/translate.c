@@ -66,7 +66,7 @@ TCGv_i64 cpu_exclusive_addr;
 TCGv_i64 cpu_exclusive_val;
 
 static bool inited = false;
-static int calc_sctlr_b = 0;
+static bool do_big_endian = 0;
 #include "exec/gen-icount.h"
 
 static const char * const regnames[] =
@@ -8815,9 +8815,6 @@ static void arm_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
             dc->vec_stride = FIELD_EX32(tb_flags, TBFLAG_A32, VECSTRIDE);
         }
     }
-    //cooonjoooined oscilation of BE/LE
-    dc->sctlr_b = (calc_sctlr_b % 2);
-    calc_sctlr_b++;
 
     dc->cp_regs = cpu->cp_regs;
     dc->features = env->features;
@@ -8998,12 +8995,14 @@ static void arm_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
 
     dc->pc_curr = dc->base.pc_next;
     char endian = 'L';
-    if (dc->sctlr_b == 1){
+    dc->sctlr_b = do_big_endian;
+    if (do_big_endian){
         endian = 'B';
     }
     insn = arm_ldl_code(env, dc->base.pc_next, dc->sctlr_b);
-
-    printf("ARM \t%x\tinsn=%08x %c\n", dc->base.pc_next, insn, endian);
+#ifdef SHOW_HELP
+    fprintf(stderr, "\x1b[33mARM   \x1b[0m\t0x%x\tinsn=\x1b[36m%08x \x1b[0m%c\t", dc->base.pc_next, insn, endian);
+#endif
     dc->insn = insn;
     dc->base.pc_next += 4;
     disas_arm_insn(dc, insn);
@@ -9288,14 +9287,14 @@ static const TranslatorOps thumb_translator_ops = {
 };
 
 /* generate intermediate code for basic block 'tb'.  */
-void gen_intermediate_code_arm(CPUState *cpu, TranslationBlock *tb, int max_insns)
+void gen_intermediate_code_arm(CPUState *cpu, TranslationBlock *tb, int max_insns, bool endianess)
 {
     if (! inited){  //cooonjoooined
         arm_translate_init();
         inited = true;
 
     }
-
+    do_big_endian = endianess;
     DisasContext dc = { };
     const TranslatorOps *ops = &arm_translator_ops;
 

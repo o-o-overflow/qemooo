@@ -210,10 +210,7 @@ static void initialize_debug_host(CPUDebug *s)
     s->info.print_insn = print_insn_hppa;
 #endif
 }
-
-/* Disassemble this for me please... (debugging).  */
-void target_disas(FILE *out, CPUState *cpu, target_ulong code,
-                  target_ulong size)
+void target_disas_multi(FILE *out, CPUState *cpu, target_ulong code, target_ulong size, int multi)
 {
     target_ulong pc;
     int count;
@@ -224,8 +221,19 @@ void target_disas(FILE *out, CPUState *cpu, target_ulong code,
     s.info.stream = out;
     s.info.buffer_vma = code;
     s.info.buffer_length = size;
+    if (multi <= 1){
+        s.info.cap_arch = CS_ARCH_SPARC;
+    } else if (multi <= 3){
+        s.info.cap_arch = CS_ARCH_RISCV;
+    }  else if (multi <= 5){
+        s.info.cap_arch = CS_ARCH_ARM;
+    }  else if (multi <= 7){
+        s.info.cap_arch = CS_ARCH_MIPS;
+    }
 
     if (s.info.cap_arch >= 0 && cap_disas_target(&s.info, code, size)) {
+        fprintf(out, "0x" TARGET_FMT_lx ":  ", pc);
+        fprintf(out, "glurp\n");
         return;
     }
 
@@ -234,11 +242,11 @@ void target_disas(FILE *out, CPUState *cpu, target_ulong code,
     }
 
     for (pc = code; size > 0; pc += count, size -= count) {
-	fprintf(out, "0x" TARGET_FMT_lx ":  ", pc);
-	count = s.info.print_insn(pc, &s.info);
-	fprintf(out, "\n");
-	if (count < 0)
-	    break;
+        fprintf(out, "0x" TARGET_FMT_lx ":  ", pc);
+        count = s.info.print_insn(pc, &s.info);
+        fprintf(out, "\n");
+        if (count < 0)
+            break;
         if (size < count) {
             fprintf(out,
                     "Disassembler disagrees with translator over instruction "
@@ -247,6 +255,11 @@ void target_disas(FILE *out, CPUState *cpu, target_ulong code,
             break;
         }
     }
+}
+/* Disassemble this for me please... (debugging).  */
+void target_disas(FILE *out, CPUState *cpu, target_ulong code,target_ulong size)
+{
+    target_disas_multi(out, cpu, code, size, 99);
 }
 
 static int plugin_printf(FILE *stream, const char *fmt, ...)

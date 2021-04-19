@@ -5,6 +5,8 @@
 #include "hw/core/cpu.h"
 #include "disas/disas.h"
 
+#define SHOW_HELP 1  // display cooonjoooined help prints
+
 /* cpu_dump_state() logging functions: */
 /**
  * log_cpu_state:
@@ -52,6 +54,11 @@ static inline void log_target_disas(CPUState *cpu, target_ulong start,
     logfile = qatomic_rcu_read(&qemu_logfile);
     if (logfile) {
         target_disas(logfile->fd, cpu, start, len);
+//#ifdef TARGET_MIPS
+//        arm_target_disas(logfile->fd, cpu, start, len);
+//#else
+//        target_disas(logfile->fd, cpu, start, len);
+//#endif
     }
     rcu_read_unlock();
 }

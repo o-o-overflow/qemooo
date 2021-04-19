@@ -80,7 +80,7 @@ void cpu_loop(CPUMIPSState *env)
         cpu_exec_end(cs);
         process_queued_cpu_work(cs);
 
-        if (cs->kvm_fd == 2 || cs->kvm_fd == 3) {
+        if (cs->kvm_fd >= 4 && cs->kvm_fd <= 7) {
             switch (trapnr) {
                 case EXCP_SYSCALL:
                     env->active_tc.PC += 4;
@@ -387,7 +387,7 @@ void cpu_loop(CPUMIPSState *env)
                     //            }
                     //                break;
                 case EXCP_SWI: {
-                    cs->kvm_fd = 2; // next time we do a different arch
+
                     //env->eabi = 1;
                     /* system call */
 
@@ -533,7 +533,7 @@ void cpu_loop(CPUMIPSState *env)
             /*
              * RISC-V
              */
-        } else if (cs->kvm_fd == 1) {
+        } else if (cs->kvm_fd == 2 || cs->kvm_fd == 3) {
             switch (trapnr) {
                 case EXCP_INTERRUPT:
                     /* just indicate that signals should be handled asap */
@@ -607,7 +607,7 @@ void cpu_loop(CPUMIPSState *env)
 /*
  *  SPARC 32 bit
  */
-        } else if (cs->kvm_fd == 0) {
+        } else if (cs->kvm_fd == 0 || cs->kvm_fd == 1) {
             switch (trapnr) {
                 case 0x110:
                 case 0x16d:

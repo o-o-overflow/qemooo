@@ -41,6 +41,7 @@
 #include "sysemu/cpu-timers.h"
 #include "sysemu/replay.h"
 
+#include "qemu.h"
 /* -icount align implementation. */
 
 typedef struct SyncClocks {
@@ -167,6 +168,7 @@ static inline tcg_target_ulong cpu_tb_exec(CPUState *cpu, TranslationBlock *itb)
         if (qemu_loglevel_mask(CPU_LOG_TB_FPU)) {
             flags |= CPU_DUMP_FPU;
         }
+
 #if defined(TARGET_I386)
         flags |= CPU_DUMP_CCOP;
 #endif
@@ -409,13 +411,18 @@ static inline TranslationBlock *tb_find(CPUState *cpu,
     uint32_t flags;
 
     tb = tb_lookup__cpu_state(cpu, &pc, &cs_base, &flags, cf_mask);
-    if (tb == NULL) {
-        mmap_lock();
-        tb = tb_gen_code(cpu, pc, cs_base, flags, cf_mask);
-        mmap_unlock();
-        /* We add the TB in the virtual pc hash table for the fast lookup */
-        qatomic_set(&cpu->tb_jmp_cache[tb_jmp_cache_hash_func(pc)], tb);
-    }
+
+    mmap_lock();
+    tb = tb_gen_code(cpu, pc, cs_base, flags, cf_mask);
+    mmap_unlock();
+    // cooonjoooined disabled caching b/c was causing problems with syscalls
+//    if (tb == NULL) {
+//        mmap_lock();
+//        tb = tb_gen_code(cpu, pc, cs_base, flags, cf_mask);
+//        mmap_unlock();
+//        /* We add the TB in the virtual pc hash table for the fast lookup */
+//        qatomic_set(&cpu->tb_jmp_cache[tb_jmp_cache_hash_func(pc)], tb);
+//    }
 #ifndef CONFIG_USER_ONLY
     /* We don't take care of direct jumps when address mapping changes in
      * system emulation. So it's not safe to make a direct jump to a TB
