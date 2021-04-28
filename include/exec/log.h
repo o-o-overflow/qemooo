@@ -5,7 +5,7 @@
 #include "hw/core/cpu.h"
 #include "disas/disas.h"
 
-#define SHOW_HELP 1  // display cooonjoooined help prints
+//#define SHOW_HELP 1  // display cooonjoooined help prints
 
 /* cpu_dump_state() logging functions: */
 /**

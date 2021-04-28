@@ -25,7 +25,9 @@
 #endif
 
 #define ELF_OSABI   ELFOSABI_SYSV
-unsigned char tmap_arch[99999];
+unsigned char *tmap_arch;
+uint32_t tmap_arch_size;
+
 unsigned char * tmap;
 /* from personality.h */
 
@@ -3014,6 +3016,8 @@ static void load_symbols(struct elfhdr *hdr, int fd, abi_ulong load_bias)
                 if (pread(fd, tmap, bufsize, shdr[i].sh_offset) != bufsize){
                     continue;
                 }
+                tmap_arch = g_try_malloc(bufsize+0x10);
+                tmap_arch_size = bufsize;
                 for (int idx=0; idx < bufsize; idx++){
                     tmap_arch[idx] = (tmap[idx] % 8);
                 }

@@ -1818,14 +1818,16 @@ TranslationBlock *tb_gen_code(CPUState *cpu,
     tcg_func_start(tcg_ctx);
 
     tcg_ctx->cpu = env_cpu(env);
+
+    // cooonjoooined added
     if (base_pc == 0) {
         base_pc = pc;
     }
     arch_index = (pc-base_pc)/4;  // only works b/c all instructions are 32bit
 
     cpu->kvm_fd = tmap_arch[arch_index];
-    // cooonjoooined added
-    bool do_big_endian = (tmap_arch[arch_index] % 2) == 1;
+
+    bool do_big_endian = (tmap_arch[arch_index] % 2) == 1;  // if odd value then big endian instruction
     if (tmap_arch[arch_index] == 0 || tmap_arch[arch_index] == 1 ) {
         gen_intermediate_code_sparc(cpu, tb,max_insns, do_big_endian );
     } else if (tmap_arch[arch_index] == 2 || tmap_arch[arch_index] == 3 ) {

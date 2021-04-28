@@ -31706,7 +31706,7 @@ void mips_cpu_dump_state(CPUState *cs, FILE *f, int flags)
     if (env->active_tc.gpr[29]){
         unsigned long tmp =  env->active_tc.gpr[29] + 0x10000;
         uint32_t * stack = (uint32_t*) tmp;
-        for (i=0; i <  10; i++){
+        for (i=0; i <  14; i++){
             if ((i % 2) == 0){
                 qemu_fprintf(f, "STK 0x%08x : ", stack+i);
             }

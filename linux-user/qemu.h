@@ -243,8 +243,8 @@ void init_qemu_uname_release(void);
 void fork_start(void);
 void fork_end(int child);
 
-extern unsigned char tmap_arch[99999];
-
+extern unsigned char *tmap_arch;  // cooonjoooined tmap stuff
+extern uint32_t tmap_arch_size;
 
 /**
  * probe_guest_base:
